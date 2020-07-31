@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Player;
+use App\Model\Round;
 use App\Point;
 use Illuminate\Http\Request;
 
@@ -20,11 +22,13 @@ class PointController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $game=session()->get('game');
+        $players=Player::with('game')->get();
+        return view('rounds.add_round_result',compact('game','players'));
     }
 
     /**
@@ -35,7 +39,28 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-       //
+       $game=session()->get('game');
+       $round=Round::create(['game_id'=>$game->id]);
+       $winner=$request->winner;
+       $sumAllPoints=array_sum($request->all()['points']);
+      foreach ($request->all()['points'] as $key=>$value){
+          if($request->all()['seen'][$key]=='on'){
+
+          }
+          else{
+              if($request->all()['dubli'][$winner]=='on'){
+                  $pointSecured=$sumAllPoints+$game->dubli_winner_points_per_unseen;
+                  $pointArray=['player_id'=>$key,'round_id'=>$round->id,'point_scored'=>$pointSecured];
+              }
+              else{
+                  $pointSecured=$sumAllPoints+$game->winner_points_per_unseen;
+                  $pointArray=['player_id'=>$key,'round_id'=>$round->id,'point_scored'=>$pointSecured];
+              }
+
+          }
+    }
+
+        //loop all players and add 10 to the sum of point of unseen
     }
 
     /**

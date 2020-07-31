@@ -26,9 +26,7 @@ class RoundController extends Controller
      */
     public function create()
     {
-        $game=session()->get('game');
-        $players=Player::with('game')->get();
-        return view('rounds.add_round_result',compact('game','players'));
+
     }
 
     /**

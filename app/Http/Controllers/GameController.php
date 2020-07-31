@@ -26,6 +26,7 @@ class GameController extends Controller
      */
     public function create()
     {
+        session()->forget('game');
      return view('games.create_game');
     }
 

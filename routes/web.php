@@ -17,5 +17,5 @@ Route::get('/', function () {return view('welcome');});
 
 Route::resource('games', 'GameController');
 Route::resource('players', 'PlayerController');
-Route::resource('rounds', 'RoundController');
+Route::resource('points', 'PointController');
 

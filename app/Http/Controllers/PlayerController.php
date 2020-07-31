@@ -45,7 +45,7 @@ class PlayerController extends Controller
            Player::create($player_array);
        }
 
-      return redirect()->route('rounds.create');
+      return redirect()->route('points.create');
     }
 
     /**

@@ -7,19 +7,19 @@
                 <div class="card " style="margin-top: 80px;padding: 50px">
                     <div class="card-header">{{ __('Enter Round Result:') }}</div>
                     <div class="card-body" style="background-color: rgba(0,0,0,.75);">
-                        <form method="POST" action="{{route('rounds.store')}}">
+                        <form method="POST" action="{{route('points.store')}}">
                             @csrf
-                            @for($i=0;$i<$game->number_of_players;$i++)
+                            @foreach($players as $player)
                                 <div class="form-group row mt-2 text-center">
 
                                     <label for="points"
-                                           class="col-md-2 col-form-label text-md-right" style="color: white"> {{$players[$i]['name']}}'s Points:</label>
+                                           class="col-md-2 col-form-label text-md-right" style="color: white"> {{$player->name}}'s Points:</label>
 
                                     <div class="col-md-3">
 
                                         <input id="points" type="text"
                                                class="form-control"
-                                               name="points[]" value="{{ old('name')}}" required
+                                               name="points[{{$player->id}}]" value="{{ old('name')}}" required
                                                autofocus>
 
                                     </div>
@@ -31,7 +31,7 @@
 
                                         <input id="seen" type="checkbox"
                                                class="form-control"
-                                               name="seen[]" value="{{ old('email')}}" autofocus>
+                                               name="seen[{{$player->id}}]"  autofocus>
 
                                     </div>
 
@@ -42,11 +42,11 @@
 
                                         <input id="dubli" type="checkbox"
                                                class="form-control"
-                                               name="seen[]" value="{{ old('email')}}" autofocus>
+                                               name="dubli[{{$player->id}}]"  autofocus>
 
                                     </div>
                                 </div>
-                            @endfor
+                            @endforeach
 
                             <div class="row text-center mt-4">
                                 <div class="col-md-12 "
@@ -62,7 +62,7 @@
                                     <div class="col-md-3">
                                         <input id="winner" type="radio"
                                                class="form-control"
-                                               name="seen[]" value="{{$players[$i]['name']}}" autofocus>
+                                               name="winner" value="{{$players[$i]['id']}}" autofocus>
 
                                         <label for="winner"
                                                class="col-form-label text-md-right" style="color: white">{{$players[$i]['name']}}</label>
