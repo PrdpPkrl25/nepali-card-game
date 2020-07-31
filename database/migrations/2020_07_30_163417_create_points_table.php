@@ -15,6 +15,8 @@ class CreatePointsTable extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->id();
+            $table->integer('player_id');
+            $table->integer('round_id');
             $table->integer('point_scored');
             $table->timestamps();
         });
