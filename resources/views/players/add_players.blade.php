@@ -5,7 +5,7 @@
         <div class="row justify-content-center" style="margin-top: 80px">
             <div class="col-md-12">
                 <div class="card " style="margin-top: 80px;padding: 50px">
-                    <div class="card-header">{{ __('Enter Player Detail:') }}</div>
+                    <div class="card-header">{{ __('Enter Round Detail:') }}</div>
                     <div class="card-body" style="background-color: rgba(0,0,0,.75);">
                         <form method="POST" action="{{route('players.store')}}">
                             @csrf
@@ -13,7 +13,7 @@
                                 <div class="form-group row mt-2 text-center">
 
                                     <label for="name"
-                                           class="col-md-3 col-form-label text-md-right" style="color: white">Player {{$i}} Name:</label>
+                                           class="col-md-2 col-form-label text-md-right" style="color: white">Player {{$i}} Name:</label>
 
                                     <div class="col-md-3">
 
@@ -54,3 +54,4 @@
     </div>
     </div>
 @endsection
+

@@ -33,7 +33,7 @@ class PlayerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StorePlayerPost $request)
     {
@@ -41,11 +41,11 @@ class PlayerController extends Controller
        for ($i=0;$i<$game->number_of_players;$i++){
            $name=$request->all()['name'][$i];
            $email=$request->all()['email'][$i];
-           $player_array=['name'=>$name,'email'=>$email];
+           $player_array=['name'=>$name,'email'=>$email,'game_id'=>$game->id];
            Player::create($player_array);
        }
 
-      return view('rounds.add_round_result');
+      return redirect()->route('rounds.create');
     }
 
     /**
