@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Game;
+use App\Http\Requests\StoreGamePost;
+use App\Model\Game;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class GameController extends Controller
 {
@@ -20,22 +22,28 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+     return view('games.create_game');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(StoreGamePost $request)
     {
-        //
+        $viewTokenId=rand(1000,100000);
+        $editTokenId=rand(1000,100000);
+        $game=Game::create($request->all()+['view_token_id'=>$viewTokenId,'edit_token_id'=>$editTokenId]);
+        session()->put('game',$game);
+        return redirect()->route('players.create');
+
     }
 
     /**

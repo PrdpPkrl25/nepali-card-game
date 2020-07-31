@@ -16,12 +16,13 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->integer('number_of_players');
-            $table->integer('winner_unseen_points')->default('10');
-            $table->integer('winner_seen_points')->default('3');
-            $table->integer('winner_dubli_unseen_points');
-            $table->integer('winner_dubli_seen_points');
-            $table->string('view_token_id');
-            $table->string('edit_token_id');
+            $table->integer('rate_per_point');
+            $table->integer('winner_points_per_seen')->default('10');
+            $table->integer('winner_points_per_unseen')->default('3');
+            $table->integer('dubli_winner_points_per_seen')->default('10');;
+            $table->integer('dubli_winner_points_per_unseen')->default('5');;
+            $table->string('view_token_id')->nullable();
+            $table->string('edit_token_id')->nullable();
             $table->timestamps();
         });
     }

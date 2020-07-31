@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+.card-title{
+    font-size: 200%;
+    font-weight: 700;
+    color: #23415C;
+    width: 100%;
+}
+
+.card-header{
+    font-size: 150%;
+    font-weight: 600;
+    color: #006072;
+    width: 100%;
+    text-align: center;
+}
+
+.product-title{
+    font-size: 160%;
+    font-weight: 500;
+    width: 100%;
+}
+
+.product-price{
+    font-size: 130%;
+    font-weight: 400;
+    width: 100%;
+}
+.shop-name{
+    font-size: 130%;
+    font-weight: 400;
+    width: 100%;
+    color: #686868;
+}
+
+.product-name{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.btn-success{
+    font-size: 120%;
+}
+
+footer{
+    position:fixed;
+    bottom:0;
+    left: 0;
+    width:100%;
+    background-color: #23415C;
+    height:60px;
+    padding:  1% 1%;
+    color: #FFF;
+    line-height: 180%;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+

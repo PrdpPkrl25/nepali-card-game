@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Player;
+use App\Http\Requests\StorePlayerPost;
+use App\Model\Player;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -20,22 +21,31 @@ class PlayerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $game=session()->get('game');
+        return view('players.add_players',compact('game'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(Request $request)
+    public function store(StorePlayerPost $request)
     {
-        //
+       $game=session()->get('game');
+       for ($i=0;$i<$game->number_of_players;$i++){
+           $name=$request->all()['name'][$i];
+           $email=$request->all()['email'][$i];
+           $player_array=['name'=>$name,'email'=>$email];
+           Player::create($player_array);
+       }
+
+      return view('rounds.add_round_result');
     }
 
     /**
