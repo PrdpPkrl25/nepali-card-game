@@ -19,7 +19,7 @@
 
                                         <input id="points" type="text"
                                                class="form-control"
-                                               name="points[{{$player->id}}]" value="{{ old('name')}}" required
+                                               name="points[{{$player->id}}]" value="0" required
                                                autofocus>
 
                                     </div>

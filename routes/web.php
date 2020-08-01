@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {return view('welcome');});
 
 Route::resource('games', 'GameController');
 Route::resource('players', 'PlayerController');
 Route::resource('points', 'PointController');
-
+Route::get('total-points', 'PointController@total');

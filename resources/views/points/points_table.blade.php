@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
     <div class="container">
@@ -10,21 +10,38 @@
                         <div class="row text-center">
                             <table class="table table-bordered table-hover text-center table-striped">
                                 <thead>
-                                <th>Round</th>
-                                @foreach($players as $player)
-                                <th>{{$player->name}}</th>
-                                @endforeach
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Name</th>
+                                    <th>Scored</th>
+                                    <th>Seen</th>
+                                    <th>Winner</th>
+                                    <th>Dubli</th>
+                                </tr>
                                 </thead>
                                 <tbody>
 
+
+                                {{-- <td>{{$loop->iteration}}</td>--}}
+                                @foreach($points as $point)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        @foreach($points as $point)
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $point->player->name }}</td>
                                         <td>
-                                            {{$point}}
+                                            {{$point->point_scored}}
                                         </td>
-                                        @endforeach
+                                        <td>
+                                            {{$point->seen}}
+                                        </td>
+                                        <td>
+                                            {{$point->winner}}
+                                        </td>
+                                        <td>
+                                            {{$point->dubli}}
+                                        </td>
                                     </tr>
+                                @endforeach
+
 
                                 </tbody>
                                 <tfoot>
@@ -32,8 +49,11 @@
                                 </tr>
                                 </tfoot>
                             </table>
-                            <a class="btn btn-light shadow border offset-md-1" href="#">PLay Next Round</a>
-                            <a class="btn btn-warning shadow border offset-md-6" href="#">Start New Game</a>
+                            <a class="btn btn-light shadow border offset-md-1"
+                               href="{{ route('points.create') }}">Play Next Round</a>
+                            {{--<a class="btn btn-light shadow border offset-md-2" href="">Show total points</a>--}}
+                            <a class="btn btn-warning shadow border offset-md-6"
+                               href="{{route('games.create')}}">Start New Game</a>
 
                         </div>
                     </div>
