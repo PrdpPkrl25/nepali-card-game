@@ -19,4 +19,5 @@ Route::get('/', function () {return view('welcome');});
 Route::resource('games', 'GameController');
 Route::resource('players', 'PlayerController');
 Route::resource('points', 'PointController');
-Route::get('total-points', 'PointController@total');
+Route::get('total-points', 'PointController@total')->name('total.points');
+Route::get('total-points/{game_id}', 'PointController@showTotal')->name('show.points');

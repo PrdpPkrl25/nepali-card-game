@@ -51,8 +51,8 @@
                             </table>
                             <a class="btn btn-light shadow border offset-md-1"
                                href="{{ route('points.create') }}">Play Next Round</a>
-                            {{--<a class="btn btn-light shadow border offset-md-2" href="">Show total points</a>--}}
-                            <a class="btn btn-warning shadow border offset-md-6"
+                            <a class="btn btn-light shadow border offset-md-2" href="{{route('total.points')}}">Show total points</a>
+                            <a class="btn btn-warning shadow border offset-md-4"
                                href="{{route('games.create')}}">Start New Game</a>
 
                         </div>

@@ -5,7 +5,7 @@
         <div class="row justify-content-center" style="margin-top: 80px">
             <div class="col-md-12">
                 <div class="card " style="margin-top: 80px;padding: 50px">
-                    <div class="card-header">{{ __('Enter Round Result:') }}</div>
+                    <div class="card-header">Enter Round Result (Game Id {{session()->get('game')->id}}): </div>
                     <div class="card-body" style="background-color: rgba(0,0,0,.75);">
                         <form method="POST" action="{{route('points.store')}}">
                             @csrf

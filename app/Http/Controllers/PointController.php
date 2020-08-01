@@ -136,7 +136,16 @@ class PointController extends Controller
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray) -> get();
-        return view('points.points_table', compact('players', 'points','game'));
+        return view('points.total-points', compact('players', 'points','game'));
+
+    }
+
+    public function showTotal($gameId)
+    {
+        $roundIdArray = Round ::where('game_id', $gameId) -> pluck('id');
+        $players = Player ::where('game_id', $gameId) -> get();
+        $points = Point ::whereIn('round_id', $roundIdArray) -> get();
+        return view('points.total-points', compact('players', 'points','game'));
 
     }
 }
