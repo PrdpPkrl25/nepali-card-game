@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Model\Player;
+use App\Model\Point;
 use App\Model\Round;
-use App\Point;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -35,7 +35,7 @@ class PointController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -43,35 +43,60 @@ class PointController extends Controller
        $round=Round::create(['game_id'=>$game->id]);
        $winner=$request->winner;
        $sumAllPoints=array_sum($request->all()['points']);
+       $winnerPoint=0;
       foreach ($request->all()['points'] as $key=>$value){
-          if($request->all()['seen'][$key]=='on'){
-
+          if($key==$winner){
+              continue;
           }
+
+          if(isset($request->all()['seen'][$key])&&$request->all()['seen'][$key]=='on'){
+              if(isset($request->all()['dubli'][$winner])&&$request->all()['dubli'][$winner]=='on'){
+                  if (isset($request->all()['dubli'][$key])&&$request->all()['dubli'][$key]=='on'){
+                      $pointSecured=($value*$game->number_of_players)-($sumAllPoints);
+                  }
+                  else{
+                      $pointSecured=($value*$game->number_of_players)-($sumAllPoints+$game->dubli_winner_points_per_seen);
+                  }
+                }
+                else{
+                    if (isset($request->all()['dubli'][$key])&&$request->all()['dubli'][$key]=='on'){
+                        $pointSecured=($value*$game->number_of_players)-($sumAllPoints);
+                    }
+                    else{
+                        $pointSecured=($value*$game->number_of_players)-($sumAllPoints+$game->winner_points_per_seen);
+                    }
+                }
+            }
           else{
-              if($request->all()['dubli'][$winner]=='on'){
-                  $pointSecured=$sumAllPoints+$game->dubli_winner_points_per_unseen;
-                  $pointArray=['player_id'=>$key,'round_id'=>$round->id,'point_scored'=>$pointSecured];
+              if(isset($request->all()['dubli'][$winner])&&$request->all()['dubli'][$winner]=='on'){
+                  $pointSecured=-1*($sumAllPoints+$game->dubli_winner_points_per_unseen);
               }
               else{
-                  $pointSecured=$sumAllPoints+$game->winner_points_per_unseen;
-                  $pointArray=['player_id'=>$key,'round_id'=>$round->id,'point_scored'=>$pointSecured];
+                  $pointSecured=-1*($sumAllPoints+$game->winner_points_per_unseen);
               }
 
           }
+          $pointArray=['player_id'=>$key,'round_id'=>$round->id,'point_scored'=>$pointSecured];
+          $point= Point::create($pointArray);
+          $winnerPoint=$winnerPoint+$pointSecured;
     }
-
-        //loop all players and add 10 to the sum of point of unseen
+        $winnerArray=['player_id'=>$winner,'round_id'=>$round->id,'point_secured'=>$winnerPoint];
+        $winnerObject = Point::create($winnerArray);
+        return redirect()->route('points.show',$round->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
+     * @param $roundId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Point $point)
+    public function show($roundId)
     {
-        //
+        $game=session()->get('game');
+        $players=Player::where('game_id',$game->id);
+        $points=Point::where('round_id',$roundId)->get();
+        return view('points.points_table',compact('roundId','points','players'));
     }
 
     /**
