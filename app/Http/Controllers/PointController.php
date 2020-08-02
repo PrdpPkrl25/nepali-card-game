@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Game;
 use App\Model\Player;
 use App\Model\Point;
 use App\Model\Round;
@@ -75,7 +76,7 @@ class PointController extends Controller
             $point = Point ::create($pointArray);
             $winnerPoint = $winnerPoint + $pointSecured;
         }
-        $winnerArray = ['player_id' => $winner, 'round_id' => $round -> id, 'point_scored' => $winnerPoint];
+        $winnerArray = ['player_id' => $winner, 'round_id' => $round -> id, 'point_scored' => -1*$winnerPoint];
         $winnerObject = Point ::create($winnerArray);
         return redirect() -> route('points.show', $round -> id);
     }
@@ -123,16 +124,18 @@ class PointController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Point $point)
+    public function destroy($roundId)
     {
-        //
+       $round=Round::where('id',$roundId)->delete();
+       return redirect()->route('total.points');
     }
 
     public function total()
     {
-        $game = session() -> get('game');
+        $gameSession = session() -> get('game');
+        $game=Game::with('rounds')->where('id',$gameSession->id)->first();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray) -> get();
@@ -142,6 +145,8 @@ class PointController extends Controller
 
     public function showTotal($gameId)
     {
+
+        $game=Game::with('rounds')->findOrFail($gameId);
         $roundIdArray = Round ::where('game_id', $gameId) -> pluck('id');
         $players = Player ::where('game_id', $gameId) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray) -> get();

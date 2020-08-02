@@ -15,6 +15,7 @@
                                     @foreach($game->players as $player)
                                         <th>{{ $player->name }}</th>
                                     @endforeach
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -24,16 +25,22 @@
                                         @foreach($round -> points as $point)
                                             <td>{{ $point->point_scored }}</td>
                                         @endforeach
+                                        <td>
+                                            <button class="ml-2 btn btn-danger remove_round"
+                                                     value="{{$round->id}}"><i class="fa fa-remove"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
 
 
                                 </tbody>
-                                <tfoot>
+                            <tfoot>
                                 <tr class="text-center">
+                                    <th>Total Point: </th>
+                                    @foreach($game->players as $player)
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    @endforeach
                                     <th></th>
 
                                 </tr>
@@ -54,9 +61,34 @@
 @endsection
 
 @section('script')
-<script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".remove_round").on('click', function (e) {
+            e.preventDefault();
+           if(confirm('Continue to delete')) {
+               var roundId = $(this).attr('value');
+               $.ajax({
+                   type: 'POST',
+                   url: '/points/delete/' + roundId,
+                   headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                   dataType: 'html',
+                   success: function (data) {
+                       location.reload();
+                   },
+               })
+               ;
+           }
+
+        });
+    });
+
+
     $(document).ready(function() {
         $('#table').DataTable();
     } );
+
+
+
 </script>
 @endsection

@@ -21,3 +21,4 @@ Route::resource('players', 'PlayerController');
 Route::resource('points', 'PointController');
 Route::get('total-points', 'PointController@total')->name('total.points');
 Route::get('total-points/{game_id}', 'PointController@showTotal')->name('show.points');
+Route::post('points/delete/{roundId}', 'PointController@destroy')->name('points.delete');
