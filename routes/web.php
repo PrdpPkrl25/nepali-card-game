@@ -19,6 +19,11 @@ Route::get('/', function () {return view('welcome');});
 Route::resource('games', 'GameController');
 Route::resource('players', 'PlayerController');
 Route::resource('points', 'PointController');
-Route::get('total-points', 'PointController@total')->name('total.points');
-Route::get('total-points/{game_id}', 'PointController@showTotal')->name('show.points');
+Route::get('points-table', 'PointController@total')->name('points.table');
 Route::post('points/delete/{roundId}', 'PointController@destroy')->name('points.delete');
+
+Route::get('code-input-page', 'PointController@codeInputPage')->name('code.input.page');
+Route::get('view/points-table', 'PointController@viewTotal')->name('view.table')->middleware('check.access');
+
+
+

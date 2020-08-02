@@ -8,51 +8,48 @@
                     <div class="card-header">Points Table:</div>
                     <div class="card-body">
                         <div class="row text-center">
-                            <table class="table table-bordered table-hover text-center table-striped">
+                            <table class="table table-bordered table-hover text-center table-striped" id="table">
                                 <thead>
                                 <tr>
-                                    <th>S. No.</th>
-                                    <th>Name</th>
-                                    <th>Scored</th>
-                                    <th>Seen</th>
-                                    <th>Winner</th>
-                                    <th>Dubli</th>
+                                    <th>Round</th>
+                                    @foreach($game->players as $player)
+                                        <th>{{ $player->name }}</th>
+                                    @endforeach
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
-                                {{-- <td>{{$loop->iteration}}</td>--}}
-                                @foreach($points as $point)
+                                @foreach($game->rounds as $round)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $point->player->name }}</td>
+                                        <td>{{ $round->id }}</td>
+                                        @foreach($round -> points as $point)
+                                            <td>{{ $point->point_scored }}</td>
+                                        @endforeach
                                         <td>
-                                            {{$point->point_scored}}
-                                        </td>
-                                        <td>
-                                            {{$point->seen}}
-                                        </td>
-                                        <td>
-                                            {{$point->winner}}
-                                        </td>
-                                        <td>
-                                            {{$point->dubli}}
+                                            <button class="ml-2 btn btn-danger remove_round"
+                                                     value="{{$round->id}}"><i class="fa fa-remove"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
 
 
                                 </tbody>
-                                <tfoot>
+                            <tfoot>
                                 <tr class="text-center">
+                                    <th>Total Point: </th>
+                                    @foreach($game->players as $player)
+                                    <th></th>
+                                    @endforeach
+                                    <th></th>
+
                                 </tr>
+
                                 </tfoot>
                             </table>
                             <a class="btn btn-light shadow border offset-md-1"
                                href="{{ route('points.create') }}">Play Next Round</a>
-                            <a class="btn btn-light shadow border offset-md-2" href="{{route('total.points')}}">Show total points</a>
-                            <a class="btn btn-warning shadow border offset-md-4"
+                            <a class="btn btn-warning shadow border offset-md-6"
                                href="{{route('games.create')}}">Start New Game</a>
 
                         </div>
@@ -61,4 +58,37 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".remove_round").on('click', function (e) {
+            e.preventDefault();
+           if(confirm('Continue to delete')) {
+               var roundId = $(this).attr('value');
+               $.ajax({
+                   type: 'POST',
+                   url: '/points/delete/' + roundId,
+                   headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                   dataType: 'html',
+                   success: function (data) {
+                       location.reload();
+                   },
+               })
+               ;
+           }
+
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('#table').DataTable();
+    } );
+
+
+
+</script>
 @endsection

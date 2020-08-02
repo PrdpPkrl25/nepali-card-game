@@ -94,7 +94,7 @@ class PointController extends Controller
         $game=session()->get('game');
         $players=Player::where('game_id',$game->id)->get();
         $points=Point::where('round_id',$roundId)->get();
-        return view('points.points_table',compact('roundId','points','players'));
+        return view('points.round_score',compact('roundId','points','players'));
     }
 
     /**
@@ -128,8 +128,8 @@ class PointController extends Controller
      */
     public function destroy($roundId)
     {
-       $round=Round::where('id',$roundId)->delete();
-       return redirect()->route('total.points');
+        Round::where('id',$roundId)->delete();
+       return redirect()->route('points.table');
     }
 
     public function total()
@@ -139,18 +139,23 @@ class PointController extends Controller
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray) -> get();
-        return view('points.total-points', compact('players', 'points','game'));
+        return view('points.points_table', compact('players', 'points','game'));
 
     }
 
-    public function showTotal($gameId)
+    public function codeInputPage()
     {
+        session()->forget('game');
+        return view('points.input_code');
+    }
 
-        $game=Game::with('rounds')->findOrFail($gameId);
-        $roundIdArray = Round ::where('game_id', $gameId) -> pluck('id');
-        $players = Player ::where('game_id', $gameId) -> get();
+    public function viewTotal()
+    {
+        $game=Game::with('rounds')->where('view_token_id',\request()->input('code_id'))->orWhere('edit_token_id',\request()->input('code_id'))->first();
+        $roundIdArray = Round ::where('game_id', $game->id) -> pluck('id');
+        $players = Player ::where('game_id', $game->id) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray) -> get();
-        return view('points.total-points', compact('players', 'points','game'));
+        return view('points.points_table', compact('players', 'points','game'));
 
     }
 }
