@@ -1,8 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center" style="margin-top: 80px">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card " style="margin-top: 80px;padding: 50px">
                     <div class="card-header">Enter Round Result (Game Id {{session()->get('game')->id}}): </div>
@@ -86,6 +85,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

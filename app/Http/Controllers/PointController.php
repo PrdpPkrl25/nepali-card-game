@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePointsPost;
 use App\Model\Game;
 use App\Model\Player;
 use App\Model\Point;
@@ -38,7 +39,7 @@ class PointController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StorePointsPost $request)
     {
         $game = session() -> get('game');
         $round = Round ::create(['game_id' => $game -> id]);
@@ -138,8 +139,8 @@ class PointController extends Controller
         $game=Game::with('rounds')->where('id',$gameSession->id)->first();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
-        $points = Point ::whereIn('round_id', $roundIdArray) -> get();
-        return view('points.points_table', compact('players', 'points','game'));
+        $points = Point ::whereIn('round_id', $roundIdArray)-> orderby('round_id','desc')->orderby('player_id','asc')->get();
+        return view('points.points_table', compact('players', 'points','game','roundIdArray'));
 
     }
 

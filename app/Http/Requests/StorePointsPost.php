@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AddRoundNegativeRule;
+use App\Rules\AddRoundPointRule;
+use App\Rules\AddRoundSeenRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePointsPost extends FormRequest
@@ -13,7 +16,7 @@ class StorePointsPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,11 @@ class StorePointsPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'winner'=>['required'],
+            'seen'=>[new AddRoundSeenRule()],
+            'points'=>[new AddRoundNegativeRule(), new AddRoundPointRule()],
         ];
     }
+
+
 }

@@ -12,4 +12,6 @@ class Player extends Model
     public function game(){
         return $this->belongsTo(Game::class,'game_id');
     }
+
+
 }

@@ -39,6 +39,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helper/helpers.php"
         ]
     },
     "autoload-dev": {
@@ -60,4 +63,6 @@
             "@php artisan key:generate --ansi"
         ]
     }
+
+
 }

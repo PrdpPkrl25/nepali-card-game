@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card align-content-between">
+                <div class="card align-content-between" style="margin-top: 80px">
                     <div class="card-header">Points Table:</div>
                     <div class="card-body">
                         <div class="row text-center">
-                            <table class="table table-bordered table-hover text-center table-striped" id="table">
+                            <table class="table table-bordered table-hover text-center table-striped" id="mytable">
                                 <thead>
                                 <tr>
                                     <th>Round</th>
@@ -21,7 +21,7 @@
                                 <tbody>
                                 @foreach($game->rounds as $round)
                                     <tr>
-                                        <td>{{ $round->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         @foreach($round -> points as $point)
                                             <td>{{ $point->point_scored }}</td>
                                         @endforeach
@@ -39,7 +39,16 @@
                                 <tr class="text-center">
                                     <th>Total Point: </th>
                                     @foreach($game->players as $player)
+                                    <th>{{totalPoint($roundIdArray,$player->id)}}</th>
+                                    @endforeach
                                     <th></th>
+
+                                </tr>
+
+                                <tr class="text-center">
+                                    <th>Total Amount: </th>
+                                    @foreach($game->players as $player)
+                                        <th>{{totalAmount($roundIdArray,$player->id,$game)}}</th>
                                     @endforeach
                                     <th></th>
 
@@ -47,10 +56,18 @@
 
                                 </tfoot>
                             </table>
-                            <a class="btn btn-light shadow border offset-md-1"
-                               href="{{ route('points.create') }}">Play Next Round</a>
-                            <a class="btn btn-warning shadow border offset-md-6"
-                               href="{{route('games.create')}}">Start New Game</a>
+                        </div>
+                        <div class="row text-center">
+                                <div class="col-md-6">
+                                    @if(session()->has('game'))
+                                        <a class="btn btn-light shadow border "
+                                           href="{{ route('points.create') }}">Play Next Round</a>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-warning shadow border "
+                                       href="{{route('games.create')}}">Start New Game</a>
+                                </div>
 
                         </div>
                     </div>
@@ -81,12 +98,11 @@
            }
 
         });
+
     });
 
 
-    $(document).ready(function() {
-        $('#table').DataTable();
-    } );
+
 
 
 

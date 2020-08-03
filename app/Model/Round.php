@@ -11,6 +11,6 @@ class Round extends Model
 
     public function points()
     {
-        return $this -> hasMany(Point::class);
+        return $this -> hasMany(Point::class)->orderBy('player_id');
     }
 }

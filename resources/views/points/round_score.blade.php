@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card align-content-between">
+                <div class="card align-content-between" style="margin-top: 80px">
                     <div class="card-header">Points Table:</div>
                     <div class="card-body">
                         <div class="row text-center">
