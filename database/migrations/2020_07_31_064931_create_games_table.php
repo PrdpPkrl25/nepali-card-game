@@ -16,7 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->integer('number_of_players');
-            $table->integer('rate_per_point');
+            $table->decimal('rate_per_point');
             $table->integer('winner_points_per_seen')->default('10');
             $table->integer('winner_points_per_unseen')->default('3');
             $table->integer('dubli_winner_points_per_seen')->default('10');;

@@ -24,7 +24,11 @@ class StoreGamePost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'rate_per_point'=>['required'],
+            'winner_points_per_seen'=>['required','integer'],
+            'winner_points_per_unseen'=>['required','integer'],
+            'dubli_winner_points_per_seen'=>['required','integer'],
+            'dubli_winner_points_per_unseen'=>['required','integer']
         ];
     }
 }
