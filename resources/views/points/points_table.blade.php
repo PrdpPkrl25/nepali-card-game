@@ -1,21 +1,20 @@
 @extends('layout')
 
 @section('content')
-    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card align-content-between" style="margin-top: 80px">
+                <div class="card align-content-between" style="margin-top: 80px;padding: 20px">
                     <div class="card-header">Points Table:</div>
                     <div class="card-body">
-                        <div class="row text-center">
-                            <table class="table table-bordered table-hover text-center table-striped" id="mytable">
+                        <div class="row ">
+                            <table class="table table-bordered table-hover table-striped" style="vertical-align: center">
                                 <thead>
                                 <tr>
                                     <th>Round</th>
                                     @foreach($game->players as $player)
                                         <th>{{ $player->name }}</th>
                                     @endforeach
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -26,9 +25,9 @@
                                             <td>{{ $point->point_scored }}</td>
                                         @endforeach
                                         <td>
-                                            <button class="ml-2 btn btn-danger remove_round"
+                                            <p class="ml-2 remove_round " style="color: red;font-weight: bolder;font-size: 14px;cursor: pointer"
                                                      value="{{$round->id}}"><i class="fa fa-remove"></i>
-                                            </button>
+                                            </p>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -37,7 +36,7 @@
                                 </tbody>
                             <tfoot>
                                 <tr class="text-center">
-                                    <th>Total Point: </th>
+                                    <th>Point: </th>
                                     @foreach($game->players as $player)
                                     <th>{{totalPoint($roundIdArray,$player->id)}}</th>
                                     @endforeach
@@ -46,7 +45,7 @@
                                 </tr>
 
                                 <tr class="text-center">
-                                    <th>Total Amount: </th>
+                                    <th>Amount: </th>
                                     @foreach($game->players as $player)
                                         <th>{{totalAmount($roundIdArray,$player->id,$game)}}</th>
                                     @endforeach
@@ -57,24 +56,24 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div class="row text-center">
-                                <div class="col-md-6">
+
+                                    <a class="btn btn-warning shadow border offset-1 "
+                                       href="{{route('games.create')}}">New Game</a>
+
                                     @if(session()->has('game'))
-                                        <a class="btn btn-light shadow border "
-                                           href="{{ route('points.create') }}">Play Next Round</a>
+                                        <a class="btn btn-light shadow border offset-2"
+                                           href="{{ route('points.create') }}">Next Round</a>
                                     @endif
-                                </div>
-                                <div class="col-md-6">
-                                    <a class="btn btn-warning shadow border "
-                                       href="{{route('games.create')}}">Start New Game</a>
-                                </div>
+
+
+
+
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @section('script')

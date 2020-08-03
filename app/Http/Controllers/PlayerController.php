@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePlayerPost;
+use App\Mail\GameDetail;
 use App\Model\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PlayerController extends Controller
 {
@@ -42,7 +44,10 @@ class PlayerController extends Controller
            $name=$request->all()['name'][$i];
            $email=$request->all()['email'][$i];
            $player_array=['name'=>$name,'email'=>$email,'game_id'=>$game->id];
-           Player::create($player_array);
+           $player=Player::create($player_array);
+           if(!$player->email==Null){
+               Mail::to($player->email)->send(new GameDetail($game));
+           }
        }
 
       return redirect()->route('points.create');

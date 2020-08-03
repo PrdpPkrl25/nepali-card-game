@@ -24,6 +24,6 @@ Route::post('points/delete/{roundId}', 'PointController@destroy')->name('points.
 
 Route::get('code-input-page', 'PointController@codeInputPage')->name('code.input.page');
 Route::get('view/points-table', 'PointController@viewTotal')->name('view.table')->middleware('check.access');
-
+Route::get('game/info', 'GameController@info')->name('game.info');
 
 

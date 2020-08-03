@@ -3,8 +3,13 @@
 @section('content')
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card " style="margin-top: 80px;padding: 50px">
-                    <div class="card-header">Enter Round Result (Game Id {{session()->get('game')->id}}): </div>
+                <div class="card " style="margin-top: 80px;padding: 20px">
+                    <div class="card-header">
+                        <div class="row">
+                        <div class="col-md-6 text-right">Enter Round Result: </div>
+                        <div class="col-md-6 text-right"> <a href="{{route('game.info')}}"> Game Info<span class="glyphicon glyphicon-info-sign"></span></a></div>
+                        </div>
+                    </div>
                     <div class="card-body" style="background-color: rgba(0,0,0,.75);">
                         <form method="POST" action="{{route('points.store')}}">
                             @csrf

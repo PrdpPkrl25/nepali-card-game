@@ -18,6 +18,9 @@ class CreatePointsTable extends Migration
             $table->integer('player_id');
             $table->integer('round_id');
             $table->integer('point_scored');
+            $table->boolean('seen')->default(0);
+            $table->boolean('dubli')->default(0);
+            $table->boolean('winner')->default(0);
             $table->timestamps();
         });
     }

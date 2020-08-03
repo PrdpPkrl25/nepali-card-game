@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGamePost;
+use App\Mail\GameDetail;
 use App\Model\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class GameController extends Controller
 {
@@ -89,5 +91,12 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         //
+    }
+
+    public function info()
+    {
+        $game=session()->get('game');
+        return view('games.game_info',compact('game'));
+
     }
 }
