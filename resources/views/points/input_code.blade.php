@@ -19,7 +19,7 @@
 
                                         <input id="code" type="text"
                                                class="form-control"
-                                               name="code_id" required
+                                               name="code_id"
                                                autofocus>
                                     </div>
                                 </div>

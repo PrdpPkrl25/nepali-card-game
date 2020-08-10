@@ -16,6 +16,7 @@ class CheckAccess
      */
     public function handle($request, Closure $next)
     {
+        session()->forget('game');
         if(!($request->input('code_id'))){
             return redirect()->route('code.input.page');
         }

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class AddRoundPointRule implements Rule
 {
+    private $countSeen=true;
     /**
      * Create a new rule instance.
      *
@@ -27,6 +28,10 @@ class AddRoundPointRule implements Rule
     {
 
         $seenArray=request()->input('seen');
+        if(!($seenArray)){
+            $this->countSeen=false;
+               return false;
+        }
         foreach ($value as $key=>$point){
             if(intval($point)>0){
                 if(!array_key_exists($key,$seenArray)){
@@ -44,6 +49,9 @@ class AddRoundPointRule implements Rule
      */
     public function message()
     {
-        return 'The seen field is off for player having point';
+        if ($this->countSeen==false){
+            return 'Click seen on at least one player';
+        }
+         return  'Seen field is off for player having point';
     }
 }

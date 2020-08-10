@@ -153,7 +153,6 @@ class PointController extends Controller
 
     public function codeInputPage()
     {
-        session()->forget('game');
         return view('points.input_code');
     }
 

@@ -15,7 +15,7 @@
 
                                 <div class="col-md-3">
                                     <input id="number_of_players" type="text"
-                                           class="form-control"
+                                           class="form-control text-center"
                                            name="number_of_players" value="{{ __('4') }}" required autocomplete="number_of_players"
                                            autofocus>
                                 </div>
@@ -35,7 +35,7 @@
 
                                 <div class="col-md-3">
                                     <input id="rate_per_point" type="text"
-                                           class="form-control"
+                                           class="form-control text-center"
                                            name="rate_per_point" value="{{ __('1') }}" required autocomplete="rate_per_point"
                                            autofocus>
                                 </div>
@@ -55,7 +55,7 @@
 
                                 <div class="col-md-3">
                                     <input id="number" type="text"
-                                           class="form-control"
+                                           class="form-control text-center"
                                            name="winner_points_per_seen" value="{{ __('3') }}" required autocomplete="winner_points_per_seen"
                                            autofocus>
                                 </div>
@@ -67,7 +67,7 @@
 
                                 <div class="col-md-3">
                                     <input id="number" type="text"
-                                           class="form-control"
+                                           class="form-control text-center"
                                            name="winner_points_per_unseen" value="{{ __('10') }}" required autocomplete="winner_points_per_unseen"
                                            autofocus>
                                 </div>
@@ -79,7 +79,7 @@
 
                                 <div class="col-md-3">
                                     <input id="dubli_winner_points_per_seen" type="text"
-                                           class="form-control @error('number') is-invalid @enderror"
+                                           class="form-control text-center"
                                            name="dubli_winner_points_per_seen" value="{{ __('5') }}" required autocomplete="dubli_winner_points_per_seen"
                                            autofocus>
                                 </div>
@@ -91,7 +91,7 @@
 
                                 <div class="col-md-3">
                                     <input id="dubli_winner_points_per_unseen" type="text"
-                                           class="form-control"
+                                           class="form-control text-center"
                                            name="dubli_winner_points_per_unseen" value="{{ __('10') }}" required autocomplete="dubli_winner_points_per_unseen"
                                            autofocus>
                                 </div>
