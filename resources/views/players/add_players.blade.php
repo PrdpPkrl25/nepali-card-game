@@ -18,7 +18,7 @@
 
                                         <input id="name" type="text"
                                                class="form-control"
-                                               name="name[]" value="{{ old('name')}}" required autocomplete="name"
+                                               name="name[]" required autocomplete="name"
                                                autofocus>
 
                                     </div>
@@ -30,7 +30,7 @@
 
                                         <input id="email" type="text"
                                                class="form-control"
-                                               name="email[]" value="{{ old('email')}}" autocomplete="email"
+                                               name="email[]" autocomplete="email"
                                                autofocus>
 
                                     </div>

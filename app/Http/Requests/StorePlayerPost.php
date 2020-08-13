@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AddPlayerEmailRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePlayerPost extends FormRequest
@@ -24,7 +25,7 @@ class StorePlayerPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email'=>[new AddPlayerEmailRule()],
         ];
     }
 }
