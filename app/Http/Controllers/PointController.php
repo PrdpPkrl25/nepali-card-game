@@ -143,6 +143,9 @@ class PointController extends Controller
     public function total()
     {
         $gameSession = session() -> get('game');
+        if(is_null($gameSession)){
+            return redirect('/');
+        }
         $game=Game::with('rounds')->where('id',$gameSession->id)->first();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
