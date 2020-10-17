@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGamePost;
 use App\Mail\GameDetail;
 use App\Model\Game;
+use App\Repository\GameRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class GameController extends Controller
 {
+    private $gameRepository;
+
+    public function __construct(GameRepository $gameRepository)
+    {
+        $this-> gameRepository= $gameRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +43,13 @@ class GameController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function store(StoreGamePost $request)
+    public function store(Request $request)
     {
-        $viewTokenId=rand(1000,100000);
-        $editTokenId=rand(1000,100000);
-        $game=Game::create($request->all()+['view_token_id'=>$viewTokenId,'edit_token_id'=>$editTokenId]);
-        session()->put('game',$game);
-        return redirect()->route('players.create');
+        $game=$this->gameRepository->handleCreate($request);
+        return response()->json($game);
 
     }
 
