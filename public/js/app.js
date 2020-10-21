@@ -69802,6 +69802,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 /* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Game/Create */ "./resources/js/components/Game/Create.js");
+/* harmony import */ var _components_Player_add__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Player/add */ "./resources/js/components/Player/add.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69823,6 +69824,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -69852,6 +69854,10 @@ var Index = /*#__PURE__*/function (_Component) {
         path: "/create-game",
         exact: true,
         component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/add-players",
+        exact: true,
+        component: _components_Player_add__WEBPACK_IMPORTED_MODULE_5__["default"]
       })));
     }
   }]);
@@ -70069,7 +70075,7 @@ var Home = /*#__PURE__*/function (_Component) {
           dubliWinnerPointPerUnseen: ''
         });
 
-        _this2.props.history.push('/');
+        _this2.props.history.push('/add-players', response.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -70261,6 +70267,17 @@ var Home = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Player/add.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Player/add.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\praka\\Project\\PHP\\marriage\\resources\\js\\components\\Player\\add.js: JSX attributes must only be assigned a non-empty expression (29:99)\n\n\u001b[0m \u001b[90m 27 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"form-group row mt-2 text-center\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 28 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mlabel\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"col-md-2 col-form-label text-md-right\"\u001b[39m htmlFor\u001b[33m=\u001b[39m\u001b[32m\"player_name\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mPlayer\u001b[39m {i} \u001b[33mName\u001b[39m\u001b[33m:\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mlabel\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 29 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33minput\u001b[39m type\u001b[33m=\u001b[39m\u001b[32m\"text\"\u001b[39m key\u001b[33m=\u001b[39m{\u001b[32m`player_name${i}`\u001b[39m} className\u001b[33m=\u001b[39m\u001b[32m\"form-control col-md-3\"\u001b[39m value\u001b[33m=\u001b[39m{} onClick\u001b[33m=\u001b[39m{}  required  id\u001b[33m=\u001b[39m{\u001b[32m`player_name${i}`\u001b[39m} placeholder\u001b[33m=\u001b[39m\u001b[32m\"Enter player name...\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m                                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 30 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 31 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mlabel\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"col-md-3 col-form-label text-md-right\"\u001b[39m htmlFor\u001b[33m=\u001b[39m\u001b[32m\"email\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mPlayer\u001b[39m {i} \u001b[33mEmail\u001b[39m\u001b[33m:\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mlabel\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33minput\u001b[39m type\u001b[33m=\u001b[39m\u001b[32m\"text\"\u001b[39m key\u001b[33m=\u001b[39m{\u001b[32m`email${i}`\u001b[39m} className\u001b[33m=\u001b[39m\u001b[32m\"form-control col-md-3\"\u001b[39m value\u001b[33m=\u001b[39m{} onClick\u001b[33m=\u001b[39m{}  id\u001b[33m=\u001b[39m{\u001b[32m`email${i}`\u001b[39m} placeholder\u001b[33m=\u001b[39m\u001b[32m\"Enter player email...\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Object.raiseWithData (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Object.raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:744:17)\n    at Object.jsxParseAttributeValue (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4469:16)\n    at Object.jsxParseAttribute (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4517:44)\n    at Object.jsxParseOpeningElementAfterName (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4537:28)\n    at Object.jsxParseOpeningElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4530:17)\n    at Object.jsxParseElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4562:33)\n    at Object.jsxParseElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4578:32)\n    at Object.jsxParseElement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4636:17)\n    at Object.parseExprAtom (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4643:19)\n    at Object.parseExprSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Object.parseMaybeUnary (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Object.parseExprOps (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Object.parseMaybeConditional (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Object.parseMaybeAssign (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Object.parseExprListItem (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:10846:18)\n    at Object.parseCallExpressionArguments (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9885:22)\n    at Object.parseSubscript (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9785:31)\n    at Object.parseSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9711:19)\n    at Object.parseExprSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9694:17)\n    at Object.parseMaybeUnary (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Object.parseExprOps (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Object.parseMaybeConditional (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Object.parseMaybeAssign (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Object.parseExpression (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9418:23)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11339:23)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Object.parseBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Object.parseBlock (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11755:10)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11286:21)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11828:60\n    at Object.withTopicForbiddingContext (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11085:14)\n    at Object.parseFor (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11828:22)");
 
 /***/ }),
 

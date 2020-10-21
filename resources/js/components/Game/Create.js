@@ -78,7 +78,7 @@ export default class Home extends Component {
             dubliWinnerPointPerSeen:'',
             dubliWinnerPointPerUnseen:'',
         })
-        this.props.history.push('/');
+        this.props.history.push('/add-players',response.data);
         }).catch(err=>console.log(err));
 
     }
