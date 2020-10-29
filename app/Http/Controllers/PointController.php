@@ -41,7 +41,7 @@ class PointController extends Controller
      */
     public function store(StorePointsPost $request)
     {
-        $game = session() -> get('game');
+        $game = $request->game;
         $round = Round ::create(['game_id' => $game -> id]);
         $winner = $request -> winner;
         $sumAllPoints = array_sum($request -> all()['points']);

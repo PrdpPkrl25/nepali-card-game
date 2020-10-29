@@ -69803,6 +69803,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 /* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Game/Create */ "./resources/js/components/Game/Create.js");
 /* harmony import */ var _components_Player_add__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Player/add */ "./resources/js/components/Player/add.js");
+/* harmony import */ var _components_Game_Point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Game/Point */ "./resources/js/components/Game/Point.js");
+/* harmony import */ var _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Game/Info */ "./resources/js/components/Game/Info.js");
+/* harmony import */ var _components_Game_Select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Game/Select */ "./resources/js/components/Game/Select.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69832,6 +69835,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
 var Index = /*#__PURE__*/function (_Component) {
   _inherits(Index, _Component);
 
@@ -69851,13 +69857,25 @@ var Index = /*#__PURE__*/function (_Component) {
         exact: true,
         component: _components_Home__WEBPACK_IMPORTED_MODULE_3__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/create-game",
+        path: "/select/game",
+        exact: true,
+        component: _components_Game_Select__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/marriage/start",
         exact: true,
         component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/add-players",
+        path: "/add-players/:id",
         exact: true,
         component: _components_Player_add__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/add-point/:id",
+        exact: true,
+        component: _components_Game_Point__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/info/:id",
+        exact: true,
+        component: _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__["default"]
       })));
     }
   }]);
@@ -69951,7 +69969,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Home; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Create; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -69981,24 +69999,24 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Home = /*#__PURE__*/function (_Component) {
-  _inherits(Home, _Component);
+var Create = /*#__PURE__*/function (_Component) {
+  _inherits(Create, _Component);
 
-  var _super = _createSuper(Home);
+  var _super = _createSuper(Create);
 
-  function Home(props) {
+  function Create(props) {
     var _this;
 
-    _classCallCheck(this, Home);
+    _classCallCheck(this, Create);
 
     _this = _super.call(this, props);
     _this.state = {
-      totalPlayers: '',
-      ratePerPoint: '',
-      winnerPointPerSeen: '',
-      winnerPointPerUnseen: '',
-      dubliWinnerPointPerSeen: '',
-      dubliWinnerPointPerUnseen: ''
+      totalPlayers: '4',
+      ratePerPoint: '1',
+      winnerPointPerSeen: '3',
+      winnerPointPerUnseen: '10',
+      dubliWinnerPointPerSeen: '5',
+      dubliWinnerPointPerUnseen: '10'
     };
     _this.handleFormSubmit = _this.handleFormSubmit.bind(_assertThisInitialized(_this));
     _this.handleInputTotalPlayersChange = _this.handleInputTotalPlayersChange.bind(_assertThisInitialized(_this));
@@ -70010,7 +70028,7 @@ var Home = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Home, [{
+  _createClass(Create, [{
     key: "handleInputTotalPlayersChange",
     value: function handleInputTotalPlayersChange(event) {
       this.setState({
@@ -70075,7 +70093,7 @@ var Home = /*#__PURE__*/function (_Component) {
           dubliWinnerPointPerUnseen: ''
         });
 
-        _this2.props.history.push('/add-players', response.data);
+        _this2.props.history.push("/add-players/".concat(response.data['id']), response.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -70176,7 +70194,410 @@ var Home = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return Home;
+  return Create;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Game/Info.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Game/Info.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Point; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var Point = /*#__PURE__*/function (_Component) {
+  _inherits(Point, _Component);
+
+  var _super = _createSuper(Point);
+
+  function Point(props) {
+    var _this;
+
+    _classCallCheck(this, Point);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      game: ''
+    };
+    return _this;
+  }
+
+  _createClass(Point, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var game = this.props.location.state;
+      this.setState({
+        game: game
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, " Game Info"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "S.N"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Attribute"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col"
+      }, "Value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "1."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Number of Players"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.state.game['number_of_players'])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Rate Per point"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.state.game['rate_per_point'])))))))));
+    }
+  }]);
+
+  return Point;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Game/Point.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Game/Point.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Point; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var Point = /*#__PURE__*/function (_Component) {
+  _inherits(Point, _Component);
+
+  var _super = _createSuper(Point);
+
+  function Point(props) {
+    var _this;
+
+    _classCallCheck(this, Point);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      game: '',
+      players: [{
+        id: 1,
+        name: 'A'
+      }, {
+        id: 2,
+        name: 'B'
+      }, {
+        id: 3,
+        name: 'C'
+      }, {
+        id: 4,
+        name: 'D'
+      }],
+      points: [],
+      seen: [],
+      dubli: [],
+      winner: ''
+    };
+    _this.handlePlayerSeen = _this.handlePlayerSeen.bind(_assertThisInitialized(_this));
+    _this.handlePlayerPoint = _this.handlePlayerPoint.bind(_assertThisInitialized(_this));
+    _this.handlePlayerDubli = _this.handlePlayerDubli.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Point, [{
+    key: "handlePlayerPoint",
+    value: function handlePlayerPoint(e, id) {
+      this.state.points[id] = e.target.value;
+      this.setState({
+        points: this.state.points
+      });
+    }
+  }, {
+    key: "handlePlayerSeen",
+    value: function handlePlayerSeen(e, id) {
+      this.state.seen[id] = e.target.value;
+      this.setState({
+        seen: this.state.seen
+      });
+    }
+  }, {
+    key: "handlePlayerDubli",
+    value: function handlePlayerDubli(e, id) {
+      this.state.dubli[id] = e.target.value;
+      this.setState({
+        dubli: this.state.dubli
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/points", {
+        points: this.state.points,
+        seen: this.state.seen,
+        dubli: this.state.dubli,
+        game: this.state.game,
+        id: this.state.game['id']
+      }).then(function (response) {
+        _this2.setState({
+          points: '',
+          seen: [],
+          dubli: [],
+          winner: ''
+        });
+
+        _this2.props.history.push('/');
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var game = this.props.location.state;
+      this.setState({
+        game: game
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, "Enter Round Point Result:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: {
+          pathname: "/info/".concat(this.state.game['id']),
+          state: this.state.game
+        }
+      }, "Game Info")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, this.state.players.map(function (player) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "form-group row mt-2 text-center",
+          key: player.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "col-md-2 col-form-label text-md-right",
+          htmlFor: "player_point"
+        }, "Player ", player.id, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "text",
+          className: "form-control col-md-2",
+          value: _this3.state.points[player.id],
+          onChange: _this3.handlePlayerPoint(player.id),
+          required: true,
+          id: "player_point",
+          name: "points",
+          placeholder: "Enter player point..."
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "col-md-2 col-form-label text-md-right",
+          htmlFor: "seen"
+        }, "Seen Status:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "seen",
+          type: "checkbox",
+          className: "form-control col-md-1",
+          value: _this3.state.seen[player.id],
+          onChange: _this3.handlePlayerSeen(player.id),
+          name: "seen"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "col-md-2 col-form-label text-md-right",
+          htmlFor: "dubli"
+        }, "Dubli Played:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "dubli",
+          type: "checkbox",
+          className: "form-control col-md-1",
+          value: _this3.state.dubli[player.id],
+          onChange: _this3.handlePlayerDubli(player.id),
+          name: "dubli"
+        }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-3 offset-md-4  text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))))))));
+    }
+  }]);
+
+  return Point;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Game/Select.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/Game/Select.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Select; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Select = /*#__PURE__*/function (_Component) {
+  _inherits(Select, _Component);
+
+  var _super = _createSuper(Select);
+
+  function Select() {
+    _classCallCheck(this, Select);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(Select, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Choose Game"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/marriage/start",
+        className: "btn btn-primary"
+      }, "Marriage")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/callbreak/start",
+        className: "btn btn-primary"
+      }, "Call Break"))))))));
+    }
+  }]);
+
+  return Select;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -70245,16 +70666,16 @@ var Home = /*#__PURE__*/function (_Component) {
         className: "card mt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, "Welcome to Marriage Game Application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Welcome to Cards Game Application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/create-game",
+        to: "/select/game",
         className: "btn btn-primary"
-      }, "Start Game")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "New Game")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6 text-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/code",
@@ -70275,9 +70696,164 @@ var Home = /*#__PURE__*/function (_Component) {
   !*** ./resources/js/components/Player/add.js ***!
   \***********************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\praka\\Project\\PHP\\marriage\\resources\\js\\components\\Player\\add.js: JSX attributes must only be assigned a non-empty expression (29:99)\n\n\u001b[0m \u001b[90m 27 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"form-group row mt-2 text-center\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 28 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mlabel\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"col-md-2 col-form-label text-md-right\"\u001b[39m htmlFor\u001b[33m=\u001b[39m\u001b[32m\"player_name\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mPlayer\u001b[39m {i} \u001b[33mName\u001b[39m\u001b[33m:\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mlabel\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 29 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33minput\u001b[39m type\u001b[33m=\u001b[39m\u001b[32m\"text\"\u001b[39m key\u001b[33m=\u001b[39m{\u001b[32m`player_name${i}`\u001b[39m} className\u001b[33m=\u001b[39m\u001b[32m\"form-control col-md-3\"\u001b[39m value\u001b[33m=\u001b[39m{} onClick\u001b[33m=\u001b[39m{}  required  id\u001b[33m=\u001b[39m{\u001b[32m`player_name${i}`\u001b[39m} placeholder\u001b[33m=\u001b[39m\u001b[32m\"Enter player name...\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m                                                                                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 30 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 31 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mlabel\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"col-md-3 col-form-label text-md-right\"\u001b[39m htmlFor\u001b[33m=\u001b[39m\u001b[32m\"email\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mPlayer\u001b[39m {i} \u001b[33mEmail\u001b[39m\u001b[33m:\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mlabel\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33minput\u001b[39m type\u001b[33m=\u001b[39m\u001b[32m\"text\"\u001b[39m key\u001b[33m=\u001b[39m{\u001b[32m`email${i}`\u001b[39m} className\u001b[33m=\u001b[39m\u001b[32m\"form-control col-md-3\"\u001b[39m value\u001b[33m=\u001b[39m{} onClick\u001b[33m=\u001b[39m{}  id\u001b[33m=\u001b[39m{\u001b[32m`email${i}`\u001b[39m} placeholder\u001b[33m=\u001b[39m\u001b[32m\"Enter player email...\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Object.raiseWithData (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Object.raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:744:17)\n    at Object.jsxParseAttributeValue (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4469:16)\n    at Object.jsxParseAttribute (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4517:44)\n    at Object.jsxParseOpeningElementAfterName (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4537:28)\n    at Object.jsxParseOpeningElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4530:17)\n    at Object.jsxParseElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4562:33)\n    at Object.jsxParseElementAt (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4578:32)\n    at Object.jsxParseElement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4636:17)\n    at Object.parseExprAtom (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:4643:19)\n    at Object.parseExprSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Object.parseMaybeUnary (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Object.parseExprOps (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Object.parseMaybeConditional (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Object.parseMaybeAssign (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Object.parseExprListItem (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:10846:18)\n    at Object.parseCallExpressionArguments (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9885:22)\n    at Object.parseSubscript (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9785:31)\n    at Object.parseSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9711:19)\n    at Object.parseExprSubscripts (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9694:17)\n    at Object.parseMaybeUnary (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Object.parseExprOps (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Object.parseMaybeConditional (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Object.parseMaybeAssign (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Object.parseExpression (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:9418:23)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11339:23)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Object.parseBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Object.parseBlock (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11755:10)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11286:21)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11828:60\n    at Object.withTopicForbiddingContext (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11085:14)\n    at Object.parseFor (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11828:22)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Add; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Add = /*#__PURE__*/function (_Component) {
+  _inherits(Add, _Component);
+
+  var _super = _createSuper(Add);
+
+  function Add(props) {
+    var _this;
+
+    _classCallCheck(this, Add);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      game: '',
+      playerName: '',
+      email: '',
+      playerNumber: 1
+    };
+    _this.handleEmail = _this.handleEmail.bind(_assertThisInitialized(_this));
+    _this.handlePlayerName = _this.handlePlayerName.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Add, [{
+    key: "handlePlayerName",
+    value: function handlePlayerName(event) {
+      this.setState({
+        playerName: event.target.value
+      });
+    }
+  }, {
+    key: "handleEmail",
+    value: function handleEmail(event) {
+      this.setState({
+        email: event.target.value
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/players", {
+        playerName: this.state.playerName,
+        email: this.state.email,
+        id: this.state.game['id']
+      }).then(function (response) {
+        _this2.setState({
+          playerName: '',
+          email: '',
+          playerNumber: response.data['player_number'] + 1
+        });
+
+        if (_this2.state.game['number_of_players'] == response.data['player_number']) {
+          _this2.props.history.push("/add-point/".concat(_this2.state.game['id']), _this2.state.game);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var game = this.props.location.state;
+      this.setState({
+        game: game
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Enter Player (", this.state.playerNumber, ") Detail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row mt-2 text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-2 col-form-label text-md-right",
+        htmlFor: "player_name"
+      }, "Player Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control col-md-3",
+        value: this.state.playerName,
+        onChange: this.handlePlayerName,
+        required: true,
+        id: "player_name",
+        placeholder: "Enter player name..."
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-3 col-form-label text-md-right",
+        htmlFor: "email"
+      }, "Player Email:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control col-md-3",
+        value: this.state.email,
+        onChange: this.handleEmail,
+        id: "email",
+        placeholder: "Enter player email..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-3 offset-md-5  text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))))))));
+    }
+  }]);
+
+  return Add;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 

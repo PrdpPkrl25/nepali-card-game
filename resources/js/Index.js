@@ -4,6 +4,9 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "./components/Home";
 import Create from "./components/Game/Create"
 import Add from "./components/Player/add"
+import Point from "./components/Game/Point"
+import Info from "./components/Game/Info"
+import Select from "./components/Game/Select";
 
 export default class Index extends Component {
     render(){
@@ -11,8 +14,11 @@ export default class Index extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={Home} />
-                    <Route path="/create-game" exact component={Create} />
-                    <Route path="/add-players" exact component={Add} />
+                    <Route path="/select/game" exact component={Select} />
+                    <Route path="/marriage/start" exact component={Create} />
+                    <Route path="/add-players/:id" exact component={Add} />
+                    <Route path="/add-point/:id" exact component={Point} />
+                    <Route path="/info/:id" exact component={Info} />
                 </Switch>
             </BrowserRouter>
     );

@@ -3,16 +3,16 @@ import axios from 'axios';
 
 
 
-export default class Home extends Component {
+export default class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalPlayers:'',
-            ratePerPoint:'',
-            winnerPointPerSeen:'',
-            winnerPointPerUnseen:'',
-            dubliWinnerPointPerSeen:'',
-            dubliWinnerPointPerUnseen:'',
+            totalPlayers:'4',
+            ratePerPoint:'1',
+            winnerPointPerSeen:'3',
+            winnerPointPerUnseen:'10',
+            dubliWinnerPointPerSeen:'5',
+            dubliWinnerPointPerUnseen:'10',
         }
         this.handleFormSubmit=this.handleFormSubmit.bind(this);
         this.handleInputTotalPlayersChange=this.handleInputTotalPlayersChange.bind(this);
@@ -78,7 +78,7 @@ export default class Home extends Component {
             dubliWinnerPointPerSeen:'',
             dubliWinnerPointPerUnseen:'',
         })
-        this.props.history.push('/add-players',response.data);
+        this.props.history.push(`/add-players/${response.data['id']}`,response.data);
         }).catch(err=>console.log(err));
 
     }

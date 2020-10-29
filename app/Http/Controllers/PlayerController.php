@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePlayerPost;
 use App\Mail\GameDetail;
+use App\Model\Game;
 use App\Model\Player;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PlayerController extends Controller
@@ -35,22 +38,16 @@ class PlayerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StorePlayerPost $request)
+    public function store(Request $request)
     {
-       $game=session()->get('game');
-       for ($i=0;$i<$game->number_of_players;$i++){
-           $name=$request->all()['name'][$i];
-           $email=$request->all()['email'][$i];
-           $player_array=['name'=>$name,'email'=>$email,'game_id'=>$game->id];
-           $player=Player::create($player_array);
-           if(!$player->email==Null){
-               Mail::to($player->email)->send(new GameDetail($game));
-           }
-       }
-
-      return redirect()->route('points.create');
+        $gameId=$request->id;
+        $player_array=['name'=>$request->playerName,'email'=>$request->email,'game_id'=>$gameId];
+        $player=Player::create($player_array);
+        $game=Game::with('players')->findOrFail($gameId);
+        $number=$game->players->count();
+         return response()->json(['player'=>$player,'player_number'=>$number]);
     }
 
     /**
