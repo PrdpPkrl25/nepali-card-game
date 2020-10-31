@@ -92,13 +92,13 @@ export default class Point extends Component {
                                     {this.state.players.map(player=>(
                                         <div className="form-group row mt-2 text-center" key={player.id}>
                                             <label className="col-md-2 col-form-label text-md-right" htmlFor="player_point">Player {player.id} Point:</label>
-                                            <input type="text"  className="form-control col-md-2" value={this.state.points} onChange={this.handlePlayerPoint(player.id)}  required  id="player_point" name="points" placeholder="Enter player point..."/>
+                                            <input type="text"  className="form-control col-md-2"  onChange={this.handlePlayerPoint(player.id)}  required  id="player_point" name="points" placeholder="Enter player point..."/>
 
                                             <label className="col-md-2 col-form-label text-md-right" htmlFor="seen">Seen Status:</label>
-                                            <input id="seen" type="checkbox" className="form-control col-md-1" value={this.state.seen} onChange={this.handlePlayerSeen(player.id)} name="seen"  />
+                                            <input id="seen" type="checkbox" className="form-control col-md-1"  onChange={this.handlePlayerSeen(player.id)} name="seen"  />
 
                                             <label className="col-md-2 col-form-label text-md-right" htmlFor="dubli">Dubli Played:</label>
-                                            <input id="dubli" type="checkbox" className="form-control col-md-1" value={this.state.dubli} onChange={this.handlePlayerDubli(player.id)} name="dubli" />
+                                            <input id="dubli" type="checkbox" className="form-control col-md-1" onChange={this.handlePlayerDubli(player.id)} name="dubli" />
                                         </div>
                                     ))}
 

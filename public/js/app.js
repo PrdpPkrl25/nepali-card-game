@@ -70472,7 +70472,6 @@ var Point = /*#__PURE__*/function (_Component) {
         }, "Player ", player.id, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "form-control col-md-2",
-          value: _this3.state.points[player.id],
           onChange: _this3.handlePlayerPoint(player.id),
           required: true,
           id: "player_point",
@@ -70485,7 +70484,6 @@ var Point = /*#__PURE__*/function (_Component) {
           id: "seen",
           type: "checkbox",
           className: "form-control col-md-1",
-          value: _this3.state.seen[player.id],
           onChange: _this3.handlePlayerSeen(player.id),
           name: "seen"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -70495,7 +70493,6 @@ var Point = /*#__PURE__*/function (_Component) {
           id: "dubli",
           type: "checkbox",
           className: "form-control col-md-1",
-          value: _this3.state.dubli[player.id],
           onChange: _this3.handlePlayerDubli(player.id),
           name: "dubli"
         }));

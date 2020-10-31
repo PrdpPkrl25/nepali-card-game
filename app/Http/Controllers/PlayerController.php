@@ -47,7 +47,8 @@ class PlayerController extends Controller
         $player=Player::create($player_array);
         $game=Game::with('players')->findOrFail($gameId);
         $number=$game->players->count();
-         return response()->json(['player'=>$player,'player_number'=>$number]);
+        $players=Player::where('game_id',$gameId)->get();
+         return response()->json(['players'=>$players,'player_number'=>$number]);
     }
 
     /**
