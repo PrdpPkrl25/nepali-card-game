@@ -13,4 +13,9 @@ class Round extends Model
     {
         return $this -> hasMany(Point::class)->orderBy('player_id');
     }
+
+    public function game()
+    {
+        return $this -> belongsTo(Game::class);
+    }
 }

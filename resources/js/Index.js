@@ -7,6 +7,8 @@ import Add from "./components/Player/add"
 import Point from "./components/Game/Point"
 import Info from "./components/Game/Info"
 import Select from "./components/Game/Select";
+import RoundTable from "./components/Game/RoundTable"
+import PointsTable from "./components/Game/PointsTable"
 
 export default class Index extends Component {
     render(){
@@ -19,6 +21,8 @@ export default class Index extends Component {
                     <Route path="/add-players/:id" exact component={Add} />
                     <Route path="/add-point/:id" exact component={Point} />
                     <Route path="/info/:id" exact component={Info} />
+                    <Route path="/round/:id/table" exact component={RoundTable} />
+                    <Route path="/points/table/:id" exact component={PointsTable} />
                 </Switch>
             </BrowserRouter>
     );

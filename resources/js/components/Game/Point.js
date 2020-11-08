@@ -27,7 +27,8 @@ export default class Point extends Component {
     }
 
     handlePlayerPoint(e,id){
-        this.state.points[id]=e.target.value;
+
+       this.state.points[id]=e.target.value;
         this.setState({
         points:this.state.points
         })
@@ -72,6 +73,7 @@ export default class Point extends Component {
         this.setState({
             game:game
         })
+
     }
 
 

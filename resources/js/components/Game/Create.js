@@ -4,71 +4,33 @@ import axios from 'axios';
 
 
 export default class Create extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+        state = {
             totalPlayers:'4',
             ratePerPoint:'1',
             winnerPointPerSeen:'3',
             winnerPointPerUnseen:'10',
             dubliWinnerPointPerSeen:'5',
             dubliWinnerPointPerUnseen:'10',
-        }
-        this.handleFormSubmit=this.handleFormSubmit.bind(this);
-        this.handleInputTotalPlayersChange=this.handleInputTotalPlayersChange.bind(this);
-        this.handleInputRatePerPointChange=this.handleInputRatePerPointChange.bind(this);
-        this.handleInputWinnerPointPerSeenChange=this.handleInputWinnerPointPerSeenChange.bind(this);
-        this.handleInputWinnerPointPerUnseenChange=this.handleInputWinnerPointPerUnseenChange.bind(this);
-        this.handleInputDubliWinnerPointPerSeenChange=this.handleInputDubliWinnerPointPerSeenChange.bind(this);
-        this.handleInputDubliWinnerPointPerUnseenChange=this.handleInputDubliWinnerPointPerUnseenChange.bind(this);
-    }
+        };
 
 
-    handleInputTotalPlayersChange(event){
+    handleInputChange=(event,attr)=>{
        this.setState({
-           totalPlayers:event.target.value
+           [attr]:event.target.value
        })
-    }
+    };
 
-    handleInputRatePerPointChange(event){
-        this.setState({
-            ratePerPoint:event.target.value
-        })
-    }
 
-    handleInputWinnerPointPerSeenChange(event){
-        this.setState({
-            winnerPointPerSeen:event.target.value
-        })
-    }
-
-    handleInputWinnerPointPerUnseenChange(event){
-        this.setState({
-            winnerPointPerUnseen:event.target.value
-        })
-    }
-
-    handleInputDubliWinnerPointPerSeenChange(event){
-        this.setState({
-            dubliWinnerPointPerSeen:event.target.value
-        })
-    }
-
-    handleInputDubliWinnerPointPerUnseenChange(event){
-        this.setState({
-            dubliWinnerPointPerUnseen:event.target.value
-        })
-    }
-
-    handleFormSubmit(event){
+    handleFormSubmit=(event)=>{
+            const {totalPlayers,ratePerPoint,winnerPointPerSeen,winnerPointPerUnseen,dubliWinnerPointPerSeen,dubliWinnerPointPerUnseen} = this.state
     event.preventDefault();
     axios.post('/api/games',{
-        totalPlayers:this.state.totalPlayers,
-        ratePerPoint:this.state.ratePerPoint,
-        winnerPointPerSeen:this.state.winnerPointPerSeen,
-        winnerPointPerUnseen:this.state.winnerPointPerUnseen,
-        dubliWinnerPointPerSeen:this.state.dubliWinnerPointPerSeen,
-        dubliWinnerPointPerUnseen:this.state.dubliWinnerPointPerUnseen,
+        totalPlayers:totalPlayers,
+        ratePerPoint:ratePerPoint,
+        winnerPointPerSeen:winnerPointPerSeen,
+        winnerPointPerUnseen:winnerPointPerUnseen,
+        dubliWinnerPointPerSeen:dubliWinnerPointPerSeen,
+        dubliWinnerPointPerUnseen:dubliWinnerPointPerUnseen,
     }).then(response=>{
         this.setState({
             totalPlayers:'',
@@ -81,8 +43,11 @@ export default class Create extends Component {
         this.props.history.push(`/add-players/${response.data['id']}`,response.data);
         }).catch(err=>console.log(err));
 
-    }
+    };
+
     render(){
+            const {handleFormSubmit, handleInputChange} = this
+            const {totalPlayers,ratePerPoint,winnerPointPerUnseen,winnerPointPerSeen,dubliWinnerPointPerSeen,dubliWinnerPointPerUnseen} = this.state
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -90,31 +55,73 @@ export default class Create extends Component {
                         <div className="card mt-5" >
                             <div className="card-header">Create New Marriage Game</div>
                             <div className="card-body ">
-                                <form onSubmit={this.handleFormSubmit}>
+                                <form onSubmit={handleFormSubmit}>
                                     <div className="form-group">
                                         <label htmlFor="total_players">Number of Players(Max 6):</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputTotalPlayersChange} value={this.state.totalPlayers} id="total_players" placeholder="Enter total number of players..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,totalPlayers)}
+                                            value={totalPlayers}
+                                            id="total_players"
+                                            placeholder="Enter total number of players..."/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="rate_per_point">Rate Per Point:</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputRatePerPointChange} value={this.state.ratePerPoint} id="rate_per_point" placeholder="Enter rate per point..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,ratePerPoint)}
+                                            value={ratePerPoint}
+                                            id="rate_per_point"
+                                            placeholder="Enter rate per point..."/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="winner_points_per_seen">Winner Points Per Seen:</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputWinnerPointPerSeenChange} value={this.state.winnerPointPerSeen} id="rate_per_point" placeholder="Enter winner point per seen..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,winnerPointPerSeen)}
+                                            value={winnerPointPerSeen}
+                                            id="winner_point_per_seen"
+                                            placeholder="Enter winner point per seen..."/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="winner_points_per_unseen">Winner Points Per Unseen:</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputWinnerPointPerUnseenChange} value={this.state.winnerPointPerUnseen} id="rate_per_point" placeholder="Enter winner point per unseen..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,winnerPointPerUnseen)}
+                                            value={winnerPointPerUnseen}
+                                            id="winner_point_per_unseen"
+                                            placeholder="Enter winner point per unseen..."/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="dubli_winner_points_per_seen">Dubli Winner Points Per Seen</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputDubliWinnerPointPerSeenChange} value={this.state.dubliWinnerPointPerSeen} id="rate_per_point" placeholder="Enter dubli winner point per seen..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,dubliWinnerPointPerSeen)}
+                                            value={dubliWinnerPointPerSeen}
+                                            id="dubli_winner_point_per_seen"
+                                            placeholder="Enter dubli winner point per seen..."/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="dubli_winner_points_per_unseen">Dubli Winner Points Per Unseen</label>
-                                        <input type="text" className="form-control" required onChange={this.handleInputDubliWinnerPointPerUnseenChange} value={this.state.dubliWinnerPointPerUnseen} id="rate_per_point" placeholder="Enter dubli point per unseen..."/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            required
+                                            onChange={(e)=>handleInputChange(e,dubliWinnerPointPerUnseen)}
+                                            value={dubliWinnerPointPerUnseen}
+                                            id="dubli_winner_point_per_unseen"
+                                            placeholder="Enter dubli point per unseen..."/>
                                     </div>
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </form>

@@ -8,6 +8,7 @@ use App\Model\Player;
 use App\Model\Point;
 use App\Model\Round;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PointController extends Controller
 {
@@ -95,14 +96,14 @@ class PointController extends Controller
      * Display the specified resource.
      *
      * @param $roundId
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($roundId)
     {
-        $game=session()->get('game');
-        $players=Player::where('game_id',$game->id)->get();
-        $points=Point::where('round_id',$roundId)->get();
-        return view('points.round_score',compact('roundId','points','players'));
+
+        $points=Point::with('player')->where('round_id',$roundId)->get();
+        $round=Round::with('game')->where('id',$roundId)->first();
+        return response()->json(['points'=>$points,'round'=>$round]);
     }
 
     /**
@@ -140,17 +141,15 @@ class PointController extends Controller
        return redirect()->route('points.table');
     }
 
-    public function total()
+    public function total($gameId)
     {
-        $gameSession = session() -> get('game');
-        if(is_null($gameSession)){
-            return redirect('/');
-        }
-        $game=Game::with('rounds')->where('id',$gameSession->id)->first();
+
+        $game=Game::with(['rounds','players'])->where('id',$gameId)->first();
+        $rounds=Round::with('points')->where('game_id',$gameId)->get();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
         $points = Point ::whereIn('round_id', $roundIdArray)-> orderby('round_id','desc')->orderby('player_id','asc')->get();
-        return view('points.points_table', compact('players', 'points','game','roundIdArray'));
+        return response()->json(['players'=>$players,'rounds'=>$rounds]);
 
     }
 

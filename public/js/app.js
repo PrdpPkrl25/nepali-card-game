@@ -69802,10 +69802,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 /* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Game/Create */ "./resources/js/components/Game/Create.js");
+/* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_Game_Create__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Player_add__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Player/add */ "./resources/js/components/Player/add.js");
 /* harmony import */ var _components_Game_Point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Game/Point */ "./resources/js/components/Game/Point.js");
 /* harmony import */ var _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Game/Info */ "./resources/js/components/Game/Info.js");
 /* harmony import */ var _components_Game_Select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Game/Select */ "./resources/js/components/Game/Select.js");
+/* harmony import */ var _components_Game_RoundTable__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Game/RoundTable */ "./resources/js/components/Game/RoundTable.js");
+/* harmony import */ var _components_Game_PointsTable__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Game/PointsTable */ "./resources/js/components/Game/PointsTable.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69827,6 +69830,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -69863,7 +69868,7 @@ var Index = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/marriage/start",
         exact: true,
-        component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__["default"]
+        component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4___default.a
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/add-players/:id",
         exact: true,
@@ -69876,6 +69881,14 @@ var Index = /*#__PURE__*/function (_Component) {
         path: "/info/:id",
         exact: true,
         component: _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/round/:id/table",
+        exact: true,
+        component: _components_Game_RoundTable__WEBPACK_IMPORTED_MODULE_9__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/points/table/:id",
+        exact: true,
+        component: _components_Game_PointsTable__WEBPACK_IMPORTED_MODULE_10__["default"]
       })));
     }
   }]);
@@ -69964,240 +69977,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!************************************************!*\
   !*** ./resources/js/components/Game/Create.js ***!
   \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Create; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var Create = /*#__PURE__*/function (_Component) {
-  _inherits(Create, _Component);
-
-  var _super = _createSuper(Create);
-
-  function Create(props) {
-    var _this;
-
-    _classCallCheck(this, Create);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      totalPlayers: '4',
-      ratePerPoint: '1',
-      winnerPointPerSeen: '3',
-      winnerPointPerUnseen: '10',
-      dubliWinnerPointPerSeen: '5',
-      dubliWinnerPointPerUnseen: '10'
-    };
-    _this.handleFormSubmit = _this.handleFormSubmit.bind(_assertThisInitialized(_this));
-    _this.handleInputTotalPlayersChange = _this.handleInputTotalPlayersChange.bind(_assertThisInitialized(_this));
-    _this.handleInputRatePerPointChange = _this.handleInputRatePerPointChange.bind(_assertThisInitialized(_this));
-    _this.handleInputWinnerPointPerSeenChange = _this.handleInputWinnerPointPerSeenChange.bind(_assertThisInitialized(_this));
-    _this.handleInputWinnerPointPerUnseenChange = _this.handleInputWinnerPointPerUnseenChange.bind(_assertThisInitialized(_this));
-    _this.handleInputDubliWinnerPointPerSeenChange = _this.handleInputDubliWinnerPointPerSeenChange.bind(_assertThisInitialized(_this));
-    _this.handleInputDubliWinnerPointPerUnseenChange = _this.handleInputDubliWinnerPointPerUnseenChange.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Create, [{
-    key: "handleInputTotalPlayersChange",
-    value: function handleInputTotalPlayersChange(event) {
-      this.setState({
-        totalPlayers: event.target.value
-      });
-    }
-  }, {
-    key: "handleInputRatePerPointChange",
-    value: function handleInputRatePerPointChange(event) {
-      this.setState({
-        ratePerPoint: event.target.value
-      });
-    }
-  }, {
-    key: "handleInputWinnerPointPerSeenChange",
-    value: function handleInputWinnerPointPerSeenChange(event) {
-      this.setState({
-        winnerPointPerSeen: event.target.value
-      });
-    }
-  }, {
-    key: "handleInputWinnerPointPerUnseenChange",
-    value: function handleInputWinnerPointPerUnseenChange(event) {
-      this.setState({
-        winnerPointPerUnseen: event.target.value
-      });
-    }
-  }, {
-    key: "handleInputDubliWinnerPointPerSeenChange",
-    value: function handleInputDubliWinnerPointPerSeenChange(event) {
-      this.setState({
-        dubliWinnerPointPerSeen: event.target.value
-      });
-    }
-  }, {
-    key: "handleInputDubliWinnerPointPerUnseenChange",
-    value: function handleInputDubliWinnerPointPerUnseenChange(event) {
-      this.setState({
-        dubliWinnerPointPerUnseen: event.target.value
-      });
-    }
-  }, {
-    key: "handleFormSubmit",
-    value: function handleFormSubmit(event) {
-      var _this2 = this;
-
-      event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/games', {
-        totalPlayers: this.state.totalPlayers,
-        ratePerPoint: this.state.ratePerPoint,
-        winnerPointPerSeen: this.state.winnerPointPerSeen,
-        winnerPointPerUnseen: this.state.winnerPointPerUnseen,
-        dubliWinnerPointPerSeen: this.state.dubliWinnerPointPerSeen,
-        dubliWinnerPointPerUnseen: this.state.dubliWinnerPointPerUnseen
-      }).then(function (response) {
-        _this2.setState({
-          totalPlayers: '',
-          ratePerPoint: '',
-          winnerPointPerSeen: '',
-          winnerPointPerUnseen: '',
-          dubliWinnerPointPerSeen: '',
-          dubliWinnerPointPerUnseen: ''
-        });
-
-        _this2.props.history.push("/add-players/".concat(response.data['id']), response.data);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card mt-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, "Create New Marriage Game"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleFormSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "total_players"
-      }, "Number of Players(Max 6):"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputTotalPlayersChange,
-        value: this.state.totalPlayers,
-        id: "total_players",
-        placeholder: "Enter total number of players..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "rate_per_point"
-      }, "Rate Per Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputRatePerPointChange,
-        value: this.state.ratePerPoint,
-        id: "rate_per_point",
-        placeholder: "Enter rate per point..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "winner_points_per_seen"
-      }, "Winner Points Per Seen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputWinnerPointPerSeenChange,
-        value: this.state.winnerPointPerSeen,
-        id: "rate_per_point",
-        placeholder: "Enter winner point per seen..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "winner_points_per_unseen"
-      }, "Winner Points Per Unseen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputWinnerPointPerUnseenChange,
-        value: this.state.winnerPointPerUnseen,
-        id: "rate_per_point",
-        placeholder: "Enter winner point per unseen..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "dubli_winner_points_per_seen"
-      }, "Dubli Winner Points Per Seen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputDubliWinnerPointPerSeenChange,
-        value: this.state.dubliWinnerPointPerSeen,
-        id: "rate_per_point",
-        placeholder: "Enter dubli winner point per seen..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "dubli_winner_points_per_unseen"
-      }, "Dubli Winner Points Per Unseen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        required: true,
-        onChange: this.handleInputDubliWinnerPointPerUnseenChange,
-        value: this.state.dubliWinnerPointPerUnseen,
-        id: "rate_per_point",
-        placeholder: "Enter dubli point per unseen..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Submit")))))));
-    }
-  }]);
-
-  return Create;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\praka\\Project\\PHP\\marriage\\resources\\js\\components\\Game\\Create.js: Support for the experimental syntax 'classProperties' isn't currently enabled (7:15):\n\n\u001b[0m \u001b[90m  5 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  6 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mCreate\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mComponent\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  7 | \u001b[39m        state \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  8 | \u001b[39m            totalPlayers\u001b[33m:\u001b[39m\u001b[32m'4'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  9 | \u001b[39m            ratePerPoint\u001b[33m:\u001b[39m\u001b[32m'1'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 | \u001b[39m            winnerPointPerSeen\u001b[33m:\u001b[39m\u001b[32m'3'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\nIf you want to leave it as-is, add @babel/plugin-syntax-class-properties (https://git.io/vb4yQ) to the 'plugins' section to enable parsing.\n    at Object._raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Object.raiseWithData (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Object.expectPlugin (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:8839:18)\n    at Object.parseClassProperty (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12239:12)\n    at Object.pushClassProperty (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12199:30)\n    at Object.parseClassMemberWithIsStatic (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12132:14)\n    at Object.parseClassMember (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12069:10)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12014:14\n    at Object.withTopicForbiddingContext (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11085:14)\n    at Object.parseClassBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11991:10)\n    at Object.parseClass (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11965:22)\n    at Object.parseExportDefaultExpression (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12401:19)\n    at Object.parseExport (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12314:31)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11314:27)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Object.parseBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Object.parseTopLevel (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11141:10)\n    at Object.parse (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12843:10)\n    at parse (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12896:38)\n    at parser (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:93:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:254:32)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:266:13\n    at async.call.result.err.err (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:216:11)");
 
 /***/ }),
 
@@ -70508,6 +70291,266 @@ var Point = /*#__PURE__*/function (_Component) {
   }]);
 
   return Point;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Game/PointsTable.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/Game/PointsTable.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PointsTable; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var PointsTable = /*#__PURE__*/function (_Component) {
+  _inherits(PointsTable, _Component);
+
+  var _super = _createSuper(PointsTable);
+
+  function PointsTable(props) {
+    var _this;
+
+    _classCallCheck(this, PointsTable);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      totalPoints: [],
+      players: [],
+      rounds: []
+    };
+    return _this;
+  }
+
+  _createClass(PointsTable, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var gameId = this.props.match.params.id;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points-table/".concat(gameId)).then(function (response) {
+        console.log(response.data['rounds'].points);
+
+        _this2.setState({
+          totalPoints: response.data['points'],
+          players: response.data['players'],
+          rounds: response.data['rounds']
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Total Points Table:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-bordered table-hover text-center table-striped"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Round"), this.state.players.map(function (player) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          key: player.id
+        }, player.name);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.rounds.map(function (round, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          key: round.id
+        }, index + 1), round.points.map(function (point) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            key: point.id
+          }, point.point_scored);
+        }));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        className: "text-center"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border offset-md-1",
+        to: "/"
+      }, "Next Round"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border offset-md-2",
+        to: "/"
+      }, "Total points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-warning shadow border offset-md-4",
+        to: "/marriage/start"
+      }, "New Game")))))));
+    }
+  }]);
+
+  return PointsTable;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Game/RoundTable.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/Game/RoundTable.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RoundTable; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var RoundTable = /*#__PURE__*/function (_Component) {
+  _inherits(RoundTable, _Component);
+
+  var _super = _createSuper(RoundTable);
+
+  function RoundTable(props) {
+    var _this;
+
+    _classCallCheck(this, RoundTable);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      roundData: [],
+      roundInfo: ''
+    };
+    return _this;
+  }
+
+  _createClass(RoundTable, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var roundId = this.props.match.params.id;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points/".concat(roundId)).then(function (response) {
+        _this2.setState({
+          roundData: response.data['points'],
+          roundInfo: response.data['round']
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Round Point Table:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-bordered table-hover text-center table-striped"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Scored"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "glyphicon glyphicon-eye-open"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "glyphicon glyphicon-duplicate"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "glyphicon glyphicon-king"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.roundData.map(function (data) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: data.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.player.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.point_scored), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.seen == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "glyphicon glyphicon-ok"
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "glyphicon glyphicon-remove"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.dubli == 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "glyphicon glyphicon-ok"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.winner == 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "glyphicon glyphicon-ok"
+        })));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        className: "text-center"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border offset-md-1",
+        to: "/"
+      }, "Next Round"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border offset-md-2",
+        to: "/points/table/".concat(this.state.roundInfo.game_id)
+      }, "Total points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-warning shadow border offset-md-4",
+        to: "/marriage/start"
+      }, "New Game")))))));
+    }
+  }]);
+
+  return RoundTable;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 

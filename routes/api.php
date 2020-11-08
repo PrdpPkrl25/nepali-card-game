@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('games', 'GameController');
 Route::resource('players', 'PlayerController');
 Route::resource('points', 'PointController');
-Route::get('points-table', 'PointController@total')->name('points.table');
+Route::get('points-table/{gameId}', 'PointController@total')->name('points.table');
 Route::post('points/delete/{roundId}', 'PointController@destroy')->name('points.delete');
 
 Route::get('code-input-page', 'PointController@codeInputPage')->name('code.input.page');
