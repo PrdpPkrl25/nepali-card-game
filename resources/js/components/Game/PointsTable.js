@@ -18,11 +18,9 @@ export default class PointsTable extends Component {
     }
 
 
-
     componentDidMount(){
         const gameId= this.props.match.params.id
         axios.get(`/api/points-table/${gameId}`).then(response=>{
-            console.log(response.data['rounds'].points)
             this.setState({
                 totalPoints:response.data['points'],
                 players:response.data['players'],
@@ -59,8 +57,8 @@ export default class PointsTable extends Component {
                                         <tbody>
                                         {
                                             this.state.rounds.map((round,index)=>(
-                                                <tr>
-                                                    <td key={round.id}>
+                                                <tr key={round.id}>
+                                                    <td >
                                                         {index+1}
                                                     </td>
                                                     {

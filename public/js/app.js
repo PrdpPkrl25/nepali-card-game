@@ -69802,7 +69802,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 /* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Game/Create */ "./resources/js/components/Game/Create.js");
-/* harmony import */ var _components_Game_Create__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_Game_Create__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Player_add__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Player/add */ "./resources/js/components/Player/add.js");
 /* harmony import */ var _components_Game_Point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Game/Point */ "./resources/js/components/Game/Point.js");
 /* harmony import */ var _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Game/Info */ "./resources/js/components/Game/Info.js");
@@ -69868,7 +69867,7 @@ var Index = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/marriage/start",
         exact: true,
-        component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4___default.a
+        component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/add-players/:id",
         exact: true,
@@ -69977,10 +69976,228 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!************************************************!*\
   !*** ./resources/js/components/Game/Create.js ***!
   \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\praka\\Project\\PHP\\marriage\\resources\\js\\components\\Game\\Create.js: Support for the experimental syntax 'classProperties' isn't currently enabled (7:15):\n\n\u001b[0m \u001b[90m  5 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  6 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mCreate\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mComponent\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  7 | \u001b[39m        state \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  8 | \u001b[39m            totalPlayers\u001b[33m:\u001b[39m\u001b[32m'4'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  9 | \u001b[39m            ratePerPoint\u001b[33m:\u001b[39m\u001b[32m'1'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 | \u001b[39m            winnerPointPerSeen\u001b[33m:\u001b[39m\u001b[32m'3'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\nIf you want to leave it as-is, add @babel/plugin-syntax-class-properties (https://git.io/vb4yQ) to the 'plugins' section to enable parsing.\n    at Object._raise (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Object.raiseWithData (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Object.expectPlugin (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:8839:18)\n    at Object.parseClassProperty (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12239:12)\n    at Object.pushClassProperty (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12199:30)\n    at Object.parseClassMemberWithIsStatic (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12132:14)\n    at Object.parseClassMember (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12069:10)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12014:14\n    at Object.withTopicForbiddingContext (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11085:14)\n    at Object.parseClassBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11991:10)\n    at Object.parseClass (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11965:22)\n    at Object.parseExportDefaultExpression (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12401:19)\n    at Object.parseExport (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12314:31)\n    at Object.parseStatementContent (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11314:27)\n    at Object.parseStatement (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11210:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11785:25)\n    at Object.parseBlockBody (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11771:10)\n    at Object.parseTopLevel (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:11141:10)\n    at Object.parse (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12843:10)\n    at parse (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\parser\\lib\\index.js:12896:38)\n    at parser (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:93:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:254:32)\n    at C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:266:13\n    at async.call.result.err.err (C:\\Users\\praka\\Project\\PHP\\marriage\\node_modules\\gensync\\index.js:216:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Create; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var Create = /*#__PURE__*/function (_Component) {
+  _inherits(Create, _Component);
+
+  var _super = _createSuper(Create);
+
+  function Create() {
+    var _this;
+
+    _classCallCheck(this, Create);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      totalPlayers: '4',
+      ratePerPoint: '1',
+      winnerPointPerSeen: '3',
+      winnerPointPerUnseen: '10',
+      dubliWinnerPointPerSeen: '5',
+      dubliWinnerPointPerUnseen: '10'
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (event, attr) {
+      _this.setState(_defineProperty({}, attr, event.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleFormSubmit", function (event) {
+      var _this$state = _this.state,
+          totalPlayers = _this$state.totalPlayers,
+          ratePerPoint = _this$state.ratePerPoint,
+          winnerPointPerSeen = _this$state.winnerPointPerSeen,
+          winnerPointPerUnseen = _this$state.winnerPointPerUnseen,
+          dubliWinnerPointPerSeen = _this$state.dubliWinnerPointPerSeen,
+          dubliWinnerPointPerUnseen = _this$state.dubliWinnerPointPerUnseen;
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/games', {
+        totalPlayers: totalPlayers,
+        ratePerPoint: ratePerPoint,
+        winnerPointPerSeen: winnerPointPerSeen,
+        winnerPointPerUnseen: winnerPointPerUnseen,
+        dubliWinnerPointPerSeen: dubliWinnerPointPerSeen,
+        dubliWinnerPointPerUnseen: dubliWinnerPointPerUnseen
+      }).then(function (response) {
+        _this.setState({
+          totalPlayers: '',
+          ratePerPoint: '',
+          winnerPointPerSeen: '',
+          winnerPointPerUnseen: '',
+          dubliWinnerPointPerSeen: '',
+          dubliWinnerPointPerUnseen: ''
+        });
+
+        _this.props.history.push("/add-players/".concat(response.data['id']), response.data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+
+    return _this;
+  }
+
+  _createClass(Create, [{
+    key: "render",
+    value: function render() {
+      var handleFormSubmit = this.handleFormSubmit,
+          handleInputChange = this.handleInputChange;
+      var _this$state2 = this.state,
+          totalPlayers = _this$state2.totalPlayers,
+          ratePerPoint = _this$state2.ratePerPoint,
+          winnerPointPerUnseen = _this$state2.winnerPointPerUnseen,
+          winnerPointPerSeen = _this$state2.winnerPointPerSeen,
+          dubliWinnerPointPerSeen = _this$state2.dubliWinnerPointPerSeen,
+          dubliWinnerPointPerUnseen = _this$state2.dubliWinnerPointPerUnseen;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Create New Marriage Game"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: handleFormSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "total_players"
+      }, "Number of Players(Max 6):"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, totalPlayers);
+        },
+        value: totalPlayers,
+        id: "total_players",
+        placeholder: "Enter total number of players..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "rate_per_point"
+      }, "Rate Per Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, ratePerPoint);
+        },
+        value: ratePerPoint,
+        id: "rate_per_point",
+        placeholder: "Enter rate per point..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "winner_points_per_seen"
+      }, "Winner Points Per Seen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, winnerPointPerSeen);
+        },
+        value: winnerPointPerSeen,
+        id: "winner_point_per_seen",
+        placeholder: "Enter winner point per seen..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "winner_points_per_unseen"
+      }, "Winner Points Per Unseen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, winnerPointPerUnseen);
+        },
+        value: winnerPointPerUnseen,
+        id: "winner_point_per_unseen",
+        placeholder: "Enter winner point per unseen..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "dubli_winner_points_per_seen"
+      }, "Dubli Winner Points Per Seen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, dubliWinnerPointPerSeen);
+        },
+        value: dubliWinnerPointPerSeen,
+        id: "dubli_winner_point_per_seen",
+        placeholder: "Enter dubli winner point per seen..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "dubli_winner_points_per_unseen"
+      }, "Dubli Winner Points Per Unseen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        required: true,
+        onChange: function onChange(e) {
+          return handleInputChange(e, dubliWinnerPointPerUnseen);
+        },
+        value: dubliWinnerPointPerUnseen,
+        id: "dubli_winner_point_per_unseen",
+        placeholder: "Enter dubli point per unseen..."
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))))));
+    }
+  }]);
+
+  return Create;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 
@@ -70096,6 +70313,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -70116,6 +70337,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -70125,101 +70348,136 @@ var Point = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Point);
 
-  function Point(props) {
+  function Point() {
     var _this;
 
     _classCallCheck(this, Point);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      game: '',
-      players: [{
-        id: 1,
-        name: 'A'
-      }, {
-        id: 2,
-        name: 'B'
-      }, {
-        id: 3,
-        name: 'C'
-      }, {
-        id: 4,
-        name: 'D'
-      }],
-      points: [],
-      seen: [],
-      dubli: [],
-      winner: ''
-    };
-    _this.handlePlayerSeen = _this.handlePlayerSeen.bind(_assertThisInitialized(_this));
-    _this.handlePlayerPoint = _this.handlePlayerPoint.bind(_assertThisInitialized(_this));
-    _this.handlePlayerDubli = _this.handlePlayerDubli.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      gameId: '',
+      players: [],
+      playersData: []
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputChanged", function (e, index) {
+      var playersData = _this.state.playersData;
+      var playersDataCopy = [].concat(playersData);
+
+      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
+
+      playersDataObject.point = e.target.value;
+      playersDataCopy[index] = playersDataObject;
+      console.log(playersDataCopy);
+
+      _this.setState({
+        playersData: playersDataCopy
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSeenClicked", function (e, index) {
+      var playersData = _this.state.playersData;
+      var playersDataCopy = [].concat(playersData);
+
+      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
+
+      playersDataObject.seen = e.target.checked;
+      playersDataCopy[index] = playersDataObject;
+      console.log(playersDataCopy);
+
+      _this.setState({
+        playersData: playersDataCopy
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDubliClicked", function (e, index) {
+      var playersData = _this.state.playersData;
+      var playersDataCopy = [].concat(playersData);
+
+      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
+
+      playersDataObject.dubli = e.target.checked;
+      playersDataCopy[index] = playersDataObject;
+      console.log(playersDataCopy);
+
+      _this.setState({
+        playersData: playersDataCopy
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleWinnerClicked", function (e, index) {
+      var playersData = _this.state.playersData;
+      var playersDataCopy = [].concat(playersData);
+
+      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
+
+      playersDataObject.winner = e.target.checked;
+      playersDataCopy[index] = playersDataObject;
+      console.log(playersDataCopy);
+
+      _this.setState({
+        playersData: playersDataCopy
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
+      var _this$state = _this.state,
+          playersData = _this$state.playersData,
+          gameId = _this$state.gameId;
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/points", {
+        playersData: playersData,
+        id: gameId
+      }).then(function (response) {
+        _this.setState({
+          playersData: [],
+          gameId: ''
+        });
+
+        _this.props.history.push('/');
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      var players = _this.props.location.state;
+      var gameId = _this.props.match.params;
+      console.log(players);
+      var playersWithRound = players.map(function (_ref) {
+        var id = _ref.id;
+        return {
+          player_id: id,
+          point: 0,
+          seen: 0,
+          dubli: 0,
+          winner: 0
+        };
+      });
+
+      _this.setState({
+        gameId: gameId,
+        players: players,
+        playersData: playersWithRound
+      });
+    });
+
     return _this;
   }
 
   _createClass(Point, [{
-    key: "handlePlayerPoint",
-    value: function handlePlayerPoint(e, id) {
-      this.state.points[id] = e.target.value;
-      this.setState({
-        points: this.state.points
-      });
-    }
-  }, {
-    key: "handlePlayerSeen",
-    value: function handlePlayerSeen(e, id) {
-      this.state.seen[id] = e.target.value;
-      this.setState({
-        seen: this.state.seen
-      });
-    }
-  }, {
-    key: "handlePlayerDubli",
-    value: function handlePlayerDubli(e, id) {
-      this.state.dubli[id] = e.target.value;
-      this.setState({
-        dubli: this.state.dubli
-      });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(event) {
-      var _this2 = this;
-
-      event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/points", {
-        points: this.state.points,
-        seen: this.state.seen,
-        dubli: this.state.dubli,
-        game: this.state.game,
-        id: this.state.game['id']
-      }).then(function (response) {
-        _this2.setState({
-          points: '',
-          seen: [],
-          dubli: [],
-          winner: ''
-        });
-
-        _this2.props.history.push('/');
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var game = this.props.location.state;
-      this.setState({
-        game: game
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
+      var handleSubmit = this.handleSubmit,
+          handleInputChanged = this.handleInputChanged,
+          handleSeenClicked = this.handleSeenClicked,
+          handleDubliClicked = this.handleDubliClicked,
+          handleWinnerClicked = this.handleWinnerClicked;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70238,27 +70496,28 @@ var Point = /*#__PURE__*/function (_Component) {
         className: "col-md-6 text-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: {
-          pathname: "/info/".concat(this.state.game['id']),
-          state: this.state.game
+          pathname: "/info/".concat(this.state.gameId)
         }
       }, "Game Info")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, this.state.players.map(function (player) {
+        onSubmit: handleSubmit
+      }, this.state.players.map(function (player, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group row mt-2 text-center",
           key: player.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
           htmlFor: "player_point"
-        }, "Player ", player.id, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, "Player ", index + 1, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "form-control col-md-2",
-          onChange: _this3.handlePlayerPoint(player.id),
           required: true,
           id: "player_point",
           name: "points",
+          onChange: function onChange(e) {
+            return handleInputChanged(e, index);
+          },
           placeholder: "Enter player point..."
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
@@ -70267,8 +70526,10 @@ var Point = /*#__PURE__*/function (_Component) {
           id: "seen",
           type: "checkbox",
           className: "form-control col-md-1",
-          onChange: _this3.handlePlayerSeen(player.id),
-          name: "seen"
+          name: "seen",
+          onChange: function onChange(e) {
+            return handleSeenClicked(e, index);
+          }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
           htmlFor: "dubli"
@@ -70276,10 +70537,34 @@ var Point = /*#__PURE__*/function (_Component) {
           id: "dubli",
           type: "checkbox",
           className: "form-control col-md-1",
-          onChange: _this3.handlePlayerDubli(player.id),
-          name: "dubli"
+          name: "dubli",
+          onChange: function onChange(e) {
+            return handleDubliClicked(e, index);
+          }
         }));
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row text-center mt-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Winner"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row mt-2 text-center"
+      }, this.state.players.map(function (player, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-3",
+          key: player.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "winner",
+          type: "radio",
+          className: "form-control",
+          name: "winner",
+          onChange: function onChange(e) {
+            return handleWinnerClicked(e, index);
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          htmlFor: "winner",
+          className: "col-form-label text-md-right"
+        }, player.name));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mb-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-3 offset-md-4  text-center"
@@ -70364,8 +70649,6 @@ var PointsTable = /*#__PURE__*/function (_Component) {
 
       var gameId = this.props.match.params.id;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points-table/".concat(gameId)).then(function (response) {
-        console.log(response.data['rounds'].points);
-
         _this2.setState({
           totalPoints: response.data['points'],
           players: response.data['players'],
@@ -70397,9 +70680,9 @@ var PointsTable = /*#__PURE__*/function (_Component) {
           key: player.id
         }, player.name);
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.rounds.map(function (round, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: round.id
-        }, index + 1), round.points.map(function (point) {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), round.points.map(function (point) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
             key: point.id
           }, point.point_scored);
@@ -70825,7 +71108,7 @@ var Add = /*#__PURE__*/function (_Component) {
         });
 
         if (_this2.state.game['number_of_players'] == response.data['player_number']) {
-          _this2.props.history.push("/add-point/".concat(_this2.state.game['id']), _this2.state.game);
+          _this2.props.history.push("/add-point/".concat(_this2.state.game['id']), response.data['players']);
         }
       })["catch"](function (err) {
         return console.log(err);

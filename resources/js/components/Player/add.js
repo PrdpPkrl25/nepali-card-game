@@ -41,7 +41,7 @@ export default class Add extends Component {
                 playerNumber:response.data['player_number']+1,
             })
             if (this.state.game['number_of_players']==response.data['player_number']){
-                this.props.history.push(`/add-point/${this.state.game['id']}`,this.state.game);
+                this.props.history.push(`/add-point/${this.state.game['id']}`,response.data['players']);
             }
         }).catch(err=>console.log(err));
 
