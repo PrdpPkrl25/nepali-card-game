@@ -2,10 +2,12 @@
 
 namespace App\Model;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Round extends Model
 {
+    use CrudTrait;
     protected $table='rounds';
     protected $fillable=['game_id'];
 

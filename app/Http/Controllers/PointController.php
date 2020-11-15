@@ -7,11 +7,19 @@ use App\Model\Game;
 use App\Model\Player;
 use App\Model\Point;
 use App\Model\Round;
+use App\Repository\PointRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PointController extends Controller
 {
+    private $pointRepository;
+
+    public function __construct(PointRepository $pointRepository)
+    {
+        $this->pointRepository = $pointRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,56 +46,14 @@ class PointController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StorePointsPost $request)
     {
-        $game = $request->game;
-        $round = Round ::create(['game_id' => $game -> id]);
-        $winner = $request -> winner;
-        $sumAllPoints = array_sum($request -> all()['points']);
-        $winnerPoint = 0;
-        foreach($request -> all()['points'] as $key => $value) {
-            if($key == $winner) {
-                continue;
-            }
 
-            if(isset($request -> all()['seen'][$key]) && $request -> all()['seen'][$key] == 'on') {
-                if(isset($request -> all()['dubli'][$winner]) && $request -> all()['dubli'][$winner] == 'on') {
-                    if(isset($request -> all()['dubli'][$key]) && $request -> all()['dubli'][$key] == 'on') {
-                        $pointSecured = ($value * $game -> number_of_players) - ($sumAllPoints);
-                        $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured,'seen'=>1,'dubli'=>1];
-                    } else {
-                        $pointSecured = ($value * $game -> number_of_players) - ($sumAllPoints + $game -> dubli_winner_points_per_seen);
-                        $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured,'seen'=>1];
-                    }
-                } else {
-                    if(isset($request -> all()['dubli'][$key]) && $request -> all()['dubli'][$key] == 'on') {
-                        $pointSecured = ($value * $game -> number_of_players) - ($sumAllPoints);
-                        $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured,'seen'=>1,'dubli'=>1];
-                    } else {
-                        $pointSecured = ($value * $game -> number_of_players) - ($sumAllPoints + $game -> winner_points_per_seen);
-                        $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured,'seen'=>1];
-                    }
-                }
-            } else {
-                if(isset($request -> all()['dubli'][$winner]) && $request -> all()['dubli'][$winner] == 'on') {
-                    $pointSecured = -1 * ($sumAllPoints + $game -> dubli_winner_points_per_unseen);
-                    $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured];
-                } else {
-                    $pointSecured = -1 * ($sumAllPoints + $game -> winner_points_per_unseen);
-                    $pointArray = ['player_id' => $key, 'round_id' => $round -> id, 'point_scored' => $pointSecured];
-                }
+        $roundId=$this->pointRepository->handleStore($request);
+        return response()->json($roundId);
 
-            }
-
-            Point ::create($pointArray);
-            $winnerPoint = $winnerPoint + $pointSecured;
-        }
-        $winnerDubli=(isset($request -> all()['dubli'][$winner]) && $request -> all()['dubli'][$winner] == 'on')?1:0;
-        $winnerArray = ['player_id' => $winner, 'round_id' => $round -> id, 'point_scored' => -1*$winnerPoint,'seen'=>1,'dubli'=>$winnerDubli,'winner'=>1];
-        Point ::create($winnerArray);
-        return redirect() -> route('points.show', $round -> id);
     }
 
 
@@ -101,7 +67,7 @@ class PointController extends Controller
     public function show($roundId)
     {
 
-        $points=Point::with('player')->where('round_id',$roundId)->get();
+        $points=Point::with('player')->where('round_id',$roundId)->orderBy('player_id')->get();
         $round=Round::with('game')->where('id',$roundId)->first();
         return response()->json(['points'=>$points,'round'=>$round]);
     }

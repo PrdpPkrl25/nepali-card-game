@@ -13,11 +13,11 @@ export default class Point extends Component {
     };
 
 
-    handleInputChanged = (e, index) => {
+    handleInputChanged = (e,index,key) => {
         const {playersData}=this.state;
         const playersDataCopy=[...playersData];
         const playersDataObject={...playersDataCopy[index]}
-        playersDataObject.point=e.target.value
+        playersDataObject[key]=e.target.value
         playersDataCopy[index]=playersDataObject
         console.log(playersDataCopy)
         this.setState({
@@ -25,37 +25,19 @@ export default class Point extends Component {
         })
     }
 
-    handleSeenClicked = (e, index) => {
-        const {playersData}=this.state;
-        const playersDataCopy=[...playersData];
-        const playersDataObject={...playersDataCopy[index]}
-        playersDataObject.seen=e.target.checked
-        playersDataCopy[index]=playersDataObject
-        console.log(playersDataCopy)
-        this.setState({
-            playersData: playersDataCopy
-        })
-    }
 
-    handleDubliClicked = (e, index) => {
+    handleWinner = (e, index) => {
         const {playersData}=this.state;
         const playersDataCopy=[...playersData];
-        const playersDataObject={...playersDataCopy[index]}
-        playersDataObject.dubli=e.target.checked
-        playersDataCopy[index]=playersDataObject
-        console.log(playersDataCopy)
-        this.setState({
-            playersData: playersDataCopy
-        })
-    }
 
-    handleWinnerClicked = (e, index) => {
-        const {playersData}=this.state;
-        const playersDataCopy=[...playersData];
-        const playersDataObject={...playersDataCopy[index]}
-        playersDataObject.winner=e.target.checked
-        playersDataCopy[index]=playersDataObject
-        console.log(playersDataCopy)
+        for(let i=0;i<this.state.players.length;i++){
+            const playersDataObject={...playersDataCopy[i]}
+            playersDataObject.winner=false
+            if(i===index){
+                playersDataObject.winner=e.target.checked
+            }
+            playersDataCopy[i]=playersDataObject
+        }
         this.setState({
             playersData: playersDataCopy
         })
@@ -69,40 +51,43 @@ export default class Point extends Component {
         event.preventDefault();
         axios.post("/api/points", {
             playersData: playersData,
-            id: gameId,
+            gameId: gameId,
         }).then(response => {
             this.setState({
                playersData: [],
                 gameId: ''
             })
-            this.props.history.push('/');
+            this.props.history.push(`/round/${response.data}/table`);
         }).catch(err => console.log(err));
 
     }
 
     componentDidMount = () => {
-        const players = this.props.location.state;
-        const gameId=this.props.match.params;
-        console.log(players)
-        const playersWithRound = players.map(({id}) => ({
+        const gameId=this.props.match.params.gameId;
+        axios.get(`/api/players/${gameId}`).then(response=>{
+            const players=response.data
+            const playersWithRound = players.map(({id}) => ({
                 player_id:id,
                 point: 0,
                 seen: 0,
                 dubli: 0,
                 winner: 0,
 
-        }));
-        this.setState({
-            gameId:gameId,
-            players:players,
-            playersData: playersWithRound
+            }));
+            this.setState({
+                gameId:gameId,
+                players:players,
+                playersData: playersWithRound
+            })
         })
+
+
 
     }
 
 
     render() {
-        const {handleSubmit,handleInputChanged,handleSeenClicked,handleDubliClicked,handleWinnerClicked}=this
+        const {handleSubmit,handleInputChanged,handleWinner}=this
 
 
         return (
@@ -133,7 +118,7 @@ export default class Point extends Component {
                                                 required
                                                 id="player_point"
                                                 name="points"
-                                                onChange={(e)=>handleInputChanged(e,index)}
+                                                onChange={(e)=>handleInputChanged(e,index,"point")}
                                                 placeholder="Enter player point..."
                                             />
 
@@ -147,7 +132,7 @@ export default class Point extends Component {
                                                 type="checkbox"
                                                 className="form-control col-md-1"
                                                 name="seen"
-                                                onChange={(e)=>handleSeenClicked(e,index)}
+                                                onChange={(e)=>handleInputChanged(e,index,"seen")}
                                             />
 
                                             <label
@@ -161,7 +146,7 @@ export default class Point extends Component {
                                                 type="checkbox"
                                                 className="form-control col-md-1"
                                                 name="dubli"
-                                                onChange={(e)=>handleDubliClicked(e,index)}
+                                                onChange={(e)=>handleInputChanged(e,index,"dubli")}
                                             />
                                         </div>
                                     ))}
@@ -179,7 +164,7 @@ export default class Point extends Component {
                                                 type="radio"
                                                 className="form-control"
                                                 name="winner"
-                                                onChange={(e)=>handleWinnerClicked(e,index)}
+                                                onChange={(e)=>handleWinner(e,index)}
                                             />
 
                                             <label htmlFor="winner"

@@ -4,20 +4,19 @@ import axios from 'axios';
 
 
 export default class RoundTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state={
+
+        state={
             roundData:[],
             roundInfo:'',
 
         }
 
-    }
 
 
-    componentDidMount(){
-        const roundId= this.props.match.params.id
+    componentDidMount=()=>{
+        const roundId= this.props.match.params.roundId
         axios.get(`/api/points/${roundId}`).then(response=>{
+            console.log(response.data['points'])
             this.setState({
 
                 roundData:response.data['points'],
@@ -77,9 +76,14 @@ export default class RoundTable extends Component {
                                         </tr>
                                         </tfoot>
                                     </table>
-                                    <Link className="btn btn-light shadow border offset-md-1" to="/">Next Round</Link>
-                                    <Link className="btn btn-light shadow border offset-md-2" to={`/points/table/${this.state.roundInfo.game_id}`}>Total points</Link>
-                                    <Link className="btn btn-warning shadow border offset-md-4" to="/marriage/start">New Game</Link>
+                                    <div className="col-md-12">
+                                      <div className="col-md-6 text-left">
+                                          <Link className="btn btn-light shadow border " to={`/add-point/${this.state.roundInfo.game_id}`}>Next Round</Link>
+                                      </div>
+                                      <div className="col-md-6 text-right">
+                                          <Link className="btn btn-light shadow border " to={`/points/table/${this.state.roundInfo.game_id}`}>Total points</Link>
+                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

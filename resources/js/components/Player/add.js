@@ -3,51 +3,44 @@ import axios from 'axios';
 
 
 export default class Add extends Component {
-    constructor(props) {
-        super(props);
-        this.state={
+
+       state={
             game:'',
-            playerName:'',
+            name:'',
             email:'',
             playerNumber:1,
         }
-        this.handleEmail=this.handleEmail.bind(this);
-        this.handlePlayerName=this.handlePlayerName.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this);
-    }
 
-    handlePlayerName(event){
+
+
+    handleInput=(event,attr)=>{
         this.setState({
-            playerName:event.target.value
+            [attr]:event.target.value
         })
     }
 
-    handleEmail(event){
-        this.setState({
-            email:event.target.value
-        })
-    }
 
-    handleSubmit(event){
-        event.preventDefault();
-        axios.post("/api/players",{
-            playerName:this.state.playerName,
-            email:this.state.email,
-            id:this.state.game['id'],
-        }).then(response=>{
-            this.setState({
-                playerName:'',
-                email:'',
-                playerNumber:response.data['player_number']+1,
-            })
-            if (this.state.game['number_of_players']==response.data['player_number']){
-                this.props.history.push(`/add-point/${this.state.game['id']}`,response.data['players']);
-            }
-        }).catch(err=>console.log(err));
+    handleSubmit=(event)=>{
+            const {name,email,game}=this.state
+            event.preventDefault();
+            axios.post("/api/players",{
+                playerName:name,
+                email:email,
+                id:game['id'],
+            }).then(response=>{
+                this.setState({
+                    name:'',
+                    email:'',
+                    playerNumber:response.data['player_number']+1,
+                })
+                if (this.state.game['number_of_players']==response.data['player_number']){
+                    this.props.history.push(`/add-point/${this.state.game['id']}`);
+                }
+            }).catch(err=>console.log(err));
 
     }
 
-    componentDidMount(){
+    componentDidMount=()=>{
         const game=this.props.location.state;
         this.setState({
             game:game
@@ -56,6 +49,8 @@ export default class Add extends Component {
 
 
     render(){
+           const {handleInput,handleSubmit}=this
+           const {name,email}=this.state
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -63,13 +58,13 @@ export default class Add extends Component {
                         <div className="card mt-5" >
                             <div className="card-header">Enter Player ({this.state.playerNumber}) Detail</div>
                             <div className="card-body ">
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={handleSubmit}>
                                     <div className="form-group row mt-2 text-center">
                                         <label className="col-md-2 col-form-label text-md-right" htmlFor="player_name">Player Name:</label>
-                                        <input type="text"  className="form-control col-md-3" value={this.state.playerName} onChange={this.handlePlayerName}  required  id="player_name" placeholder="Enter player name..."/>
+                                        <input type="text"  className="form-control col-md-3" value={name} onChange={(e)=>handleInput(e,name)}  required  id="player_name" placeholder="Enter player name..."/>
 
                                         <label className="col-md-3 col-form-label text-md-right" htmlFor="email">Player Email:</label>
-                                        <input type="text"  className="form-control col-md-3" value={this.state.email} onChange={this.handleEmail}  id="email" placeholder="Enter player email..."/>
+                                        <input type="text"  className="form-control col-md-3" value={email} onChange={(e)=>handleInput(e,email)}  id="email" placeholder="Enter player email..."/>
                                     </div>
                                     <div className="form-group row mb-0">
                                         <div className="col-md-3 offset-md-5  text-center">

@@ -18,11 +18,11 @@ export default class Index extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/select/game" exact component={Select} />
                     <Route path="/marriage/start" exact component={Create} />
-                    <Route path="/add-players/:id" exact component={Add} />
-                    <Route path="/add-point/:id" exact component={Point} />
-                    <Route path="/info/:id" exact component={Info} />
-                    <Route path="/round/:id/table" exact component={RoundTable} />
-                    <Route path="/points/table/:id" exact component={PointsTable} />
+                    <Route path="/add-players/:gameId" exact component={Add} />
+                    <Route path="/add-point/:gameId" exact component={Point} />
+                    <Route path="/info/:gameId" exact component={Info} />
+                    <Route path="/round/:roundId/table" exact component={RoundTable} />
+                    <Route path="/points/table/:gameId" exact component={PointsTable} />
                 </Switch>
             </BrowserRouter>
     );

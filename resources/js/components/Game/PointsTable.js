@@ -4,27 +4,26 @@ import axios from 'axios';
 
 
 export default class PointsTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state={
+
+        state={
             totalPoints:[],
             players:[],
             rounds:[],
+            gameId:''
 
 
         }
 
 
-    }
 
-
-    componentDidMount(){
-        const gameId= this.props.match.params.id
+    componentDidMount=()=>{
+        const gameId= this.props.match.params.gameId
         axios.get(`/api/points-table/${gameId}`).then(response=>{
             this.setState({
                 totalPoints:response.data['points'],
                 players:response.data['players'],
-                rounds:response.data['rounds']
+                rounds:response.data['rounds'],
+                gameId:gameId,
             })
         })
     }
@@ -79,9 +78,16 @@ export default class PointsTable extends Component {
                                         </tfoot>
                                     </table>
 
-                                    <Link className="btn btn-light shadow border offset-md-1" to="/">Next Round</Link>
-                                    <Link className="btn btn-light shadow border offset-md-2" to="/">Total points</Link>
-                                    <Link className="btn btn-warning shadow border offset-md-4" to="/marriage/start">New Game</Link>
+                                    <div className="col-md-12">
+                                        <div className="col-md-6 text-left">
+                                            <Link className="btn btn-light shadow border " to={`/add-point/${this.state.gameId}`}>Next Round</Link>
+                                        </div>
+
+                                        <div className="col-md-6 text-right">
+                                            <Link className="btn btn-warning shadow border offset-md-4" to="/marriage/start">New Game</Link>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

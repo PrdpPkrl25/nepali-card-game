@@ -27,9 +27,9 @@ class StorePointsPost extends FormRequest
     public function rules()
     {
         return [
-            'winner'=>['required'],
+            /*'winner'=>['required'],
             'seen'=>[new AddRoundSeenRule()],
-            'points'=>[new AddRoundNegativeRule(), new AddRoundPointRule()],
+            'points'=>[new AddRoundNegativeRule(), new AddRoundPointRule()],*/
         ];
     }
 

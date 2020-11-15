@@ -6,7 +6,6 @@ use App\Http\Requests\StorePlayerPost;
 use App\Mail\GameDetail;
 use App\Model\Game;
 use App\Model\Player;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +19,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -54,12 +53,13 @@ class PlayerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Player  $player
-     * @return \Illuminate\Http\Response
+     * @param $gameId
+     * @return void
      */
-    public function show(Player $player)
+    public function show($gameId)
     {
-        //
+        $players=Player::where('game_id',$gameId)->get();
+        return response()->json($players);
     }
 
     /**

@@ -69869,23 +69869,23 @@ var Index = /*#__PURE__*/function (_Component) {
         exact: true,
         component: _components_Game_Create__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/add-players/:id",
+        path: "/add-players/:gameId",
         exact: true,
         component: _components_Player_add__WEBPACK_IMPORTED_MODULE_5__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/add-point/:id",
+        path: "/add-point/:gameId",
         exact: true,
         component: _components_Game_Point__WEBPACK_IMPORTED_MODULE_6__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/info/:id",
+        path: "/info/:gameId",
         exact: true,
         component: _components_Game_Info__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/round/:id/table",
+        path: "/round/:roundId/table",
         exact: true,
         component: _components_Game_RoundTable__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/points/table/:id",
+        path: "/points/table/:gameId",
         exact: true,
         component: _components_Game_PointsTable__WEBPACK_IMPORTED_MODULE_10__["default"]
       })));
@@ -70365,13 +70365,13 @@ var Point = /*#__PURE__*/function (_Component) {
       playersData: []
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputChanged", function (e, index) {
+    _defineProperty(_assertThisInitialized(_this), "handleInputChanged", function (e, index, key) {
       var playersData = _this.state.playersData;
       var playersDataCopy = [].concat(playersData);
 
       var playersDataObject = _objectSpread({}, playersDataCopy[index]);
 
-      playersDataObject.point = e.target.value;
+      playersDataObject[key] = e.target.value;
       playersDataCopy[index] = playersDataObject;
       console.log(playersDataCopy);
 
@@ -70380,45 +70380,21 @@ var Point = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleSeenClicked", function (e, index) {
+    _defineProperty(_assertThisInitialized(_this), "handleWinner", function (e, index) {
       var playersData = _this.state.playersData;
       var playersDataCopy = [].concat(playersData);
 
-      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
+      for (var i = 0; i < _this.state.players.length; i++) {
+        var playersDataObject = _objectSpread({}, playersDataCopy[i]);
 
-      playersDataObject.seen = e.target.checked;
-      playersDataCopy[index] = playersDataObject;
-      console.log(playersDataCopy);
+        playersDataObject.winner = false;
 
-      _this.setState({
-        playersData: playersDataCopy
-      });
-    });
+        if (i === index) {
+          playersDataObject.winner = e.target.checked;
+        }
 
-    _defineProperty(_assertThisInitialized(_this), "handleDubliClicked", function (e, index) {
-      var playersData = _this.state.playersData;
-      var playersDataCopy = [].concat(playersData);
-
-      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
-
-      playersDataObject.dubli = e.target.checked;
-      playersDataCopy[index] = playersDataObject;
-      console.log(playersDataCopy);
-
-      _this.setState({
-        playersData: playersDataCopy
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleWinnerClicked", function (e, index) {
-      var playersData = _this.state.playersData;
-      var playersDataCopy = [].concat(playersData);
-
-      var playersDataObject = _objectSpread({}, playersDataCopy[index]);
-
-      playersDataObject.winner = e.target.checked;
-      playersDataCopy[index] = playersDataObject;
-      console.log(playersDataCopy);
+        playersDataCopy[i] = playersDataObject;
+      }
 
       _this.setState({
         playersData: playersDataCopy
@@ -70432,38 +70408,39 @@ var Point = /*#__PURE__*/function (_Component) {
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/points", {
         playersData: playersData,
-        id: gameId
+        gameId: gameId
       }).then(function (response) {
         _this.setState({
           playersData: [],
           gameId: ''
         });
 
-        _this.props.history.push('/');
+        _this.props.history.push("/round/".concat(response.data, "/table"));
       })["catch"](function (err) {
         return console.log(err);
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
-      var players = _this.props.location.state;
-      var gameId = _this.props.match.params;
-      console.log(players);
-      var playersWithRound = players.map(function (_ref) {
-        var id = _ref.id;
-        return {
-          player_id: id,
-          point: 0,
-          seen: 0,
-          dubli: 0,
-          winner: 0
-        };
-      });
+      var gameId = _this.props.match.params.gameId;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/players/".concat(gameId)).then(function (response) {
+        var players = response.data;
+        var playersWithRound = players.map(function (_ref) {
+          var id = _ref.id;
+          return {
+            player_id: id,
+            point: 0,
+            seen: 0,
+            dubli: 0,
+            winner: 0
+          };
+        });
 
-      _this.setState({
-        gameId: gameId,
-        players: players,
-        playersData: playersWithRound
+        _this.setState({
+          gameId: gameId,
+          players: players,
+          playersData: playersWithRound
+        });
       });
     });
 
@@ -70475,9 +70452,7 @@ var Point = /*#__PURE__*/function (_Component) {
     value: function render() {
       var handleSubmit = this.handleSubmit,
           handleInputChanged = this.handleInputChanged,
-          handleSeenClicked = this.handleSeenClicked,
-          handleDubliClicked = this.handleDubliClicked,
-          handleWinnerClicked = this.handleWinnerClicked;
+          handleWinner = this.handleWinner;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70516,7 +70491,7 @@ var Point = /*#__PURE__*/function (_Component) {
           id: "player_point",
           name: "points",
           onChange: function onChange(e) {
-            return handleInputChanged(e, index);
+            return handleInputChanged(e, index, "point");
           },
           placeholder: "Enter player point..."
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -70528,7 +70503,7 @@ var Point = /*#__PURE__*/function (_Component) {
           className: "form-control col-md-1",
           name: "seen",
           onChange: function onChange(e) {
-            return handleSeenClicked(e, index);
+            return handleInputChanged(e, index, "seen");
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
@@ -70539,7 +70514,7 @@ var Point = /*#__PURE__*/function (_Component) {
           className: "form-control col-md-1",
           name: "dubli",
           onChange: function onChange(e) {
-            return handleDubliClicked(e, index);
+            return handleInputChanged(e, index, "dubli");
           }
         }));
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70558,7 +70533,7 @@ var Point = /*#__PURE__*/function (_Component) {
           className: "form-control",
           name: "winner",
           onChange: function onChange(e) {
-            return handleWinnerClicked(e, index);
+            return handleWinner(e, index);
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           htmlFor: "winner",
@@ -70619,6 +70594,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -70628,35 +70605,40 @@ var PointsTable = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(PointsTable);
 
-  function PointsTable(props) {
+  function PointsTable() {
     var _this;
 
     _classCallCheck(this, PointsTable);
 
-    _this = _super.call(this, props);
-    _this.state = {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
       totalPoints: [],
       players: [],
-      rounds: []
-    };
+      rounds: [],
+      gameId: ''
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      var gameId = _this.props.match.params.gameId;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points-table/".concat(gameId)).then(function (response) {
+        _this.setState({
+          totalPoints: response.data['points'],
+          players: response.data['players'],
+          rounds: response.data['rounds'],
+          gameId: gameId
+        });
+      });
+    });
+
     return _this;
   }
 
   _createClass(PointsTable, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var gameId = this.props.match.params.id;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points-table/".concat(gameId)).then(function (response) {
-        _this2.setState({
-          totalPoints: response.data['points'],
-          players: response.data['players'],
-          rounds: response.data['rounds']
-        });
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70689,16 +70671,19 @@ var PointsTable = /*#__PURE__*/function (_Component) {
         }));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         className: "text-center"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "btn btn-light shadow border offset-md-1",
-        to: "/"
-      }, "Next Round"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "btn btn-light shadow border offset-md-2",
-        to: "/"
-      }, "Total points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border ",
+        to: "/add-point/".concat(this.state.gameId)
+      }, "Next Round")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "btn btn-warning shadow border offset-md-4",
         to: "/marriage/start"
-      }, "New Game")))))));
+      }, "New Game")))))))));
     }
   }]);
 
@@ -70746,6 +70731,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -70755,33 +70742,38 @@ var RoundTable = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(RoundTable);
 
-  function RoundTable(props) {
+  function RoundTable() {
     var _this;
 
     _classCallCheck(this, RoundTable);
 
-    _this = _super.call(this, props);
-    _this.state = {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
       roundData: [],
       roundInfo: ''
-    };
-    return _this;
-  }
+    });
 
-  _createClass(RoundTable, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var roundId = this.props.match.params.id;
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      var roundId = _this.props.match.params.roundId;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/points/".concat(roundId)).then(function (response) {
-        _this2.setState({
+        console.log(response.data['points']);
+
+        _this.setState({
           roundData: response.data['points'],
           roundInfo: response.data['round']
         });
       });
-    }
-  }, {
+    });
+
+    return _this;
+  }
+
+  _createClass(RoundTable, [{
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70820,16 +70812,19 @@ var RoundTable = /*#__PURE__*/function (_Component) {
         })));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         className: "text-center"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "btn btn-light shadow border offset-md-1",
-        to: "/"
-      }, "Next Round"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "btn btn-light shadow border offset-md-2",
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border ",
+        to: "/add-point/".concat(this.state.roundInfo.game_id)
+      }, "Next Round")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "btn btn-light shadow border ",
         to: "/points/table/".concat(this.state.roundInfo.game_id)
-      }, "Total points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "btn btn-warning shadow border offset-md-4",
-        to: "/marriage/start"
-      }, "New Game")))))));
+      }, "Total points")))))))));
     }
   }]);
 
@@ -71050,6 +71045,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -71058,73 +71055,72 @@ var Add = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Add);
 
-  function Add(props) {
+  function Add() {
     var _this;
 
     _classCallCheck(this, Add);
 
-    _this = _super.call(this, props);
-    _this.state = {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
       game: '',
-      playerName: '',
+      name: '',
       email: '',
       playerNumber: 1
-    };
-    _this.handleEmail = _this.handleEmail.bind(_assertThisInitialized(_this));
-    _this.handlePlayerName = _this.handlePlayerName.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    return _this;
-  }
+    });
 
-  _createClass(Add, [{
-    key: "handlePlayerName",
-    value: function handlePlayerName(event) {
-      this.setState({
-        playerName: event.target.value
-      });
-    }
-  }, {
-    key: "handleEmail",
-    value: function handleEmail(event) {
-      this.setState({
-        email: event.target.value
-      });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(event) {
-      var _this2 = this;
+    _defineProperty(_assertThisInitialized(_this), "handleInput", function (event, attr) {
+      _this.setState(_defineProperty({}, attr, event.target.value));
+    });
 
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
+      var _this$state = _this.state,
+          name = _this$state.name,
+          email = _this$state.email,
+          game = _this$state.game;
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/players", {
-        playerName: this.state.playerName,
-        email: this.state.email,
-        id: this.state.game['id']
+        playerName: name,
+        email: email,
+        id: game['id']
       }).then(function (response) {
-        _this2.setState({
-          playerName: '',
+        _this.setState({
+          name: '',
           email: '',
           playerNumber: response.data['player_number'] + 1
         });
 
-        if (_this2.state.game['number_of_players'] == response.data['player_number']) {
-          _this2.props.history.push("/add-point/".concat(_this2.state.game['id']), response.data['players']);
+        if (_this.state.game['number_of_players'] == response.data['player_number']) {
+          _this.props.history.push("/add-point/".concat(_this.state.game['id']));
         }
       })["catch"](function (err) {
         return console.log(err);
       });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var game = this.props.location.state;
-      this.setState({
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      var game = _this.props.location.state;
+
+      _this.setState({
         game: game
       });
-    }
-  }, {
+    });
+
+    return _this;
+  }
+
+  _createClass(Add, [{
     key: "render",
     value: function render() {
+      var handleInput = this.handleInput,
+          handleSubmit = this.handleSubmit;
+      var _this$state2 = this.state,
+          name = _this$state2.name,
+          email = _this$state2.email;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -71138,7 +71134,7 @@ var Add = /*#__PURE__*/function (_Component) {
       }, "Enter Player (", this.state.playerNumber, ") Detail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -71147,8 +71143,10 @@ var Add = /*#__PURE__*/function (_Component) {
       }, "Player Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "form-control col-md-3",
-        value: this.state.playerName,
-        onChange: this.handlePlayerName,
+        value: name,
+        onChange: function onChange(e) {
+          return handleInput(e, name);
+        },
         required: true,
         id: "player_name",
         placeholder: "Enter player name..."
@@ -71158,8 +71156,10 @@ var Add = /*#__PURE__*/function (_Component) {
       }, "Player Email:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "form-control col-md-3",
-        value: this.state.email,
-        onChange: this.handleEmail,
+        value: email,
+        onChange: function onChange(e) {
+          return handleInput(e, email);
+        },
         id: "email",
         placeholder: "Enter player email..."
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
