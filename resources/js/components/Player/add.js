@@ -21,10 +21,10 @@ export default class Add extends Component {
 
 
     handleSubmit=(event)=>{
-            const {name,email,game}=this.state
+           const {name,email,game}=this.state
             event.preventDefault();
             axios.post("/api/players",{
-                playerName:name,
+                name:name,
                 email:email,
                 id:game['id'],
             }).then(response=>{
@@ -61,10 +61,10 @@ export default class Add extends Component {
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group row mt-2 text-center">
                                         <label className="col-md-2 col-form-label text-md-right" htmlFor="player_name">Player Name:</label>
-                                        <input type="text"  className="form-control col-md-3" value={name} onChange={(e)=>handleInput(e,name)}  required  id="player_name" placeholder="Enter player name..."/>
+                                        <input type="text"  className="form-control col-md-3" value={name}  onChange={(e)=>handleInput(e,'name')}  required  id="player_name" placeholder="Enter player name..."/>
 
                                         <label className="col-md-3 col-form-label text-md-right" htmlFor="email">Player Email:</label>
-                                        <input type="text"  className="form-control col-md-3" value={email} onChange={(e)=>handleInput(e,email)}  id="email" placeholder="Enter player email..."/>
+                                        <input type="text"  className="form-control col-md-3" value={email}  onChange={(e)=>handleInput(e,'email')}  id="email" placeholder="Enter player email..."/>
                                     </div>
                                     <div className="form-group row mb-0">
                                         <div className="col-md-3 offset-md-5  text-center">

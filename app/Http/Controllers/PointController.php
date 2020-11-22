@@ -107,15 +107,20 @@ class PointController extends Controller
        return redirect()->route('points.table');
     }
 
+    public function playerPoint(Request $request,$id){
+
+        $roundIdArray=$request->input('roundIdArray');
+        $totalPoint=totalPoint($roundIdArray,$id);
+        return response()->json($totalPoint);
+    }
+
     public function total($gameId)
     {
-
         $game=Game::with(['rounds','players'])->where('id',$gameId)->first();
         $rounds=Round::with('points')->where('game_id',$gameId)->get();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
-        $points = Point ::whereIn('round_id', $roundIdArray)-> orderby('round_id','desc')->orderby('player_id','asc')->get();
-        return response()->json(['players'=>$players,'rounds'=>$rounds]);
+        return response()->json(['players'=>$players,'rounds'=>$rounds,'roundIdArray'=>$roundIdArray]);
 
     }
 
@@ -126,11 +131,9 @@ class PointController extends Controller
 
     public function viewTotal()
     {
-        $game=Game::with('rounds')->where('view_token_id',\request()->input('code_id'))->orWhere('edit_token_id',\request()->input('code_id'))->first();
-        $roundIdArray = Round ::where('game_id', $game->id) -> pluck('id');
-        $players = Player ::where('game_id', $game->id) -> get();
-        $points = Point ::whereIn('round_id', $roundIdArray) -> get();
-        return view('points.points_table', compact('players', 'points','game','roundIdArray'));
+        $game=Game::with('rounds')->where('view_token_id',\request()->input('code'))->orWhere('edit_token_id',\request()->input('code'))->first();
+
+        return response()->json(['gameId'=>$game->id]);
 
     }
 }

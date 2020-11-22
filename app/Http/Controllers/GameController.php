@@ -57,11 +57,11 @@ class GameController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Game $game)
     {
-        //
+        return response()->json($game);
     }
 
     /**

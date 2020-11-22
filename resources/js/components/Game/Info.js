@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 
 
@@ -11,14 +12,19 @@ export default class Point extends Component {
     }
 
     componentDidMount(){
-        const game=this.props.location.state;
-                this.setState({
-                    game:game
-                })
+        const gameId=this.props.match.params.gameId;
+        axios.get(`/api/games/${gameId}`).then(response=>{
+            console.log(response.data)
+            this.setState({
+                game:response.data
+            })
+        })
+
     }
 
 
     render(){
+        const {game}=this.state
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -38,14 +44,45 @@ export default class Point extends Component {
                                             <tr>
                                                 <td>1.</td>
                                                 <td>Number of Players</td>
-                                                <td>{this.state.game['number_of_players']}</td>
+                                                <td>{game['number_of_players']}</td>
                                             </tr>
 
                                             <tr>
                                                 <td>2.</td>
                                                 <td>Rate Per point</td>
-                                                <td>{this.state.game['rate_per_point']}</td>
+                                                <td>{game['rate_per_point']}</td>
                                             </tr>
+                                            <tr>
+                                                <td>3.</td>
+                                                <td>Winner Points Per Seen</td>
+                                                <td>{game['winner_points_per_seen']}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4.</td>
+                                                <td>Winner Points Per Unseen</td>
+                                                <td>{game['winner_points_per_unseen']}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5.</td>
+                                                <td>Dubli Winner Points Per Seen</td>
+                                                <td>{game['dubli_winner_points_per_seen']}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6.</td>
+                                                <td>Dubli Winner Points Per Unseen</td>
+                                                <td>{game['dubli_winner_points_per_unseen']}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7.</td>
+                                                <td>View Token Id</td>
+                                                <td>{game['view_token_id']}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8.</td>
+                                                <td>Edit Token Id</td>
+                                                <td>{game['edit_token_id']}</td>
+                                            </tr>
+
                                     </tbody>
                                 </table>
                             </div>

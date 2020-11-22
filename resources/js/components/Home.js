@@ -16,7 +16,7 @@ export default class Home extends Component {
                                         <Link to='/select/game' className='btn btn-primary'>New Game</Link>
                                     </div>
                                     <div className="col-md-6 text-right">
-                                        <Link to='/code' className='btn btn-primary'>View Game</Link>
+                                        <Link to='/view' className='btn btn-primary'>View Game</Link>
                                     </div>
                                 </div>
                             </div>

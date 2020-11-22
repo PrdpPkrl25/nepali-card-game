@@ -42,8 +42,8 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $gameId=$request->id;
-        $player_array=['name'=>$request->playerName,'email'=>$request->email,'game_id'=>$gameId];
-        $player=Player::create($player_array);
+        $player_array=['name'=>$request->name,'email'=>$request->email,'game_id'=>$gameId];
+        Player::create($player_array);
         $game=Game::with('players')->findOrFail($gameId);
         $number=$game->players->count();
         $players=Player::where('game_id',$gameId)->get();

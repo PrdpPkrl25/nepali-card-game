@@ -40,11 +40,7 @@ class GameCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // columns
-        CRUD::addColumn([
-            'name' => 'created_at', // The db column name
-            'label' => 'created_at', // Table column heading
-            'type' => 'datetime'
-        ]);
+        CRUD::addColumn('id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

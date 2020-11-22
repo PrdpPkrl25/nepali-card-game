@@ -16,16 +16,12 @@ class CheckAccess
      */
     public function handle($request, Closure $next)
     {
-        session()->forget('game');
-        if(!($request->input('code_id'))){
-            return redirect()->route('code.input.page');
+        if(!($request->input('code'))){
+            return response()->json(['error'=>'Please enter your code']);
         }
-       $game=Game::where('view_token_id',$request->input('code_id'))->orWhere('edit_token_id',$request->input('code_id'))->first();
+       $game=Game::where('view_token_id',$request->input('code'))->orWhere('edit_token_id',$request->input('code'))->first();
         if(!($game instanceof Game)){
-            abort(404);
-        }
-        if($request->input('code_id')==$game->edit_token_id){
-            session()->put('game',$game);
+            return response()->json(['error'=>'Invalid Code']);
         }
         return $next($request);
 

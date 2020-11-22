@@ -16,9 +16,7 @@ export default class RoundTable extends Component {
     componentDidMount=()=>{
         const roundId= this.props.match.params.roundId
         axios.get(`/api/points/${roundId}`).then(response=>{
-            console.log(response.data['points'])
             this.setState({
-
                 roundData:response.data['points'],
                 roundInfo:response.data['round']
 

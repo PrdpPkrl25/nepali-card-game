@@ -14,36 +14,30 @@ export default class Point extends Component {
 
 
     handleInputChanged = (e,index,key) => {
-        const {playersData}=this.state;
-        const playersDataCopy=[...playersData];
-        const playersDataObject={...playersDataCopy[index]}
+        const playersData=[...this.state.playersData];
+        const playersDataObject={...playersData[index]}
         playersDataObject[key]=e.target.value
-        playersDataCopy[index]=playersDataObject
-        console.log(playersDataCopy)
+        playersData[index]=playersDataObject
         this.setState({
-            playersData: playersDataCopy
+            playersData: playersData
         })
     }
 
 
     handleWinner = (e, index) => {
-        const {playersData}=this.state;
-        const playersDataCopy=[...playersData];
-
+        const playersData=[...this.state.playersData];
         for(let i=0;i<this.state.players.length;i++){
-            const playersDataObject={...playersDataCopy[i]}
+            const playersDataObject={...playersData[i]}
             playersDataObject.winner=false
             if(i===index){
                 playersDataObject.winner=e.target.checked
             }
-            playersDataCopy[i]=playersDataObject
+            playersData[i]=playersDataObject
         }
         this.setState({
-            playersData: playersDataCopy
+            playersData: playersData
         })
     }
-
-
 
 
     handleSubmit = (event) => {
@@ -88,7 +82,7 @@ export default class Point extends Component {
 
     render() {
         const {handleSubmit,handleInputChanged,handleWinner}=this
-
+        const {players,gameId}=this.state
 
         return (
             <div className="container">
@@ -98,14 +92,13 @@ export default class Point extends Component {
                             <div className="card-header">
                                 <div className="row">
                                     <div className="col-md-6 text-right">Enter Round Point Result:</div>
-                                    <div className="col-md-6 text-right"><Link
-                                        to={{pathname: `/info/${this.state.gameId}`}}>Game
-                                        Info</Link></div>
+                                    <div className="col-md-6 text-right">
+                                        <Link to={{pathname: `/info/${gameId}`}}>Game Info</Link></div>
                                 </div>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    {this.state.players.map((player,index) => (
+                                    {players.map((player,index) => (
                                         <div className="form-group row mt-2 text-center" key={player.id}>
                                             <label
                                                 className="col-md-2 col-form-label text-md-right"
@@ -115,7 +108,6 @@ export default class Point extends Component {
                                             <input
                                                 type="text"
                                                 className="form-control col-md-2"
-                                                required
                                                 id="player_point"
                                                 name="points"
                                                 onChange={(e)=>handleInputChanged(e,index,"point")}
@@ -157,7 +149,7 @@ export default class Point extends Component {
                                     </div>
                                     <hr/>
                                     <div className="form-group row mt-2 text-center">
-                                        {this.state.players.map((player,index)=>(
+                                        {players.map((player,index)=>(
                                             <div className="col-md-3" key={player.id}>
                                             <input
                                                 id="winner"

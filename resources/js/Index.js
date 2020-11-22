@@ -9,6 +9,7 @@ import Info from "./components/Game/Info"
 import Select from "./components/Game/Select";
 import RoundTable from "./components/Game/RoundTable"
 import PointsTable from "./components/Game/PointsTable"
+import View from "./components/Game/View"
 
 export default class Index extends Component {
     render(){
@@ -16,6 +17,7 @@ export default class Index extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/view" exact component={View} />
                     <Route path="/select/game" exact component={Select} />
                     <Route path="/marriage/start" exact component={Create} />
                     <Route path="/add-players/:gameId" exact component={Add} />
