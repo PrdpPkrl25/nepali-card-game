@@ -75000,48 +75000,55 @@ var Create = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      totalPlayers: '4',
-      ratePerPoint: '1',
-      winnerPointPerSeen: '3',
-      winnerPointPerUnseen: '10',
-      dubliWinnerPointPerSeen: '5',
-      dubliWinnerPointPerUnseen: '10'
+      input: {},
+      errors: {}
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (event, attr) {
-      _this.setState(_defineProperty({}, attr, event.target.value));
+    _defineProperty(_assertThisInitialized(_this), "handleValidation", function () {
+      var input = _this.state.input;
+      var errors = {};
+      var isValid = true;
+      console.log(input['number_of_players']);
+
+      if (input['number_of_players'] > 6) {
+        isValid = false;
+        errors['number_of_players'] = "Maximum number of players that can be played is 6";
+      }
+
+      _this.setState({
+        errors: errors
+      });
+
+      return isValid;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (event) {
+      var input = _this.state.input;
+      input[event.target.name] = event.target.value;
+
+      _this.setState({
+        input: input
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleFormSubmit", function (event) {
-      var _this$state = _this.state,
-          totalPlayers = _this$state.totalPlayers,
-          ratePerPoint = _this$state.ratePerPoint,
-          winnerPointPerSeen = _this$state.winnerPointPerSeen,
-          winnerPointPerUnseen = _this$state.winnerPointPerUnseen,
-          dubliWinnerPointPerSeen = _this$state.dubliWinnerPointPerSeen,
-          dubliWinnerPointPerUnseen = _this$state.dubliWinnerPointPerUnseen;
-      event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/games', {
-        totalPlayers: totalPlayers,
-        ratePerPoint: ratePerPoint,
-        winnerPointPerSeen: winnerPointPerSeen,
-        winnerPointPerUnseen: winnerPointPerUnseen,
-        dubliWinnerPointPerSeen: dubliWinnerPointPerSeen,
-        dubliWinnerPointPerUnseen: dubliWinnerPointPerUnseen
-      }).then(function (response) {
-        _this.setState({
-          totalPlayers: '',
-          ratePerPoint: '',
-          winnerPointPerSeen: '',
-          winnerPointPerUnseen: '',
-          dubliWinnerPointPerSeen: '',
-          dubliWinnerPointPerUnseen: ''
-        });
+      if (_this.handleValidation()) {
+        var input = _this.state.input;
+        event.preventDefault();
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/games', {
+          input: input
+        }).then(function (response) {
+          _this.setState({
+            input: {}
+          });
 
-        _this.props.history.push("/add-players/".concat(response.data['id']), response.data);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
+          _this.props.history.push("/add-players/".concat(response.data['id']), response.data);
+
+          alert('Game Created Sucessfully');
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     });
 
     return _this;
@@ -75052,19 +75059,15 @@ var Create = /*#__PURE__*/function (_Component) {
     value: function render() {
       var handleFormSubmit = this.handleFormSubmit,
           handleInputChange = this.handleInputChange;
-      var _this$state2 = this.state,
-          totalPlayers = _this$state2.totalPlayers,
-          ratePerPoint = _this$state2.ratePerPoint,
-          winnerPointPerUnseen = _this$state2.winnerPointPerUnseen,
-          winnerPointPerSeen = _this$state2.winnerPointPerSeen,
-          dubliWinnerPointPerSeen = _this$state2.dubliWinnerPointPerSeen,
-          dubliWinnerPointPerUnseen = _this$state2.dubliWinnerPointPerUnseen;
+      var _this$state = this.state,
+          input = _this$state.input,
+          errors = _this$state.errors;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
+        className: "col-md-10"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card mt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75074,93 +75077,100 @@ var Create = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: handleFormSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "total_players"
+        className: "col-md-5 col-form-label text-md-right mr-5",
+        htmlFor: "number_of_players"
       }, "Number of Players(Max 6):"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, totalPlayers);
-        },
-        value: totalPlayers,
-        id: "total_players",
+        name: "number_of_players",
+        onChange: handleInputChange,
+        value: input.number_of_players || '',
+        id: "number_of_players",
         placeholder: "Enter total number of players..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "offset-md-4",
+        style: {
+          color: "red"
+        }
+      }, errors["number_of_players"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-5 col-form-label text-md-right mr-5",
         htmlFor: "rate_per_point"
       }, "Rate Per Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, ratePerPoint);
-        },
-        value: ratePerPoint,
+        name: "rate_per_point",
+        onChange: handleInputChange,
+        value: input.rate_per_point || '',
         id: "rate_per_point",
         placeholder: "Enter rate per point..."
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-5 col-form-label text-md-right mr-5",
         htmlFor: "winner_points_per_seen"
       }, "Winner Points Per Seen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, winnerPointPerSeen);
-        },
-        value: winnerPointPerSeen,
-        id: "winner_point_per_seen",
+        name: "winner_points_per_seen",
+        onChange: handleInputChange,
+        value: input.winner_points_per_seen || '',
+        id: "winner_points_per_seen",
         placeholder: "Enter winner point per seen..."
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-5 col-form-label text-md-right mr-5",
         htmlFor: "winner_points_per_unseen"
       }, "Winner Points Per Unseen:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, winnerPointPerUnseen);
-        },
-        value: winnerPointPerUnseen,
-        id: "winner_point_per_unseen",
+        name: "winner_points_per_unseen",
+        onChange: handleInputChange,
+        value: input.winner_points_per_unseen || '',
+        id: "winner_points_per_unseen",
         placeholder: "Enter winner point per unseen..."
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-5 col-form-label text-md-right mr-5",
         htmlFor: "dubli_winner_points_per_seen"
       }, "Dubli Winner Points Per Seen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, dubliWinnerPointPerSeen);
-        },
-        value: dubliWinnerPointPerSeen,
-        id: "dubli_winner_point_per_seen",
+        name: "dubli_winner_points_per_seen",
+        onChange: handleInputChange,
+        value: input.dubli_winner_points_per_seen || '',
+        id: "dubli_winner_points_per_seen",
         placeholder: "Enter dubli winner point per seen..."
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-md-5 col-form-label text-md-right mr-5",
         htmlFor: "dubli_winner_points_per_unseen"
       }, "Dubli Winner Points Per Unseen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control col-md-4 text-center",
         required: true,
-        onChange: function onChange(e) {
-          return handleInputChange(e, dubliWinnerPointPerUnseen);
-        },
-        value: dubliWinnerPointPerUnseen,
-        id: "dubli_winner_point_per_unseen",
+        name: "dubli_winner_points_per_unseen",
+        onChange: handleInputChange,
+        value: input.dubli_winner_points_per_unseen || '',
+        id: "dubli_winner_points_per_unseen",
         placeholder: "Enter dubli point per unseen..."
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-3 offset-md-5 text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
-      }, "Submit")))))));
+      }, "Submit"))))))));
     }
   }]);
 
