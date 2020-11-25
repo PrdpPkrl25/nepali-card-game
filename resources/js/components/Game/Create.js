@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'cogo-toast';
 
 
 
 export default class Create extends Component {
         state = {
-            input:{},
+            input:{
+                number_of_players:'4',
+                rate_per_point:'1',
+                winner_points_per_seen:'3',
+                winner_points_per_unseen:'10',
+                dubli_winner_points_per_seen:'5',
+                dubli_winner_points_per_unseen:'10'
+            },
             errors:{}
         };
 
-        handleValidation=()=>{
+        /*handleValidation=()=>{
             let input=this.state.input;
             let errors={};
             let isValid=true;
-            console.log(input['number_of_players'])
             if(input['number_of_players']>6){
                 isValid=false;
                 errors['number_of_players']="Maximum number of players that can be played is 6"
@@ -22,7 +29,7 @@ export default class Create extends Component {
                 errors:errors
             })
             return isValid;
-        }
+        }*/
 
     handleInputChange=(event)=>{
         let input=this.state.input
@@ -34,21 +41,18 @@ export default class Create extends Component {
 
 
     handleFormSubmit=(event)=>{
-        if(this.handleValidation()){
+        event.preventDefault();
             const {input} = this.state;
-            event.preventDefault();
-            axios.post('/api/games',{
-                input:input
-            }).then(response=>{
+            axios.post('/api/games',input).then(response=>{
                 this.setState({
                     input:{}
                 })
                 this.props.history.push(`/add-players/${response.data['id']}`,response.data);
-                alert('Game Created Sucessfully')
-            }).catch(err=>console.log(err));
-        }
-
-
+            }).catch(error => {
+                this.setState({
+                    errors : error.response.data.errors
+                })
+            })
     };
 
     render(){
@@ -72,7 +76,6 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="number_of_players"
                                             onChange={handleInputChange}
                                             value={input.number_of_players||''}
@@ -90,13 +93,14 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="rate_per_point"
                                             onChange={handleInputChange}
                                             value={input.rate_per_point||''}
                                             id="rate_per_point"
                                             placeholder="Enter rate per point..."/>
+                                        <div className="offset-md-4" style={{color: "red"}}>{errors["rate_per_point"]}</div>
                                     </div>
+
                                     <div className="form-group row mt-2 text-center">
                                         <label
                                             className="col-md-5 col-form-label text-md-right mr-5"
@@ -106,12 +110,12 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="winner_points_per_seen"
                                             onChange={handleInputChange}
                                             value={input.winner_points_per_seen||''}
                                             id="winner_points_per_seen"
                                             placeholder="Enter winner point per seen..."/>
+                                        <div className="offset-md-4" style={{color: "red"}}>{errors["winner_points_per_seen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -122,12 +126,12 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="winner_points_per_unseen"
                                             onChange={handleInputChange}
                                             value={input.winner_points_per_unseen||''}
                                             id="winner_points_per_unseen"
                                             placeholder="Enter winner point per unseen..."/>
+                                        <div className="offset-md-4" style={{color: "red"}}>{errors["winner_points_per_unseen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -138,12 +142,12 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="dubli_winner_points_per_seen"
                                             onChange={handleInputChange}
                                             value={input.dubli_winner_points_per_seen||''}
                                             id="dubli_winner_points_per_seen"
                                             placeholder="Enter dubli winner point per seen..."/>
+                                        <div className="offset-md-4" style={{color: "red"}}>{errors["dubli_winner_points_per_seen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -154,14 +158,13 @@ export default class Create extends Component {
                                         <input
                                             type="text"
                                             className="form-control col-md-4 text-center"
-                                            required
                                             name="dubli_winner_points_per_unseen"
                                             onChange={handleInputChange}
                                             value={input.dubli_winner_points_per_unseen||''}
                                             id="dubli_winner_points_per_unseen"
                                             placeholder="Enter dubli point per unseen..."/>
+                                        <div className="offset-md-4" style={{color: "red"}}>{errors["dubli_winner_points_per_unseen"]}</div>
                                     </div>
-
                                     <div className="col-md-3 offset-md-5 text-center">
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                     </div>

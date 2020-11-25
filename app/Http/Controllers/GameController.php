@@ -46,7 +46,7 @@ class GameController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(StoreGamePost $request)
     {
         $game=$this->gameRepository->handleCreate($request);
         return response()->json($game);

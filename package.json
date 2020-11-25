@@ -26,6 +26,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "cogo-toast": "^4.2.3",
         "noty": "^3.2.0-beta",
         "react-data-table-component": "^6.11.6",
         "react-notifications": "^1.7.2",
