@@ -26,8 +26,7 @@ class AddRoundPointRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
-        $seenArray=request()->input('seen');
+        $seenArray=request()->input['seen'];
         if(!($seenArray)){
             $this->countSeen=false;
                return false;

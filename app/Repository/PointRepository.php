@@ -15,9 +15,9 @@ class PointRepository
     function handleStore($request){
         $game = Game::findOrFail($request->gameId);
         $round = Round ::create(['game_id' => $game->id]);
-        List($sumAllPoints,$winner,$winnerDubli) = $this->totalPoints($request->playersData);
+        List($sumAllPoints,$winner,$winnerDubli) = $this->totalPoints($request->input);
         $winnerPoint = 0;
-        foreach($request -> playersData as $player) {
+        foreach($request -> input as $player) {
             if($player['winner']) {
                 continue;
             }
@@ -59,9 +59,9 @@ class PointRepository
 
     }
 
-    function totalPoints($playersData){
+    function totalPoints($input){
         $totalPoints=0;
-        foreach ($playersData as $data){
+        foreach ($input as $data){
             $totalPoints=$totalPoints+$data['point'];
             if($data['winner']){
                 $winnerDubli=$data['dubli'];

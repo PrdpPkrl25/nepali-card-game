@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class AddRoundSeenRule implements Rule
+class AddRoundWinnerRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,9 +25,7 @@ class AddRoundSeenRule implements Rule
      */
     public function passes($attribute, $value)
     {
-         $winner=request()->input['winner'];
-        return array_key_exists($winner,$value) ?  true :  false;
-
+       dd($value);
     }
 
     /**
@@ -37,6 +35,6 @@ class AddRoundSeenRule implements Rule
      */
     public function message()
     {
-        return 'The seen field is off for winner.';
+        return 'The validation error message.';
     }
 }

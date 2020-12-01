@@ -25,7 +25,7 @@ class AddRoundNegativeRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
+        dd($value);
         foreach ($value as $key=>$point){
             if(intval($point)<0){
                 return false;

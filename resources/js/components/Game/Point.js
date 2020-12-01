@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import toastr from 'cogo-toast';
 
 
 export default class Point extends Component {
@@ -8,51 +9,71 @@ export default class Point extends Component {
     state = {
         gameId: '',
         players:[],
-        playersData: [],
+        input: [],
+        error:{},
+        disabled:[]
 
     };
 
 
-    handleInputChanged = (e,index,key) => {
-        const playersData=[...this.state.playersData];
-        const playersDataObject={...playersData[index]}
-        playersDataObject[key]=e.target.value
-        playersData[index]=playersDataObject
+    handleInputChanged = (e,index) => {
+        const input=[...this.state.input];
+        const inputObject={...input[index]}
+        inputObject[e.target.name]=e.target.value
+        input[index]=inputObject
         this.setState({
-            playersData: playersData
+            input
         })
     }
 
+    handleSeen=(e,index)=>{
+        const input=[...this.state.input];
+        const disabled=[...this.state.disabled]
+        const inputObject={...input[index]}
+        const disabledObject={...disabled[index]}
+        console.log(disabledObject)
+        inputObject[e.target.name]=e.target.value
+        disabledObject['disabled']=!disabledObject.disabled
+        input[index]=inputObject
+        disabled[index]=disabledObject
+        console.log(disabled)
+        this.setState({
+            input,
+            disabled
+        })
+    }
 
     handleWinner = (e, index) => {
-        const playersData=[...this.state.playersData];
+        const input=[...this.state.input];
         for(let i=0;i<this.state.players.length;i++){
-            const playersDataObject={...playersData[i]}
-            playersDataObject.winner=false
+            const inputObject={...input[i]}
+            inputObject.winner=false
             if(i===index){
-                playersDataObject.winner=e.target.checked
+                inputObject.winner=e.target.checked
             }
-            playersData[i]=playersDataObject
+            input[i]=inputObject
         }
         this.setState({
-            playersData: playersData
+            input
         })
     }
 
 
     handleSubmit = (event) => {
-        const {playersData,gameId} = this.state
+        const {input,gameId} = this.state
         event.preventDefault();
-        axios.post("/api/points", {
-            playersData: playersData,
-            gameId: gameId,
-        }).then(response => {
+        axios.post("/api/points", {input, gameId}).then(response => {
             this.setState({
-               playersData: [],
+                input: [],
                 gameId: ''
             })
             this.props.history.push(`/round/${response.data}/table`);
-        }).catch(err => console.log(err));
+        }).catch(error=>{
+
+                toastr.error(error.response.data.errors.winner[0], {position : 'top-right', heading: 'Error'});
+
+
+        });
 
     }
 
@@ -60,7 +81,7 @@ export default class Point extends Component {
         const gameId=this.props.match.params.gameId;
         axios.get(`/api/players/${gameId}`).then(response=>{
             const players=response.data
-            const playersWithRound = players.map(({id}) => ({
+            const input = players.map(({id}) => ({
                 player_id:id,
                 point: 0,
                 seen: 0,
@@ -68,21 +89,21 @@ export default class Point extends Component {
                 winner: 0,
 
             }));
+            const disabled = players.map(({id}) => ({
+                disabled:true
+
+            }));
             this.setState({
-                gameId:gameId,
-                players:players,
-                playersData: playersWithRound
+               gameId, players, input,disabled
             })
         })
-
-
 
     }
 
 
     render() {
-        const {handleSubmit,handleInputChanged,handleWinner}=this
-        const {players,gameId}=this.state
+        const {handleSubmit,handleInputChanged,handleWinner,handleSeen}=this
+        const {players,gameId,input,disabled}=this.state
 
         return (
             <div className="container">
@@ -102,16 +123,18 @@ export default class Point extends Component {
                                         <div className="form-group row mt-2 text-center" key={player.id}>
                                             <label
                                                 className="col-md-2 col-form-label text-md-right"
-                                                htmlFor="player_point">
+                                                htmlFor="point">
                                                 Player {index+1} Point:
                                             </label>
                                             <input
                                                 type="text"
                                                 className="form-control col-md-2"
-                                                id="player_point"
-                                                name="points"
-                                                onChange={(e)=>handleInputChanged(e,index,"point")}
-                                                placeholder="Enter player point..."
+                                                id="point"
+                                                name="point"
+                                                value={input['point']}
+                                                disabled={(disabled[index].disabled)?"disabled":""}
+                                                onChange={(e)=>handleInputChanged(e,index)}
+                                                placeholder="Enter point..."
                                             />
 
                                             <label
@@ -124,7 +147,7 @@ export default class Point extends Component {
                                                 type="checkbox"
                                                 className="form-control col-md-1"
                                                 name="seen"
-                                                onChange={(e)=>handleInputChanged(e,index,"seen")}
+                                                onChange={(e)=>handleSeen(e,index)}
                                             />
 
                                             <label
@@ -138,7 +161,7 @@ export default class Point extends Component {
                                                 type="checkbox"
                                                 className="form-control col-md-1"
                                                 name="dubli"
-                                                onChange={(e)=>handleInputChanged(e,index,"dubli")}
+                                                onChange={(e)=>handleInputChanged(e,index)}
                                             />
                                         </div>
                                     ))}

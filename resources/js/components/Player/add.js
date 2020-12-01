@@ -42,6 +42,7 @@ export default class Add extends Component {
 
     componentDidMount=()=>{
         const game=this.props.location.state;
+        console.log(game)
         this.setState({
             game:game
         })

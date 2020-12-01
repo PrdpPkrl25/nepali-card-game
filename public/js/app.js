@@ -75030,7 +75030,7 @@ var Create = /*#__PURE__*/function (_Component) {
         dubli_winner_points_per_seen: '5',
         dubli_winner_points_per_unseen: '10'
       },
-      errors: {}
+      error: []
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInputChange", function (event) {
@@ -75040,6 +75040,18 @@ var Create = /*#__PURE__*/function (_Component) {
       _this.setState({
         input: input
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "hasErrorFor", function (fieldName) {
+      return !!_this.state.errors[fieldName];
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "renderErrorFor", function (fieldName) {
+      if (_this.hasErrorFor(fieldName)) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", {
+          className: "error invalid-feedback"
+        }, " ", _this.state.errors[fieldName][0], " ");
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleFormSubmit", function (event) {
@@ -75052,6 +75064,11 @@ var Create = /*#__PURE__*/function (_Component) {
 
         _this.props.history.push("/add-players/".concat(response.data['id']), response.data);
       })["catch"](function (error) {
+        cogo_toast__WEBPACK_IMPORTED_MODULE_2__["default"].error(error.response.data.errors.number_of_players, {
+          position: 'top-right',
+          heading: 'Error'
+        });
+
         _this.setState({
           errors: error.response.data.errors
         });
@@ -75065,10 +75082,9 @@ var Create = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var handleFormSubmit = this.handleFormSubmit,
-          handleInputChange = this.handleInputChange;
-      var _this$state = this.state,
-          input = _this$state.input,
-          errors = _this$state.errors;
+          handleInputChange = this.handleInputChange,
+          renderErrorFor = this.renderErrorFor;
+      var input = this.state.input;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75096,12 +75112,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.number_of_players || '',
         id: "number_of_players",
         placeholder: "Enter total number of players..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["number_of_players"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "col-md-5 col-form-label text-md-right mr-5",
@@ -75114,12 +75125,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.rate_per_point || '',
         id: "rate_per_point",
         placeholder: "Enter rate per point..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["rate_per_point"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "col-md-5 col-form-label text-md-right mr-5",
@@ -75132,12 +75138,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.winner_points_per_seen || '',
         id: "winner_points_per_seen",
         placeholder: "Enter winner point per seen..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["winner_points_per_seen"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "col-md-5 col-form-label text-md-right mr-5",
@@ -75150,12 +75151,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.winner_points_per_unseen || '',
         id: "winner_points_per_unseen",
         placeholder: "Enter winner point per unseen..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["winner_points_per_unseen"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "col-md-5 col-form-label text-md-right mr-5",
@@ -75168,12 +75164,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.dubli_winner_points_per_seen || '',
         id: "dubli_winner_points_per_seen",
         placeholder: "Enter dubli winner point per seen..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["dubli_winner_points_per_seen"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row mt-2 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "col-md-5 col-form-label text-md-right mr-5",
@@ -75186,12 +75177,7 @@ var Create = /*#__PURE__*/function (_Component) {
         value: input.dubli_winner_points_per_unseen || '',
         id: "dubli_winner_points_per_unseen",
         placeholder: "Enter dubli point per unseen..."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "offset-md-4",
-        style: {
-          color: "red"
-        }
-      }, errors["dubli_winner_points_per_unseen"])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-3 offset-md-5 text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -75327,6 +75313,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var cogo_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cogo-toast */ "./node_modules/cogo-toast/dist/index.es.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -75359,6 +75346,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Point = /*#__PURE__*/function (_Component) {
   _inherits(Point, _Component);
 
@@ -75378,59 +75366,85 @@ var Point = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       gameId: '',
       players: [],
-      playersData: []
+      input: [],
+      error: {},
+      disabled: []
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputChanged", function (e, index, key) {
-      var playersData = [].concat(_this.state.playersData);
+    _defineProperty(_assertThisInitialized(_this), "handleInputChanged", function (e, index) {
+      var input = [].concat(_this.state.input);
 
-      var playersDataObject = _objectSpread({}, playersData[index]);
+      var inputObject = _objectSpread({}, input[index]);
 
-      playersDataObject[key] = e.target.value;
-      playersData[index] = playersDataObject;
+      inputObject[e.target.name] = e.target.value;
+      input[index] = inputObject;
 
       _this.setState({
-        playersData: playersData
+        input: input
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSeen", function (e, index) {
+      var input = [].concat(_this.state.input);
+      var disabled = [].concat(_this.state.disabled);
+
+      var inputObject = _objectSpread({}, input[index]);
+
+      var disabledObject = _objectSpread({}, disabled[index]);
+
+      console.log(disabledObject);
+      inputObject[e.target.name] = e.target.value;
+      disabledObject['disabled'] = !disabledObject.disabled;
+      input[index] = inputObject;
+      disabled[index] = disabledObject;
+      console.log(disabled);
+
+      _this.setState({
+        input: input,
+        disabled: disabled
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleWinner", function (e, index) {
-      var playersData = [].concat(_this.state.playersData);
+      var input = [].concat(_this.state.input);
 
       for (var i = 0; i < _this.state.players.length; i++) {
-        var playersDataObject = _objectSpread({}, playersData[i]);
+        var inputObject = _objectSpread({}, input[i]);
 
-        playersDataObject.winner = false;
+        inputObject.winner = false;
 
         if (i === index) {
-          playersDataObject.winner = e.target.checked;
+          inputObject.winner = e.target.checked;
         }
 
-        playersData[i] = playersDataObject;
+        input[i] = inputObject;
       }
 
       _this.setState({
-        playersData: playersData
+        input: input
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
       var _this$state = _this.state,
-          playersData = _this$state.playersData,
+          input = _this$state.input,
           gameId = _this$state.gameId;
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/points", {
-        playersData: playersData,
+        input: input,
         gameId: gameId
       }).then(function (response) {
         _this.setState({
-          playersData: [],
+          input: [],
           gameId: ''
         });
 
         _this.props.history.push("/round/".concat(response.data, "/table"));
-      })["catch"](function (err) {
-        return console.log(err);
+      })["catch"](function (error) {
+        cogo_toast__WEBPACK_IMPORTED_MODULE_3__["default"].error(error.response.data.errors.winner[0], {
+          position: 'top-right',
+          heading: 'Error'
+        });
       });
     });
 
@@ -75438,7 +75452,7 @@ var Point = /*#__PURE__*/function (_Component) {
       var gameId = _this.props.match.params.gameId;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/players/".concat(gameId)).then(function (response) {
         var players = response.data;
-        var playersWithRound = players.map(function (_ref) {
+        var input = players.map(function (_ref) {
           var id = _ref.id;
           return {
             player_id: id,
@@ -75448,11 +75462,18 @@ var Point = /*#__PURE__*/function (_Component) {
             winner: 0
           };
         });
+        var disabled = players.map(function (_ref2) {
+          var id = _ref2.id;
+          return {
+            disabled: true
+          };
+        });
 
         _this.setState({
           gameId: gameId,
           players: players,
-          playersData: playersWithRound
+          input: input,
+          disabled: disabled
         });
       });
     });
@@ -75465,10 +75486,13 @@ var Point = /*#__PURE__*/function (_Component) {
     value: function render() {
       var handleSubmit = this.handleSubmit,
           handleInputChanged = this.handleInputChanged,
-          handleWinner = this.handleWinner;
+          handleWinner = this.handleWinner,
+          handleSeen = this.handleSeen;
       var _this$state2 = this.state,
           players = _this$state2.players,
-          gameId = _this$state2.gameId;
+          gameId = _this$state2.gameId,
+          input = _this$state2.input,
+          disabled = _this$state2.disabled;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75499,16 +75523,18 @@ var Point = /*#__PURE__*/function (_Component) {
           key: player.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
-          htmlFor: "player_point"
+          htmlFor: "point"
         }, "Player ", index + 1, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "form-control col-md-2",
-          id: "player_point",
-          name: "points",
+          id: "point",
+          name: "point",
+          value: input['point'],
+          disabled: disabled[index].disabled ? "disabled" : "",
           onChange: function onChange(e) {
-            return handleInputChanged(e, index, "point");
+            return handleInputChanged(e, index);
           },
-          placeholder: "Enter player point..."
+          placeholder: "Enter point..."
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
           htmlFor: "seen"
@@ -75518,7 +75544,7 @@ var Point = /*#__PURE__*/function (_Component) {
           className: "form-control col-md-1",
           name: "seen",
           onChange: function onChange(e) {
-            return handleInputChanged(e, index, "seen");
+            return handleSeen(e, index);
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
@@ -75529,7 +75555,7 @@ var Point = /*#__PURE__*/function (_Component) {
           className: "form-control col-md-1",
           name: "dubli",
           onChange: function onChange(e) {
-            return handleInputChanged(e, index, "dubli");
+            return handleInputChanged(e, index);
           }
         }));
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76343,6 +76369,7 @@ var Add = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var game = _this.props.location.state;
+      console.log(game);
 
       _this.setState({
         game: game

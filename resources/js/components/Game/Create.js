@@ -14,22 +14,9 @@ export default class Create extends Component {
                 dubli_winner_points_per_seen:'5',
                 dubli_winner_points_per_unseen:'10'
             },
-            errors:{}
+            error:[]
         };
 
-        /*handleValidation=()=>{
-            let input=this.state.input;
-            let errors={};
-            let isValid=true;
-            if(input['number_of_players']>6){
-                isValid=false;
-                errors['number_of_players']="Maximum number of players that can be played is 6"
-            }
-            this.setState({
-                errors:errors
-            })
-            return isValid;
-        }*/
 
     handleInputChange=(event)=>{
         let input=this.state.input
@@ -38,6 +25,20 @@ export default class Create extends Component {
            input
        })
     };
+
+    hasErrorFor=(fieldName)=>
+    {
+        return !!this.state.errors[fieldName];
+    }
+
+    renderErrorFor=(fieldName)=>
+    {
+        if (this.hasErrorFor(fieldName)) {
+            return (
+                <em className="error invalid-feedback"> {this.state.errors[fieldName][0]} </em>
+            )
+        }
+    }
 
 
     handleFormSubmit=(event)=>{
@@ -49,6 +50,7 @@ export default class Create extends Component {
                 })
                 this.props.history.push(`/add-players/${response.data['id']}`,response.data);
             }).catch(error => {
+              toastr.error(error.response.data.errors.number_of_players, {position : 'top-right', heading: 'Error'});
                 this.setState({
                     errors : error.response.data.errors
                 })
@@ -56,8 +58,8 @@ export default class Create extends Component {
     };
 
     render(){
-            const {handleFormSubmit, handleInputChange} = this
-            const {input,errors} = this.state
+            const {handleFormSubmit, handleInputChange,renderErrorFor} = this
+            const {input} = this.state
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -75,13 +77,12 @@ export default class Create extends Component {
                                         </label>
                                         <input
                                             type="text"
-                                            className="form-control col-md-4 text-center"
+                                            className={`form-control col-md-4 text-center`}
                                             name="number_of_players"
                                             onChange={handleInputChange}
                                             value={input.number_of_players||''}
                                             id="number_of_players"
                                             placeholder="Enter total number of players..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["number_of_players"]}</div>
                                     </div>
 
                                     <div className="form-group row mt-2 text-center">
@@ -98,7 +99,6 @@ export default class Create extends Component {
                                             value={input.rate_per_point||''}
                                             id="rate_per_point"
                                             placeholder="Enter rate per point..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["rate_per_point"]}</div>
                                     </div>
 
                                     <div className="form-group row mt-2 text-center">
@@ -115,7 +115,6 @@ export default class Create extends Component {
                                             value={input.winner_points_per_seen||''}
                                             id="winner_points_per_seen"
                                             placeholder="Enter winner point per seen..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["winner_points_per_seen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -131,7 +130,6 @@ export default class Create extends Component {
                                             value={input.winner_points_per_unseen||''}
                                             id="winner_points_per_unseen"
                                             placeholder="Enter winner point per unseen..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["winner_points_per_unseen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -147,7 +145,6 @@ export default class Create extends Component {
                                             value={input.dubli_winner_points_per_seen||''}
                                             id="dubli_winner_points_per_seen"
                                             placeholder="Enter dubli winner point per seen..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["dubli_winner_points_per_seen"]}</div>
                                     </div>
                                     <div className="form-group row mt-2 text-center">
                                         <label
@@ -163,7 +160,6 @@ export default class Create extends Component {
                                             value={input.dubli_winner_points_per_unseen||''}
                                             id="dubli_winner_points_per_unseen"
                                             placeholder="Enter dubli point per unseen..."/>
-                                        <div className="offset-md-4" style={{color: "red"}}>{errors["dubli_winner_points_per_unseen"]}</div>
                                     </div>
                                     <div className="col-md-3 offset-md-5 text-center">
                                     <button type="submit" className="btn btn-primary">Submit</button>
