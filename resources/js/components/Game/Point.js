@@ -31,15 +31,25 @@ export default class Point extends Component {
         const disabled=[...this.state.disabled]
         const inputObject={...input[index]}
         const disabledObject={...disabled[index]}
-        console.log(disabledObject)
-        inputObject[e.target.name]=e.target.value
+        inputObject[e.target.name]=e.target.checked
         disabledObject['disabled']=!disabledObject.disabled
         input[index]=inputObject
         disabled[index]=disabledObject
-        console.log(disabled)
+        console.log(input)
         this.setState({
             input,
             disabled
+        })
+    }
+
+    handleDubli=(e,index)=>{
+        const input=[...this.state.input];
+        const inputObject={...input[index]}
+        inputObject[e.target.name]=e.target.checked
+        input[index]=inputObject
+        console.log(input)
+        this.setState({
+            input,
         })
     }
 
@@ -62,6 +72,7 @@ export default class Point extends Component {
     handleSubmit = (event) => {
         const {input,gameId} = this.state
         event.preventDefault();
+
         axios.post("/api/points", {input, gameId}).then(response => {
             this.setState({
                 input: [],
@@ -70,7 +81,7 @@ export default class Point extends Component {
             this.props.history.push(`/round/${response.data}/table`);
         }).catch(error=>{
 
-                toastr.error(error.response.data.errors.winner[0], {position : 'top-right', heading: 'Error'});
+                toastr.error(error.response.data.errors, {position : 'top-right', heading: 'Error'});
 
 
         });
@@ -102,7 +113,7 @@ export default class Point extends Component {
 
 
     render() {
-        const {handleSubmit,handleInputChanged,handleWinner,handleSeen}=this
+        const {handleSubmit,handleInputChanged,handleWinner,handleSeen,handleDubli}=this
         const {players,gameId,input,disabled}=this.state
 
         return (
@@ -160,18 +171,20 @@ export default class Point extends Component {
                                                 id="dubli"
                                                 type="checkbox"
                                                 className="form-control col-md-1"
+                                                disabled={(disabled[index].disabled)?"disabled":""}
                                                 name="dubli"
-                                                onChange={(e)=>handleInputChanged(e,index)}
+                                                onChange={(e)=>handleDubli(e,index)}
                                             />
                                         </div>
                                     ))}
-                                    <div className="row text-center mt-4">
+                                    <hr/>
+                                    <div className="row text-center mt-5">
                                         <div className="col-md-12 " >
-                                            <span>Winner</span>
+                                            <span className="text-success font-weight-bolder ">Winner</span>
                                         </div>
                                     </div>
                                     <hr/>
-                                    <div className="form-group row mt-2 text-center">
+                                    <div className="form-group row text-center">
                                         {players.map((player,index)=>(
                                             <div className="col-md-3" key={player.id}>
                                             <input
@@ -179,6 +192,7 @@ export default class Point extends Component {
                                                 type="radio"
                                                 className="form-control"
                                                 name="winner"
+                                                disabled={(disabled[index].disabled)?"disabled":""}
                                                 onChange={(e)=>handleWinner(e,index)}
                                             />
 
@@ -193,7 +207,7 @@ export default class Point extends Component {
                                     </div>
                                     <div className="form-group row mb-0">
                                         <div className="col-md-3 offset-md-4  text-center">
-                                            <button type="submit" className="btn btn-primary">Submit</button>
+                                            <button type="submit"  className="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
                                 </form>

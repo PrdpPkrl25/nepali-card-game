@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DataTable from 'react-data-table-component';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 
@@ -48,8 +47,6 @@ export default class PointsTable extends Component {
         }).catch(error=>{console.log(error)})
 
     }
-
-
 
     totalPoint=(id,index)=>{
             const totalPoints=[...this.state.totalPoints]
@@ -128,8 +125,7 @@ export default class PointsTable extends Component {
                                             {
                                                 players.map((player,index)=>(
                                                     <th key={player.id}>
-                                                       {/* {totalPoint(player.id,index)}
-                                                        {this.state.totalPoints[index]}*/}
+                                                       {/*{totalPoint(player.id,index)}*/}
                                                     </th>
                                                 ))
                                             }

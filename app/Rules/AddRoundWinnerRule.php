@@ -25,7 +25,7 @@ class AddRoundWinnerRule implements Rule
      */
     public function passes($attribute, $value)
     {
-       dd($value);
+       return false;
     }
 
     /**
@@ -35,6 +35,6 @@ class AddRoundWinnerRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'At least one winner must be selected';
     }
 }

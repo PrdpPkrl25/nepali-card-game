@@ -48,7 +48,7 @@ class PointController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StorePointsPost $request)
+    public function store(Request $request)
     {
 
         $roundId=$this->pointRepository->handleStore($request);
@@ -132,8 +132,8 @@ class PointController extends Controller
     public function viewTotal()
     {
         $game=Game::with('rounds')->where('view_token_id',\request()->input('code'))->orWhere('edit_token_id',\request()->input('code'))->first();
-
-        return response()->json(['gameId'=>$game->id]);
+        $editStatus=$game->edit_token_id==\request()->input('code')?1:0;
+        return response()->json(['gameId'=>$game->id,'editStatus'=>$editStatus]);
 
     }
 }

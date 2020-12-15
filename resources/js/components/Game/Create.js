@@ -14,7 +14,7 @@ export default class Create extends Component {
                 dubli_winner_points_per_seen:'5',
                 dubli_winner_points_per_unseen:'10'
             },
-            error:[]
+            errors:[]
         };
 
 
@@ -28,7 +28,12 @@ export default class Create extends Component {
 
     hasErrorFor=(fieldName)=>
     {
-        return !!this.state.errors[fieldName];
+        if(this.state.errors[fieldName]){
+            return !!this.state.errors[fieldName];
+        }
+        else {
+            return false
+        }
     }
 
     renderErrorFor=(fieldName)=>
@@ -48,12 +53,15 @@ export default class Create extends Component {
                 this.setState({
                     input:{}
                 })
+                toastr.success("Game Created Successfully", {position : 'top-right', heading: 'Sucess'});
                 this.props.history.push(`/add-players/${response.data['id']}`,response.data);
+
             }).catch(error => {
-              toastr.error(error.response.data.errors.number_of_players, {position : 'top-right', heading: 'Error'});
-                this.setState({
-                    errors : error.response.data.errors
-                })
+                    Object.keys(error.response.data.errors).forEach((value)=>{
+                    error.response.data.errors[value].forEach((error)=>{
+                        toastr.error(error, {position : 'top-right', heading: 'Error'});
+                    });
+                });
             })
     };
 
@@ -83,6 +91,7 @@ export default class Create extends Component {
                                             value={input.number_of_players||''}
                                             id="number_of_players"
                                             placeholder="Enter total number of players..."/>
+                                        {renderErrorFor('number_of_players')}
                                     </div>
 
                                     <div className="form-group row mt-2 text-center">
