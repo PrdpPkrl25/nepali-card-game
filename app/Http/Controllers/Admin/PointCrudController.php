@@ -39,6 +39,11 @@ class PointCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->addColumn([
+            'name'=>'id',
+            'label'=>'ID',
+            'type'=>'text',
+        ]);
         CRUD::setFromDb(); // columns
 
         /**

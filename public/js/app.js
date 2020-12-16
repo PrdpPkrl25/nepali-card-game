@@ -74954,7 +74954,7 @@ var Point = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "col-md-2 col-form-label text-md-right",
           htmlFor: "point"
-        }, "Player ", index + 1, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, player.name, " Point:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "form-control col-md-2",
           id: "point",

@@ -39,8 +39,12 @@ class GameCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->addColumn([
+            'name'=>'id',
+            'label'=>'ID',
+            'type'=>'text',
+        ]);
         CRUD::setFromDb(); // columns
-        CRUD::addColumn('id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

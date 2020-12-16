@@ -135,7 +135,7 @@ export default class Point extends Component {
                                             <label
                                                 className="col-md-2 col-form-label text-md-right"
                                                 htmlFor="point">
-                                                Player {index+1} Point:
+                                                {player.name} Point:
                                             </label>
                                             <input
                                                 type="text"
