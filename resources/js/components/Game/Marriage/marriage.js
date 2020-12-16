@@ -4,7 +4,7 @@ import toastr from 'cogo-toast';
 
 
 
-export default class Create extends Component {
+export default class Marriage extends Component {
         state = {
             input:{
                 number_of_players:'4',

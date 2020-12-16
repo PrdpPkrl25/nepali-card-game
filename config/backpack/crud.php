@@ -65,7 +65,7 @@ return [
         ],
 
         /*
-         * Create Operation
+         * Marriage Operation
          */
         'create' => [
             // Define the size/looks of the content div for all CRUDs

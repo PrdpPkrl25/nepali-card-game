@@ -49,7 +49,7 @@ class UserCrudController extends CrudController
     }
 
     /**
-     * Define what happens when the Create operation is loaded.
+     * Define what happens when the Marriage operation is loaded.
      *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void

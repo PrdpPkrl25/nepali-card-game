@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class AddPlayerEmailRule implements Rule
 {
     /**
-     * Create a new rule instance.
+     * Marriage a new rule instance.
      *
      * @return void
      */

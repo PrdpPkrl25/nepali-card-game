@@ -27,7 +27,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Marriage a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
@@ -2650,7 +2650,7 @@ _jquery2.default.fn[plugin] = function (option) {
         inst = $this.data(plugin),
         options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) === 'object' ? option : {};
 
-    // Create instance if does not exist
+    // Marriage instance if does not exist
     if (!inst) {
       inst = new _Colorpicker2.default(this, options);
       $this.data(plugin, inst);
@@ -3750,7 +3750,7 @@ var SliderHandler = function () {
           cp = this.colorpicker,
           ch = cp.colorHandler;
 
-      // Create a color object
+      // Marriage a color object
       var color = !ch.hasColor() ? ch.getFallbackColor() : ch.color.getClone();
 
       // Adjust the guide position

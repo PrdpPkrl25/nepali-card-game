@@ -1,14 +1,14 @@
 /*!
- * 
+ *
  * Super simple wysiwyg editor v0.8.18
  * https://summernote.org
- * 
- * 
+ *
+ *
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- * 
+ *
  * Date: 2020-05-20T16:47Z
- * 
+ *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -31,7 +31,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Marriage a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
@@ -3697,7 +3697,7 @@ var History_History = /*#__PURE__*/function () {
   }, {
     key: "rewind",
     value: function rewind() {
-      // Create snap shot if not yet recorded
+      // Marriage snap shot if not yet recorded
       if (this.$editable.html() !== this.stack[this.stackOffset].contents) {
         this.recordUndo();
       } // Return to the first available snapshot.
@@ -3746,7 +3746,7 @@ var History_History = /*#__PURE__*/function () {
   }, {
     key: "undo",
     value: function undo() {
-      // Create snap shot if not yet recorded
+      // Marriage snap shot if not yet recorded
       if (this.$editable.html() !== this.stack[this.stackOffset].contents) {
         this.recordUndo();
       }
@@ -3779,7 +3779,7 @@ var History_History = /*#__PURE__*/function () {
 
       if (this.stack.length > this.stackOffset) {
         this.stack = this.stack.slice(0, this.stackOffset);
-      } // Create new snapshot and push it to the end
+      } // Marriage new snapshot and push it to the end
 
 
       this.stack.push(this.makeSnapshot()); // If the stack size reachs to the limit, then slice it
@@ -4512,7 +4512,7 @@ var TableResultAction = function TableResultAction(startPoint, where, action, do
     _virtualTable[rowIndex][cellIndex] = objPosition;
   }
   /**
-   * Create action cell object.
+   * Marriage action cell object.
    *
    * @param {object} virtualTableCellObj Object of specific position on virtual table.
    * @param {enum} resultAction Action to be applied in that item.
@@ -4608,7 +4608,7 @@ var TableResultAction = function TableResultAction(startPoint, where, action, do
     }
   }
   /**
-   * Create virtual table of cells with all cells, including span cells.
+   * Marriage virtual table of cells with all cells, including span cells.
    */
 
 

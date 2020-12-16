@@ -21,13 +21,13 @@ if(!o)return v()?v().get(l[0].id):null;l.css("visibility","hidden");// Hide text
 var n=function(){var a=[],c=0;
 // Apply patches to the jQuery object, only once
 u||(m(),u=!0),
-// Create an editor instance for each matched node
+// Marriage an editor instance for each matched node
 l.each(function(e,t){var n,i=t.id,r=o.oninit;
 // Generate unique id for target element if needed
 i||(t.id=i=v().DOM.uniqueId()),
 // Only init the editor once
 v().get(i)||(
-// Create editor instance and render it
+// Marriage editor instance and render it
 n=v().createEditor(i,o),a.push(n),n.on("init",function(){var e,t=r;l.css("visibility",""),
 // Run this if the oninit setting is defined
 // this logic will fire the oninit callback ones each

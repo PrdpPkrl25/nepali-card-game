@@ -8,7 +8,7 @@ class AddRoundPointRule implements Rule
 {
     private $countSeen=true;
     /**
-     * Create a new rule instance.
+     * Marriage a new rule instance.
      *
      * @return void
      */

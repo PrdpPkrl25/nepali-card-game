@@ -2384,7 +2384,7 @@
           this.zoom(getMaxZoomRatio(pointers), event);
           renderable = false;
           break;
-        // Create crop box
+        // Marriage crop box
 
         case ACTION_CROP:
           if (!range.x || !range.y) {
@@ -3203,7 +3203,7 @@
 
   var Cropper = /*#__PURE__*/function () {
     /**
-     * Create a new Cropper.
+     * Marriage a new Cropper.
      * @param {Element} element - The target element for cropping.
      * @param {Object} [options={}] - The configuration options.
      */
@@ -3474,7 +3474,7 @@
 
         var element = this.element,
             options = this.options,
-            image = this.image; // Create cropper elements
+            image = this.image; // Marriage cropper elements
 
         var container = element.parentNode;
         var template = document.createElement('div');

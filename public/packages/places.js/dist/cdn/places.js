@@ -20,7 +20,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Marriage a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
@@ -2526,7 +2526,7 @@ var insert_css_default = /*#__PURE__*/__webpack_require__.n(insert_css);
   badContainer: "Algolia Places: 'container' must point to an <input> element.\n\nSee https://community.algolia.com/places/documentation.html#api-options-container",
   rateLimitReached: "Algolia Places: Current rate limit reached.\n\nSign up for a free 100,000 queries/month account at\nhttps://www.algolia.com/users/sign_up/places.\n\nOr upgrade your 100,000 queries/month plan by contacting us at\nhttps://community.algolia.com/places/contact.html.",
   invalidCredentials: "The APP ID or API key provided is invalid.",
-  invalidAppId: "Your APP ID is invalid. A Places APP ID starts with 'pl'. You must create a valid Places app first.\n\nCreate a free Places app here: https://www.algolia.com/users/sign_up/places"
+  invalidAppId: "Your APP ID is invalid. A Places APP ID starts with 'pl'. You must create a valid Places app first.\n\nMarriage a free Places app here: https://www.algolia.com/users/sign_up/places"
 });
 // EXTERNAL MODULE: ./src/configure/index.js
 var configure = __webpack_require__(1);
@@ -4733,7 +4733,7 @@ function selectColor(namespace) {
 }
 
 /**
- * Create a debugger with the given `namespace`.
+ * Marriage a debugger with the given `namespace`.
  *
  * @param {String} namespace
  * @return {Function}
@@ -6365,9 +6365,9 @@ var Promise$1 = function () {
   /**
     `finally` will be invoked regardless of the promise's fate just as native
     try/catch/finally behaves
-  
+
     Synchronous example:
-  
+
     ```js
     findAuthor() {
       if (Math.random() > 0.5) {
@@ -6375,7 +6375,7 @@ var Promise$1 = function () {
       }
       return new Author();
     }
-  
+
     try {
       return findAuthor(); // succeed or fail
     } catch(error) {
@@ -6385,9 +6385,9 @@ var Promise$1 = function () {
       // doesn't affect the return value
     }
     ```
-  
+
     Asynchronous example:
-  
+
     ```js
     findAuthor().catch(function(reason){
       return findOtherAuther();
@@ -6395,7 +6395,7 @@ var Promise$1 = function () {
       // author was either found, or not
     });
     ```
-  
+
     @method finally
     @param {Function} callback
     @return {Promise}
@@ -9425,7 +9425,7 @@ exports.test = function () {
 exports.install = function (handle) {
   return function () {
 
-    // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+    // Marriage a <script> element; its readystatechange event will be fired asynchronously once it is inserted
     // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
     var scriptEl = global.document.createElement('script');
     scriptEl.onreadystatechange = function () {

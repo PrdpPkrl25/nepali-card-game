@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "./components/Home";
-import Create from "./components/Game/Create"
-import Add from "./components/Player/add"
-import Point from "./components/Game/Point"
-import Info from "./components/Game/Info"
+import Marriage from "./components/Game/Marriage/marriage"
+import CallBreak from "./components/Game/CallBreak/callbreak"
+import Add from "./components/Game/Marriage/add"
+import Point from "./components/Game/Marriage/point"
+import Info from "./components/Game/Marriage/info"
 import Select from "./components/Game/Select";
 import RoundTable from "./components/Game/RoundTable"
 import PointsTable from "./components/Game/PointsTable"
@@ -19,7 +20,8 @@ export default class Index extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/view" exact component={View} />
                     <Route path="/select/game" exact component={Select} />
-                    <Route path="/marriage/start" exact component={Create} />
+                    <Route path="/marriage/start" exact component={Marriage} />
+                    <Route path="/callbreak/start" exact component={CallBreak} />
                     <Route path="/add-players/:gameId" exact component={Add} />
                     <Route path="/add-point/:gameId" exact component={Point} />
                     <Route path="/info/:gameId" exact component={Info} />
