@@ -59,7 +59,8 @@ class PlayerController extends Controller
     public function show($gameId)
     {
         $players=Player::where('game_id',$gameId)->get();
-        return response()->json($players);
+        $number=$players->count();
+        return response()->json($number);
     }
 
     /**

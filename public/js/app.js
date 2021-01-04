@@ -74211,6 +74211,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cogo_toast__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cogo-toast */ "./node_modules/cogo-toast/dist/index.es.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74238,6 +74239,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Add = /*#__PURE__*/function (_Component) {
   _inherits(Add, _Component);
 
@@ -74258,7 +74260,7 @@ var Add = /*#__PURE__*/function (_Component) {
       game: '',
       name: '',
       email: '',
-      playerNumber: 1
+      playerNumber: ''
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInput", function (event, attr) {
@@ -74271,31 +74273,35 @@ var Add = /*#__PURE__*/function (_Component) {
           email = _this$state.email,
           game = _this$state.game;
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/players", {
-        name: name,
-        email: email,
-        id: game['id']
-      }).then(function (response) {
-        _this.setState({
-          name: '',
-          email: '',
-          playerNumber: response.data['player_number'] + 1
-        });
 
-        if (_this.state.game['number_of_players'] == response.data['player_number']) {
-          _this.props.history.push("/add-point/".concat(_this.state.game['id']));
-        }
-      })["catch"](function (err) {
-        return console.log(err);
-      });
+      if (_this.validate()) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/players", {
+          name: name,
+          email: email,
+          id: game['id']
+        }).then(function (response) {
+          _this.setState({
+            name: '',
+            email: '',
+            playerNumber: response.data['player_number'] + 1
+          });
+
+          if (_this.state.game['number_of_players'] == response.data['player_number']) {
+            _this.props.history.push("/add-point/".concat(_this.state.game['id']));
+          }
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var game = _this.props.location.state;
-      console.log(game);
-
-      _this.setState({
-        game: game
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/players/".concat(game.id)).then(function (response) {
+        _this.setState({
+          game: game,
+          playerNumber: response.data + 1
+        });
       });
     });
 
@@ -74303,6 +74309,38 @@ var Add = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Add, [{
+    key: "validate",
+    value: function validate() {
+      var email = this.state.email;
+      var name = this.state.name;
+      var isValid = true;
+      console.log(email);
+      console.log(name);
+
+      if (!name) {
+        isValid = false;
+        cogo_toast__WEBPACK_IMPORTED_MODULE_2__["default"].error("Please enter player name", {
+          position: 'top-right',
+          heading: 'Error'
+        });
+        ;
+      }
+
+      if (typeof email !== "undefined" || !email) {
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+        if (!pattern.test(email)) {
+          isValid = false;
+          cogo_toast__WEBPACK_IMPORTED_MODULE_2__["default"].error("Email address provided is invalid", {
+            position: 'top-right',
+            heading: 'Error'
+          });
+        }
+      }
+
+      return isValid;
+    }
+  }, {
     key: "render",
     value: function render() {
       var handleInput = this.handleInput,
@@ -74336,7 +74374,6 @@ var Add = /*#__PURE__*/function (_Component) {
         onChange: function onChange(e) {
           return handleInput(e, 'name');
         },
-        required: true,
         id: "player_name",
         placeholder: "Enter player name..."
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -74809,6 +74846,13 @@ var Point = /*#__PURE__*/function (_Component) {
       var disabledObject = _objectSpread({}, disabled[index]);
 
       inputObject[e.target.name] = e.target.checked;
+
+      if (inputObject[e.target.name] === false) {
+        inputObject['point'] = 0;
+        inputObject['dubli'] = 0;
+        inputObject['winner'] = 0;
+      }
+
       disabledObject['disabled'] = !disabledObject.disabled;
       input[index] = inputObject;
       disabled[index] = disabledObject;
@@ -74827,7 +74871,6 @@ var Point = /*#__PURE__*/function (_Component) {
 
       inputObject[e.target.name] = e.target.checked;
       input[index] = inputObject;
-      console.log(input);
 
       _this.setState({
         input: input

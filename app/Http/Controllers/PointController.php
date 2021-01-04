@@ -116,11 +116,17 @@ class PointController extends Controller
 
     public function total($gameId)
     {
+        $returnArray=[];
+        $players=Player::where('game_id',$gameId)->get();
+        foreach ($players as $player){
+            $point=Point::where('player_id',31)->pluck('point_scored')->toArray();
+            $returnArray[$player->id]=$point;
+        }
         $game=Game::with(['rounds','players'])->where('id',$gameId)->first();
         $rounds=Round::with('points')->where('game_id',$gameId)->get();
         $roundIdArray = Round ::where('game_id', $game -> id) -> pluck('id');
         $players = Player ::where('game_id', $game -> id) -> get();
-        return response()->json(['players'=>$players,'rounds'=>$rounds,'roundIdArray'=>$roundIdArray]);
+        return response()->json(['players'=>$players,'rounds'=>$rounds,'roundIdArray'=>$roundIdArray,'point'=>$returnArray]);
 
     }
 

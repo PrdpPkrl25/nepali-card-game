@@ -32,6 +32,11 @@ export default class Point extends Component {
         const inputObject={...input[index]}
         const disabledObject={...disabled[index]}
         inputObject[e.target.name]=e.target.checked
+        if(inputObject[e.target.name]===false){
+            inputObject['point']=0;
+            inputObject['dubli']=0;
+            inputObject['winner']=0;
+        }
         disabledObject['disabled']=!disabledObject.disabled
         input[index]=inputObject
         disabled[index]=disabledObject
@@ -47,7 +52,6 @@ export default class Point extends Component {
         const inputObject={...input[index]}
         inputObject[e.target.name]=e.target.checked
         input[index]=inputObject
-        console.log(input)
         this.setState({
             input,
         })
