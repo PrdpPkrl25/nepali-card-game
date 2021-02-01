@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class AddRoundNegativeRule implements Rule
 {
     /**
-     * Create a new rule instance.
+     * Marriage a new rule instance.
      *
      * @return void
      */
@@ -25,7 +25,6 @@ class AddRoundNegativeRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
         foreach ($value as $key=>$point){
             if(intval($point)<0){
                 return false;

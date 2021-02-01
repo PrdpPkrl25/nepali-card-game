@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePlayerPost;
 use App\Mail\GameDetail;
+use App\Model\Game;
 use App\Model\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PlayerController extends Controller
@@ -17,7 +19,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -35,33 +37,30 @@ class PlayerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StorePlayerPost $request)
+    public function store(Request $request)
     {
-       $game=session()->get('game');
-       for ($i=0;$i<$game->number_of_players;$i++){
-           $name=$request->all()['name'][$i];
-           $email=$request->all()['email'][$i];
-           $player_array=['name'=>$name,'email'=>$email,'game_id'=>$game->id];
-           $player=Player::create($player_array);
-           if(!$player->email==Null){
-               Mail::to($player->email)->send(new GameDetail($game));
-           }
-       }
-
-      return redirect()->route('points.create');
+        $gameId=$request->id;
+        $player_array=['name'=>$request->name,'email'=>$request->email,'game_id'=>$gameId];
+        Player::create($player_array);
+        $game=Game::with('players')->findOrFail($gameId);
+        $number=$game->players->count();
+        $players=Player::where('game_id',$gameId)->get();
+         return response()->json(['players'=>$players,'player_number'=>$number]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Player  $player
-     * @return \Illuminate\Http\Response
+     * @param $gameId
+     * @return void
      */
-    public function show(Player $player)
+    public function show($gameId)
     {
-        //
+        $players=Player::where('game_id',$gameId)->get();
+        $number=$players->count();
+        return response()->json($number);
     }
 
     /**

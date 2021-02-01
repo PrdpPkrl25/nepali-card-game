@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\AddRoundNegativeRule;
 use App\Rules\AddRoundPointRule;
 use App\Rules\AddRoundSeenRule;
+use App\Rules\AddRoundWinnerRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePointsPost extends FormRequest
@@ -27,9 +28,9 @@ class StorePointsPost extends FormRequest
     public function rules()
     {
         return [
-            'winner'=>['required'],
+            'winner'=>[new AddRoundWinnerRule()],
             'seen'=>[new AddRoundSeenRule()],
-            'points'=>[new AddRoundNegativeRule(), new AddRoundPointRule()],
+            'point'=>[new AddRoundNegativeRule(), new AddRoundPointRule()],
         ];
     }
 

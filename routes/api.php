@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('games', 'GameController');
+Route::resource('players', 'PlayerController');
+Route::resource('points', 'PointController');
+Route::resource('rounds', 'RoundController');
+Route::get('points-table/{gameId}', 'PointController@total')->name('points.table');
+Route::post('points/delete/{roundId}', 'PointController@destroy')->name('points.delete');
+Route::get('player/{id}/points/', 'PointController@playerPoint')->name('points.player');
+Route::post('view/points-table', 'PointController@viewTotal')->name('view.table')->middleware('check.access');
+Route::get('game/info', 'GameController@info')->name('game.info');

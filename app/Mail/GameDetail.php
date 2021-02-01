@@ -13,7 +13,7 @@ class GameDetail extends Mailable
     protected $game;
 
     /**
-     * Create a new message instance.
+     * Marriage a new message instance.
      *
      * @param $game
      */

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Game;
 use App\Model\Player;
-use App\Round;
+use App\Model\Round;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
@@ -77,11 +77,13 @@ class RoundController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Round  $round
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Round $round)
+    public function destroy($id)
     {
-        //
+        $round=Round::findOrFail($id);
+        $round->delete();
+        return response()->json('Round data deleted successfully');
     }
 }

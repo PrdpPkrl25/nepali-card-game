@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class AddRoundSeenRule implements Rule
 {
     /**
-     * Create a new rule instance.
+     * Marriage a new rule instance.
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class AddRoundSeenRule implements Rule
      */
     public function passes($attribute, $value)
     {
-         $winner=request()->input('winner');
+         $winner=request()->input['winner'];
         return array_key_exists($winner,$value) ?  true :  false;
 
     }
