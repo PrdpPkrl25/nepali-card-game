@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 export default class Home extends Component {
     render(){
         return (
+            <div class="jumbotron jumbotron-fluid landing">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-12">
@@ -23,6 +24,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

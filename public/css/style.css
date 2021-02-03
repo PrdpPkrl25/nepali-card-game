@@ -1,10 +1,28 @@
 @charset "UTF-8";
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 .card-title{
     font-size: 200%;
     font-weight: 700;
     color: #23415C;
     width: 100%;
+}
+
+.landing{
+    background-image: url("/images/cards.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-body{
+    height: 50%;
 }
 
 .card-header{
@@ -15,28 +33,6 @@
     text-align: center;
 }
 
-.product-title{
-    font-size: 160%;
-    font-weight: 500;
-    width: 100%;
-}
-
-.product-price{
-    font-size: 130%;
-    font-weight: 400;
-    width: 100%;
-}
-.shop-name{
-    font-size: 130%;
-    font-weight: 400;
-    width: 100%;
-    color: #686868;
-}
-
-.product-name{
-    font-size: 150%;
-    font-weight: bold;
-}
 
 .btn-success{
     font-size: 120%;

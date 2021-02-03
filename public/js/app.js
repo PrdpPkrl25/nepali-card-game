@@ -74314,8 +74314,6 @@ var Add = /*#__PURE__*/function (_Component) {
       var email = this.state.email;
       var name = this.state.name;
       var isValid = true;
-      console.log(email);
-      console.log(name);
 
       if (!name) {
         isValid = false;
@@ -74326,7 +74324,7 @@ var Add = /*#__PURE__*/function (_Component) {
         ;
       }
 
-      if (typeof email !== "undefined" || !email) {
+      if (email) {
         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
         if (!pattern.test(email)) {
@@ -75714,6 +75712,8 @@ var Home = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "jumbotron jumbotron-fluid landing"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
@@ -75737,7 +75737,7 @@ var Home = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/view",
         className: "btn btn-primary"
-      }, "View Game"))))))));
+      }, "View Game")))))))));
     }
   }]);
 
@@ -75766,8 +75766,8 @@ var Home = /*#__PURE__*/function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\praka\Project\PHP\marriage\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\praka\Project\PHP\marriage\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\HP\Project\nepali-card-game\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\HP\Project\nepali-card-game\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

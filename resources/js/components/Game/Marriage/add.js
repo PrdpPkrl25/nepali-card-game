@@ -27,15 +27,12 @@ export default class Add extends Component {
         let email = this.state.email;
         let name = this.state.name;
         let isValid = true;
-        console.log(email)
-        console.log(name)
-
         if (!name) {
             isValid = false;
             toastr.error("Please enter player name", {position : 'top-right', heading: 'Error'});;
         }
-
-        if (typeof email!== "undefined"||!email) {
+        
+        if (email) {
 
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
